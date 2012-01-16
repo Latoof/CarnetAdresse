@@ -7,16 +7,12 @@ import java.util.TreeSet;
 
 import com.thoughtworks.xstream.XStream;
 
-/***
- * Text a caractere completement inutile. \o/
- * 
- */
 public class Fiche {
 
-	String 			nom, numeroTel;
-	TreeSet<String>	prenoms;
-	TreeSet<Adresse> adresses;
-	TreeSet<String>	emails;
+	String 				nom, numeroTel;
+	TreeSet<String>		prenoms;
+	TreeSet<Adresse> 	adresses;
+	TreeSet<String>		emails;
 	
 	public Fiche(String filename) {
 		
@@ -27,8 +23,8 @@ public class Fiche {
 		try {
 			BufferedReader in = new BufferedReader ( new FileReader(filename) );
 			
-			
-		} catch (FileNotFoundException e) {
+		}
+		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
@@ -38,6 +34,7 @@ public class Fiche {
 	}
 		
 	public Fiche(String nom,String prenom1, String numeroTel, Adresse adresse) {
+		
 		this.nom = nom;
 		this.numeroTel = numeroTel;
 		this.prenoms = new TreeSet<String>();
@@ -49,6 +46,7 @@ public class Fiche {
 	}
 	
 	public Fiche(String nom, String prenom1, String prenom2, String numeroTel, Adresse adresse) {
+		
 		this.nom = nom;
 		this.numeroTel = numeroTel;
 		this.prenoms = new TreeSet<String>();
@@ -62,6 +60,7 @@ public class Fiche {
 	
 	
 	public Fiche(String nom, String prenom1, String prenom2, String prenom3, String numeroTel, Adresse adresse) {
+		
 		this.nom = nom;
 		this.numeroTel = numeroTel;
 		this.prenoms = new TreeSet<String>();
@@ -190,20 +189,5 @@ public class Fiche {
 	public void setEmails(TreeSet<String> emails) {
 		this.emails = emails;
 	}
-	
-	/*
-	@Override
-	public int compareTo(Fiche arg0) {
-		// TODO Auto-generated method stub
-		
-		if()
-		
-		return 0;
-	}
-	*/
-
-	
-	
-	
 	
 }

@@ -1,7 +1,10 @@
 import javax.swing.*;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.Vector;
 
@@ -23,38 +26,47 @@ public class UserGUI extends JFrame{
 		
 		this.carnet = c;
 		
+		//Nous permet d'activer le mÃ©canisme de fermeture de la fenetre
 		WindowListener l = new WindowAdapter() {
 			public void windowClosing(WindowEvent e){
 			System.exit(0);
 			}
 		};
+		
 		this.addWindowListener( l );
 		
-		this.setSize(new Dimension(800, 600));
-		this.setMinimumSize( new Dimension(480, 360) );
+		
+		this.setSize(new Dimension(500, 400));
+		this.setMinimumSize( new Dimension(500, 400) );
 		this.setVisible(true);
 		
+		
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout( new FlowLayout() );
+		mainPanel.setLayout( new BorderLayout() );
+		
+		JPanel paneList = new JPanel(new BorderLayout());
+		paneList.setBackground(Color.RED);
+		
+		JPanel paneButton = new JPanel(new GridLayout(1, 2));
+		JButton add = new JButton("Add");
+		JButton edit = new JButton("edit");
+		
+		paneButton.add(add);
+		paneButton.add(edit);
+		
+		paneList.add(genList(), BorderLayout.NORTH);
+		paneList.add(paneButton, BorderLayout.SOUTH);
 		
 		fichePanel = new FichePanel( this.carnet.getFicheFromIndex(0) );
+		fichePanel.setBackground(Color.BLUE);
+		
+		mainPanel.add(paneList, BorderLayout.WEST);
+		mainPanel.add(fichePanel, BorderLayout.EAST);
 		
 		
-		mainPanel.add( genList() );
-		mainPanel.add( fichePanel );
-	
-		/*
-		JTextField nom = new JTextField("Nom");
-		JTextField prenom = new JTextField("Prénom");
-		JTextField adresse = new JTextField("Adresse");
-		JTextField mail = new JTextField("Mail");
 		
-		mainPanel.add(new JLabel("Nom"));
-		mainPanel.add(nom);
-		mainPanel.add(prenom);
-		mainPanel.add(adresse);
-		mainPanel.add(mail);
-		*/
+//		mainPanel.add( genList() );
+//		mainPanel.add( fichePanel );
 		
 		
 		this.setContentPane(mainPanel);

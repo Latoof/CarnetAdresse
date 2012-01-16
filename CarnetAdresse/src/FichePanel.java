@@ -8,12 +8,6 @@ import javax.swing.*;
 
 public class FichePanel extends JPanel implements ActionListener {
 
-	/*
-	String 			nom, numeroTel;
-	TreeSet<String>	prenoms;
-	TreeSet<Adresse> adresses;
-	TreeSet<String>	emails;
-	*/
 	Fiche fiche;
 	
 	JTextField entryNom;
@@ -29,7 +23,7 @@ public class FichePanel extends JPanel implements ActionListener {
 	public FichePanel ( Fiche f ) {
 		
 		super();
-		this.setSize(200, 600);
+		this.setSize(400, 600);
 		
 		JPanel panel = new JPanel();
 		//FlowLayout vLayout = new FlowLayout();
