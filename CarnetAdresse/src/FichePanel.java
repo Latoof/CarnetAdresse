@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class FicheFrame extends JFrame {
+public class FichePanel extends JPanel {
 
 	/*
 	String 			nom, numeroTel;
@@ -21,20 +21,11 @@ public class FicheFrame extends JFrame {
 	JTextField entryMail;
 
 	
-	public FicheFrame ( Fiche f ) {
+	public FichePanel ( Fiche f ) {
 		
 		super();
 		this.setSize(200, 600);
 		
-		if ( f != null ) {
-			this.fiche = f;
-		}
-		else {
-			//this.fiche = new Fiche(dq);
-		}
-		
-		this.setTitle( f.getNom() + " " + f.getPrenoms().first() );
-
 		JPanel panel = new JPanel();
 		//FlowLayout vLayout = new FlowLayout();
 		
@@ -42,13 +33,13 @@ public class FicheFrame extends JFrame {
 		panel.setLayout(gLayout);
 		
 		
-		this.entryNom = new JTextField( this.fiche.getNom() );
-		this.entryPrenom = new JTextField( this.fiche.getPrenoms().first() );
+		this.entryNom = new JTextField();
+		this.entryPrenom = new JTextField();
 
-		this.entryTel = new JTextField( this.fiche.getNumeroTel() );
-		this.entryAdresse = new JTextField( this.fiche.getAdresses().first().toString() );
+		this.entryTel = new JTextField();
+		this.entryAdresse = new JTextField();
 
-		this.entryMail = new JTextField( this.fiche.getEmails().first() );
+		this.entryMail = new JTextField();
 
 		
 		panel.add( new JLabel("Nom") );
@@ -67,12 +58,37 @@ public class FicheFrame extends JFrame {
 		panel.add( entryMail );
 		
 		
-		this.setContentPane(panel);
+		this.add(panel);
+		
+		if ( f != null ) {
+			this.fiche = f;
+
+			
+
+	
+		}
+		else {
+			
+			
+			
+		}
+		
 		this.setVisible(true);
+
 		
 	}
 	
+	public void voirFiche( Fiche f ) {
+		
+		this.entryNom.setText( f.getNom() );
+		this.entryPrenom.setText(  f.getPrenoms().first() );
 	
+		this.entryTel.setText(  f.getNumeroTel() );
+		this.entryAdresse.setText( f.getAdresses().first().toString() );
+	
+		this.entryMail.setText(f.getEmails().first());
+	
+	}
 	
 	
 }

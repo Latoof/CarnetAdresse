@@ -13,7 +13,7 @@ public class SelectionListener implements ListSelectionListener {
 		@Override
 		public void valueChanged(ListSelectionEvent arg0) {
 
-			this.gui.popFiche( arg0.getFirstIndex() );
+			this.gui.popFiche( arg0.getLastIndex() );
 			
 		}
 	

@@ -1,5 +1,6 @@
 import javax.swing.*;
 
+import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.util.Vector;
 
@@ -7,6 +8,7 @@ import java.util.Vector;
 public class UserGUI extends JFrame{
 
 	private Carnet carnet;
+	private FichePanel fichePanel;
 	
 	public UserGUI ( Carnet c ) {
 		
@@ -25,8 +27,13 @@ public class UserGUI extends JFrame{
 		this.setVisible(true);
 		
 		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout( new FlowLayout() );
+		
+		fichePanel = new FichePanel( this.carnet.getFicheFromIndex(0) );
+		
 		
 		mainPanel.add( genList() );
+		mainPanel.add( fichePanel );
 	
 		/*
 		JTextField nom = new JTextField("Nom");
@@ -43,6 +50,8 @@ public class UserGUI extends JFrame{
 		
 		
 		this.setContentPane(mainPanel);
+		
+		this.setVisible(true);
 	}
 	
 	public JList genList() {
@@ -63,7 +72,8 @@ public class UserGUI extends JFrame{
 	
 	public void popFiche( int index ) {
 		
-		new FicheFrame( this.carnet.getFicheFromIndex( index ) );
+		this.fichePanel.voirFiche( this.carnet.getFicheFromIndex( index ) );
+		this.fichePanel.repaint();
 		
 	}
 	
