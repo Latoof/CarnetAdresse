@@ -1,9 +1,16 @@
 import javax.swing.*;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.util.Vector;
 
+/**
+ * 
+ * Limites : On ne visualisera/modifiera que les premiers elements des listes multiples (email, prenoms, etc)
+ * @author Latoof
+ *
+ */
 
 public class UserGUI extends JFrame{
 
@@ -23,7 +30,8 @@ public class UserGUI extends JFrame{
 		};
 		this.addWindowListener( l );
 		
-		this.setSize(400, 600);
+		this.setSize(new Dimension(800, 600));
+		this.setMinimumSize( new Dimension(480, 360) );
 		this.setVisible(true);
 		
 		JPanel mainPanel = new JPanel();

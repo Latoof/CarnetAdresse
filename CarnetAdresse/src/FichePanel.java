@@ -1,10 +1,12 @@
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 import javax.swing.*;
 
-public class FichePanel extends JPanel {
+public class FichePanel extends JPanel implements ActionListener {
 
 	/*
 	String 			nom, numeroTel;
@@ -19,6 +21,9 @@ public class FichePanel extends JPanel {
 	JTextField entryTel;
 	JTextField entryAdresse;
 	JTextField entryMail;
+	
+	JButton boutonValider;
+	JButton boutonAnnuler;
 
 	
 	public FichePanel ( Fiche f ) {
@@ -29,7 +34,7 @@ public class FichePanel extends JPanel {
 		JPanel panel = new JPanel();
 		//FlowLayout vLayout = new FlowLayout();
 		
-		GridLayout gLayout = new GridLayout(5, 2);
+		GridLayout gLayout = new GridLayout(8, 2);
 		panel.setLayout(gLayout);
 		
 		
@@ -57,13 +62,23 @@ public class FichePanel extends JPanel {
 		panel.add( new JLabel("eMail") );
 		panel.add( entryMail );
 		
+		this.boutonValider = new JButton("Valider");
+		this.boutonValider.setEnabled(false);
+		panel.add( boutonValider );
 		
+		this.boutonAnnuler = new JButton("Annuler");
+		this.boutonAnnuler.setEnabled(false);
+		panel.add( boutonAnnuler );
+		
+		this.boutonValider.addActionListener(this);
+		this.boutonAnnuler.addActionListener(this);
+
 		this.add(panel);
 		
 		if ( f != null ) {
 			this.fiche = f;
 
-			
+			this.voirFiche(f);
 
 	
 		}
@@ -80,14 +95,51 @@ public class FichePanel extends JPanel {
 	
 	public void voirFiche( Fiche f ) {
 		
+		this.fiche = f;
+		
 		this.entryNom.setText( f.getNom() );
 		this.entryPrenom.setText(  f.getPrenoms().first() );
 	
-		this.entryTel.setText(  f.getNumeroTel() );
-		this.entryAdresse.setText( f.getAdresses().first().toString() );
+		this.entryTel.setText( f.getNumeroTel() );
+		this.entryAdresse.setText( "(Ici l'adresse de "+f.getPrenoms().first()+")" );
 	
-		this.entryMail.setText(f.getEmails().first());
+		this.entryMail.setText( f.getEmails().first() );
 	
+		this.boutonValider.setEnabled(true);
+		this.boutonAnnuler.setEnabled(true);
+		
+	}
+
+	public void validerChangements() {
+		
+		this.fiche.setNom( this.entryNom.getText() );
+		
+		this.fiche.getPrenoms().pollFirst();
+		this.fiche.getPrenoms().add( this.entryPrenom.getText() );
+		
+		// this.fiche.getAdresses().pollFirst();
+		// this.fiche.getAdresses().add( new Adresse( this.entryAdresse.getText( ) ) );
+		
+		this.fiche.getEmails().pollFirst();
+		this.fiche.getEmails().add( this.entryMail.getText() );
+		
+	}
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		
+		if ( arg0.getSource() instanceof JButton ) {
+			System.out.println("OK");
+			
+			if ( ((JButton) arg0.getSource()).equals(this.boutonValider) ) {
+				this.validerChangements();
+			}
+			else if ( ((JButton) arg0.getSource()).equals(this.boutonAnnuler) ) {
+				this.voirFiche(this.fiche);
+			}
+		}
+		
 	}
 	
 	
