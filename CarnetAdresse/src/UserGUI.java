@@ -56,9 +56,16 @@ public class UserGUI extends JFrame{
 		
 		JList list = new JList( v ) ;
 		
+		list.addListSelectionListener( new SelectionListener(this) );
+		
 		return list;
 	}
 	
+	public void popFiche( int index ) {
+		
+		new FicheFrame( this.carnet.getFicheFromIndex( index ) );
+		
+	}
 	
 	
 }
