@@ -1,4 +1,6 @@
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,66 +8,51 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class FichePanel extends JPanel implements ActionListener {
+public class FichePanel extends JPanel {
 
 	Fiche fiche;
 	
-	JTextField entryNom;
-	JTextField entryPrenom;
-	JTextField entryTel;
-	JTextField entryAdresse;
-	JTextField entryMail;
-	
-	JButton boutonValider;
-	JButton boutonAnnuler;
-
+	JLabel entryNom;
+	JLabel entryPrenom, entryPrenom2, entryPrenom3;
+	JLabel entryTel;
+	JLabel entryAdresse;
+	JLabel entryMail;
 	
 	public FichePanel ( Fiche f ) {
 		
 		super();
-		this.setSize(400, 600);
+		JPanel panel = new JPanel(new GridBagLayout());
 		
-		JPanel panel = new JPanel();
-		//FlowLayout vLayout = new FlowLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
 		
-		GridLayout gLayout = new GridLayout(8, 2);
-		panel.setLayout(gLayout);
-		
-		
-		this.entryNom = new JTextField();
-		this.entryPrenom = new JTextField();
+		this.entryNom = new JLabel();
+		this.entryPrenom = new JLabel();
+		this.entryPrenom2 = new JLabel("Coucou");
+		this.entryPrenom3 = new JLabel();
 
-		this.entryTel = new JTextField();
-		this.entryAdresse = new JTextField();
+		this.entryTel = new JLabel();
+		this.entryAdresse = new JLabel();
 
-		this.entryMail = new JTextField();
+		this.entryMail = new JLabel();
+		
+		panel.add( new JLabel("Nom"), setGridBagConstraints(0, 0, 100, 0, gbc) );
+		panel.add( entryNom, setGridBagConstraints(1, 0, 0, 0, gbc) );
+		
+		panel.add( new JLabel("Prenom"), setGridBagConstraints(0, 1, 100, 0, gbc) );
+		panel.add( entryPrenom, setGridBagConstraints(1, 1, 0, 0, gbc) );
+		panel.add( entryPrenom2, setGridBagConstraints(1, 2, 0, 0, gbc) );
+		panel.add( entryPrenom3, setGridBagConstraints(1, 3, 0, 0, gbc) );
 
+		panel.add( new JLabel("Adresse"), setGridBagConstraints(0, 4, 100, 0, gbc) );
+		panel.add( entryAdresse, setGridBagConstraints(1, 4, 0, 0, gbc) );
+
+
+		panel.add( new JLabel("Tel."), setGridBagConstraints(0, 5, 100, 0, gbc) );
+		panel.add( entryTel, setGridBagConstraints(1, 5, 0, 0, gbc) );
 		
-		panel.add( new JLabel("Nom") );
-		panel.add( entryNom );
-		
-		panel.add( new JLabel("Prenom") );
-		panel.add( entryPrenom );
-		
-		panel.add( new JLabel("Adresse") );
-		panel.add( entryAdresse );
-		
-		panel.add( new JLabel("Tel.") );
-		panel.add( entryTel );
-		
-		panel.add( new JLabel("eMail") );
-		panel.add( entryMail );
-		
-		this.boutonValider = new JButton("Valider");
-		this.boutonValider.setEnabled(false);
-		panel.add( boutonValider );
-		
-		this.boutonAnnuler = new JButton("Annuler");
-		this.boutonAnnuler.setEnabled(false);
-		panel.add( boutonAnnuler );
-		
-		this.boutonValider.addActionListener(this);
-		this.boutonAnnuler.addActionListener(this);
+		panel.add( new JLabel("eMail"), setGridBagConstraints(0, 6, 100, 0, gbc) );
+		panel.add( entryMail, setGridBagConstraints(1, 6, 0, 0, gbc) );
 
 		this.add(panel);
 		
@@ -73,18 +60,13 @@ public class FichePanel extends JPanel implements ActionListener {
 			this.fiche = f;
 
 			this.voirFiche(f);
-
-	
 		}
 		else {
-			
-			
 			
 		}
 		
 		this.setVisible(true);
 
-		
 	}
 	
 	public void voirFiche( Fiche f ) {
@@ -93,48 +75,22 @@ public class FichePanel extends JPanel implements ActionListener {
 		
 		this.entryNom.setText( f.getNom() );
 		this.entryPrenom.setText(  f.getPrenoms().first() );
-	
+		
 		this.entryTel.setText( f.getNumeroTel() );
 		this.entryAdresse.setText( "(Ici l'adresse de "+f.getPrenoms().first()+")" );
 	
 		this.entryMail.setText( f.getEmails().first() );
 	
-		this.boutonValider.setEnabled(true);
-		this.boutonAnnuler.setEnabled(true);
-		
-	}
-
-	public void validerChangements() {
-		
-		this.fiche.setNom( this.entryNom.getText() );
-		
-		this.fiche.getPrenoms().pollFirst();
-		this.fiche.getPrenoms().add( this.entryPrenom.getText() );
-		
-		// this.fiche.getAdresses().pollFirst();
-		// this.fiche.getAdresses().add( new Adresse( this.entryAdresse.getText( ) ) );
-		
-		this.fiche.getEmails().pollFirst();
-		this.fiche.getEmails().add( this.entryMail.getText() );
-		
 	}
 	
-	
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public GridBagConstraints setGridBagConstraints (int gx, int gy, int wx, int wy, GridBagConstraints gbc){
 		
-		if ( arg0.getSource() instanceof JButton ) {
-			System.out.println("OK");
-			
-			if ( ((JButton) arg0.getSource()).equals(this.boutonValider) ) {
-				this.validerChangements();
-			}
-			else if ( ((JButton) arg0.getSource()).equals(this.boutonAnnuler) ) {
-				this.voirFiche(this.fiche);
-			}
-		}
+		gbc.gridx = gx;
+		gbc.gridy = gy;
+		gbc.weightx = wx;
+		gbc.weighty = wy;
 		
+		return gbc;
 	}
-	
 	
 }

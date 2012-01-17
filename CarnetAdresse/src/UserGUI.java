@@ -17,8 +17,9 @@ import java.util.Vector;
 
 public class UserGUI extends JFrame{
 
-	private Carnet carnet;
-	private FichePanel fichePanel;
+	private Carnet 				carnet;
+	private FichePanel 			fichePanel;
+	private FichePanelModify 	fichePanelModify;
 	
 	public UserGUI ( Carnet c ) {
 		
@@ -42,7 +43,7 @@ public class UserGUI extends JFrame{
 		
 		
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout( new BorderLayout() );
+		mainPanel.setLayout( new BorderLayout());
 		
 		JPanel paneList = new JPanel(new BorderLayout());
 		paneList.setBackground(Color.RED);
@@ -54,20 +55,22 @@ public class UserGUI extends JFrame{
 		paneButton.add(add);
 		paneButton.add(edit);
 		
-		paneList.add(genList(), BorderLayout.NORTH);
+		paneList.add(new JScrollPane(genList()), BorderLayout.CENTER);
 		paneList.add(paneButton, BorderLayout.SOUTH);
+		
+		JPanel rightPanel = new JPanel(new GridLayout(2, 1));
 		
 		fichePanel = new FichePanel( this.carnet.getFicheFromIndex(0) );
 		fichePanel.setBackground(Color.BLUE);
 		
+		fichePanelModify = new FichePanelModify( this.carnet.getFicheFromIndex(0) );
+		fichePanelModify.setBackground(Color.GREEN);
+		
+		rightPanel.add(fichePanel);
+		rightPanel.add(fichePanelModify);
+		
 		mainPanel.add(paneList, BorderLayout.WEST);
-		mainPanel.add(fichePanel, BorderLayout.EAST);
-		
-		
-		
-//		mainPanel.add( genList() );
-//		mainPanel.add( fichePanel );
-		
+		mainPanel.add(rightPanel, BorderLayout.CENTER);		
 		
 		this.setContentPane(mainPanel);
 		
