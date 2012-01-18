@@ -16,14 +16,62 @@ public class Adresse implements Comparable {
 		return "Adresse [numero=" + numero + ", codePostal=" + codePostal
 				+ ", nomRue=" + nomRue + ", ville=" + ville + ", pays=" + pays
 				+ "]";
+
 	}
-	/*
-	public void monTestAMwa() {
 	
-		Assert.assertTrue( 1 < 2 );
+	
+
 		
+	public int getNumero() {
+		return numero;
 	}
-	*/
+
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+
+	public int getCodePostal() {
+		return codePostal;
+	}
+
+
+	public void setCodePostal(int codePostal) {
+		this.codePostal = codePostal;
+	}
+
+
+	public String getNomRue() {
+		return nomRue;
+	}
+
+
+	public void setNomRue(String nomRue) {
+		this.nomRue = nomRue;
+	}
+
+
+	public String getVille() {
+		return ville;
+	}
+
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+
+	public String getPays() {
+		return pays;
+	}
+
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+
 	@Override
 	public int compareTo(Object o) {
 		

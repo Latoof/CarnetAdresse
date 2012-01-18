@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -28,7 +27,7 @@ public class FichePanel extends JPanel {
 		
 		this.entryNom = new JLabel();
 		this.entryPrenom = new JLabel();
-		this.entryPrenom2 = new JLabel("Coucou");
+		this.entryPrenom2 = new JLabel();
 		this.entryPrenom3 = new JLabel();
 
 		this.entryTel = new JLabel();
