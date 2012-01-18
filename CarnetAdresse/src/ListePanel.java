@@ -76,9 +76,11 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 			else if ( ((JButton) arg0.getSource()).equals(this.bSupprimer) ) {
 				int index = liste.getSelectedIndex();
 				
-				this.carnet.delFiche( (Fiche) listeM.getElementAt(index) );
-				listeM.removeElementAt(index);
-				System.out.println("Deletion de "+index);
+				if ( index != -1 ) {
+					this.carnet.delFiche( (Fiche) listeM.getElementAt(index) );
+					listeM.removeElementAt(index);
+					System.out.println("Deletion de "+index);
+				}
 			}
 			
 			//this.genList();
@@ -91,23 +93,20 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 	}
 	
 	public void genList() {
-		Vector<String> v = new Vector<String>();
-		
 		
 		for ( int i=0; i < this.carnet.getListeFiches().size(); i++ ) {
-			//v.add( this.carnet.getListeFiches().get(i).getNom() + " " + this.carnet.getListeFiches().get(i).getPrenoms().first().toString() );
 			this.listeM.addElement( this.carnet.getFicheFromIndex(i) );
 		}
 		
-		//this.liste = new JList( this.carnet.getListeFiches().toArray() ) ;
 		this.repaint();
-		System.out.println("Repainted "+this.carnet.getListeFiches().size()+" elements");
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		
-		this.gui.popFiche( (Fiche) listeM.getElementAt(e.getLastIndex()) );
+		if (liste.getSelectedIndex() != -1) {
+			this.gui.popFiche( (Fiche) this.liste.getSelectedValue() );
+		}
 		
 	}
 

@@ -15,7 +15,7 @@ import java.util.Vector;
  *
  */
 
-public class UserGUI extends JFrame{
+public class UserGUI extends JFrame {
 
 	private Carnet 				carnet;
 	private FichePanel 			fichePanel;
@@ -41,6 +41,34 @@ public class UserGUI extends JFrame{
 		this.setMinimumSize( new Dimension(500, 400) );
 		this.setVisible(true);
 		
+		
+		JMenuBar menuBar = new JMenuBar();
+			JMenu menuFichier = new JMenu("Fichier");
+				JMenuItem itemNouveau = new JMenuItem("Nouveau carnet");
+				itemNouveau.setAccelerator(KeyStroke.getKeyStroke(
+				        KeyEvent.VK_1, ActionEvent.ALT_MASK));
+				itemNouveau.getAccessibleContext().setAccessibleDescription(
+				        "This doesn't really do anything");
+				JMenuItem itemOuvrir = new JMenuItem("Ouvrir fichier");
+				itemOuvrir.setAccelerator(KeyStroke.getKeyStroke(
+				        KeyEvent.VK_2, ActionEvent.ALT_MASK));
+				itemOuvrir.getAccessibleContext().setAccessibleDescription(
+				        "This doesn't really do anything");
+				JMenuItem itemEnregistrer = new JMenuItem("Enregistrer carnet");
+				itemEnregistrer.setAccelerator(KeyStroke.getKeyStroke(
+				        KeyEvent.VK_3, ActionEvent.ALT_MASK));
+				itemEnregistrer.getAccessibleContext().setAccessibleDescription(
+				        "This doesn't really do anything");
+			
+				
+		
+				menuFichier.add(itemNouveau);
+				menuFichier.addSeparator();
+				menuFichier.add(itemOuvrir);
+				menuFichier.addSeparator();
+				menuFichier.add(itemEnregistrer);
+			menuBar.add(menuFichier);
+		this.setJMenuBar(menuBar);
 		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout( new BorderLayout());
