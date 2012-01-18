@@ -45,18 +45,9 @@ public class UserGUI extends JFrame{
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout( new BorderLayout());
 		
-		JPanel paneList = new JPanel(new BorderLayout());
-		paneList.setBackground(Color.RED);
+		ListePanel listePanel = new ListePanel(this.carnet);
+		listePanel.getListe().addListSelectionListener( new SelectionListener(this) );
 		
-		JPanel paneButton = new JPanel(new GridLayout(1, 2));
-		JButton add = new JButton("Add");
-		JButton edit = new JButton("edit");
-		
-		paneButton.add(add);
-		paneButton.add(edit);
-		
-		paneList.add(new JScrollPane(genList()), BorderLayout.CENTER);
-		paneList.add(paneButton, BorderLayout.SOUTH);
 		
 		JPanel rightPanel = new JPanel(new GridLayout(2, 1));
 		
@@ -69,7 +60,7 @@ public class UserGUI extends JFrame{
 		rightPanel.add(fichePanel);
 		rightPanel.add(fichePanelModify);
 		
-		mainPanel.add(paneList, BorderLayout.WEST);
+		mainPanel.add(listePanel, BorderLayout.WEST);
 		mainPanel.add(rightPanel, BorderLayout.CENTER);		
 		
 		this.setContentPane(mainPanel);
