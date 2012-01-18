@@ -45,8 +45,7 @@ public class UserGUI extends JFrame{
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout( new BorderLayout());
 		
-		ListePanel listePanel = new ListePanel(this.carnet);
-		listePanel.getListe().addListSelectionListener( new SelectionListener(this) );
+		ListePanel listePanel = new ListePanel(this, this.carnet);
 		
 		
 		JPanel rightPanel = new JPanel(new GridLayout(2, 1));
@@ -68,25 +67,11 @@ public class UserGUI extends JFrame{
 		this.setVisible(true);
 	}
 	
-	public JList genList() {
-		
-		Vector<String> v = new Vector<String>();
-		
-		
-		for ( int i=0; i < this.carnet.getListeFiches().size(); i++ ) {
-			v.add( this.carnet.getListeFiches().get(i).getNom() + " " + this.carnet.getListeFiches().get(i).getPrenoms().first().toString() );
-		}
-		
-		JList list = new JList( v ) ;
-		
-		list.addListSelectionListener( new SelectionListener(this) );
-		
-		return list;
-	}
+
 	
-	public void popFiche( int index ) {
+	public void popFiche( Fiche f ) {
 		
-		this.fichePanel.voirFiche( this.carnet.getFicheFromIndex( index ) );
+		this.fichePanel.voirFiche( f );
 		this.fichePanel.repaint();
 		
 	}

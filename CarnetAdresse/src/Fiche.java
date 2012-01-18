@@ -42,6 +42,7 @@ public class Fiche {
 		this.adresses = new TreeSet<Adresse>();
 		this.adresses.add(adresse);
 		this.emails =  new TreeSet<String>();
+		this.addEmail("exemple@mail.fr");
 
 	}
 	
@@ -85,8 +86,7 @@ public class Fiche {
 		this.adresses.add(adresse);
 	}
 
-	@Override
-	public String toString() {
+	public String toStringDBG() {
 		return "Fiche [nom=" + nom + ", numeroTel=" + numeroTel + ", prenoms="
 				+ prenoms + ", adresse=" + adresses + "]";
 	}
@@ -189,5 +189,10 @@ public class Fiche {
 	public void setEmails(TreeSet<String> emails) {
 		this.emails = emails;
 	}
+	
+	public String toString() {
+		return (this.prenoms.first()+" "+this.nom);
+	}
+	
 	
 }
