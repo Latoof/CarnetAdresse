@@ -33,11 +33,9 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		this.listeM = new DefaultListModel();
 		this.liste = new JList( listeM ) ;
 
-		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.RED);
 
-		
 		this.genList();
 		
 		

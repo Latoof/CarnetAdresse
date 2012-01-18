@@ -2,6 +2,7 @@ public class Adresse implements Comparable {
 	
 	private int numero, codePostal;
 	private String nomRue, ville, pays;
+	
 	public Adresse(int numero, String nomRue, String ville, int codePostal,	String pays) {
 		this.numero = numero;
 		this.codePostal = codePostal;
