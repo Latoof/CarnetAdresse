@@ -15,11 +15,17 @@ import java.util.Vector;
  *
  */
 
-public class UserGUI extends JFrame {
+public class UserGUI extends JFrame implements ActionListener {
 
 	private Carnet 				carnet;
+	
+	private ListePanel			listePanel;
 	private FichePanel 			fichePanel;
 	private FichePanelModify 	fichePanelModify;
+	
+	private JMenuItem itemNouveau;
+	private JMenuItem itemOuvrir;
+	private JMenuItem itemEnregistrer;
 	
 	public UserGUI ( Carnet c ) {
 		
@@ -37,30 +43,33 @@ public class UserGUI extends JFrame {
 		this.addWindowListener( l );
 		
 		
-		this.setSize(new Dimension(500, 400));
-		this.setMinimumSize( new Dimension(500, 400) );
+		this.setSize(new Dimension(800, 600));
+		this.setMinimumSize( new Dimension(550, 425) );
 		this.setVisible(true);
 		
 		
 		JMenuBar menuBar = new JMenuBar();
 			JMenu menuFichier = new JMenu("Fichier");
-				JMenuItem itemNouveau = new JMenuItem("Nouveau carnet");
+				itemNouveau = new JMenuItem("Nouveau carnet");
 				itemNouveau.setAccelerator(KeyStroke.getKeyStroke(
 				        KeyEvent.VK_1, ActionEvent.ALT_MASK));
 				itemNouveau.getAccessibleContext().setAccessibleDescription(
 				        "This doesn't really do anything");
-				JMenuItem itemOuvrir = new JMenuItem("Ouvrir fichier");
+				itemOuvrir = new JMenuItem("Ouvrir fichier");
 				itemOuvrir.setAccelerator(KeyStroke.getKeyStroke(
 				        KeyEvent.VK_2, ActionEvent.ALT_MASK));
 				itemOuvrir.getAccessibleContext().setAccessibleDescription(
 				        "This doesn't really do anything");
-				JMenuItem itemEnregistrer = new JMenuItem("Enregistrer carnet");
+				itemEnregistrer = new JMenuItem("Enregistrer carnet");
 				itemEnregistrer.setAccelerator(KeyStroke.getKeyStroke(
 				        KeyEvent.VK_3, ActionEvent.ALT_MASK));
 				itemEnregistrer.getAccessibleContext().setAccessibleDescription(
 				        "This doesn't really do anything");
 			
-				
+				itemNouveau.addActionListener(this);
+				itemOuvrir.addActionListener(this);
+				itemEnregistrer.addActionListener(this);
+
 		
 				menuFichier.add(itemNouveau);
 				menuFichier.addSeparator();
@@ -73,13 +82,13 @@ public class UserGUI extends JFrame {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout( new BorderLayout());
 		
-		ListePanel listePanel = new ListePanel(this, this.carnet);
+		listePanel = new ListePanel(this, this.carnet);
 		
 		
 		JPanel rightPanel = new JPanel(new GridLayout(2, 1));
 		
 		fichePanel = new FichePanel( this.carnet.getFicheFromIndex(0) );
-		fichePanel.setBackground(Color.BLUE);
+		//fichePanel.setBackground(Color.BLUE);
 		
 		fichePanelModify = new FichePanelModify( this.carnet.getFicheFromIndex(0) );
 		fichePanelModify.setBackground(Color.GREEN);
@@ -102,6 +111,53 @@ public class UserGUI extends JFrame {
 		this.fichePanel.voirFiche( f );
 		this.fichePanel.repaint();
 		
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+
+		if ( arg0.getSource() instanceof JMenuItem ) {
+			System.out.println("OK");
+			
+			if ( ((JMenuItem) arg0.getSource()).equals(this.itemOuvrir) ) {
+				
+				JFrame fr = new JFrame();
+				JFileChooser fc = new JFileChooser();
+				fc.setApproveButtonText("Ouvrirmm");
+
+				fr.add(fc);
+				fr.pack();
+				fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				//fr.setVisible(true);
+				   int returnVal = fc.showOpenDialog(fr);
+				    if(returnVal == JFileChooser.APPROVE_OPTION) {
+
+				    	this.carnet.fromXML( fc.getSelectedFile() );
+				    	this.listePanel.genList();
+				    	
+				    }
+				
+			}
+			else if ( ((JMenuItem) arg0.getSource()).equals(this.itemEnregistrer) ) {
+				JFrame fr = new JFrame();
+				JFileChooser fc = new JFileChooser();
+				//fc.setDialogType(JFileChooser.SAVE_DIALOG);
+				fc.setApproveButtonText("Enregistrer");
+				fr.add(fc);
+				fr.pack();
+				fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				//fr.setVisible(true);
+				   int returnVal = fc.showOpenDialog(fr);
+				    if(returnVal == JFileChooser.APPROVE_OPTION) {
+
+				    	this.carnet.toXML( fc.getSelectedFile().getAbsolutePath() );
+
+				    }
+			}
+		
+		}
 	}
 	
 	

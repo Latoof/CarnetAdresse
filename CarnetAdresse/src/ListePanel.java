@@ -33,11 +33,9 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		this.listeM = new DefaultListModel();
 		this.liste = new JList( listeM ) ;
 
-		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.RED);
 
-		
 		this.genList();
 		
 		
@@ -93,6 +91,8 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 	}
 	
 	public void genList() {
+		
+		this.listeM.removeAllElements();
 		
 		for ( int i=0; i < this.carnet.getListeFiches().size(); i++ ) {
 			this.listeM.addElement( this.carnet.getFicheFromIndex(i) );
