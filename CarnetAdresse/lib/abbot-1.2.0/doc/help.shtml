@@ -1,0 +1,161 @@
+<html>
+
+<head>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="abbot help">
+<meta name="description" content="Help references for Abbot.">
+<meta name="date" content="2008-03-05">
+<title>Abbot Help</title>
+</head>
+
+<body bgcolor=white lang=EN-US link="#660000" vlink="#003399" style='tab-interval:
+.5in'>
+<!--[if gte mso 9]><xml>
+ <v:background id="_x0000_s1160" o:bwmode="white" o:targetscreensize="800,600">
+  <v:fill src="" o:title="strbkgde" type="frame"/>
+ </v:background></xml><![endif]-->
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+	<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><i><span
+style='color:#00CC00'>A</span></i><i><span style='color:red'>b</span></i><i><span
+style='color:#00CC00'>b</span>ot framework for automated testing of Java GUI components
+and programs</i><br>
+All materials Copyright © 2002-2011 <a href="mailto:twall_AT_users.sf.net">Timothy
+Wall</a>, All Rights Reserved</p>
+
+<p align=center style='text-align:center'>This version 1.2.0</p>
+
+<h3><a name=Support></a>Questions, Help, Support and Contributions</h3>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+text-align:justify'>To obtain help, read the <a href="FAQ.shtml">FAQ</a>, 
+and search <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=abbot-users">the
+mailing list archives</a> and older discussions in the SourceForge
+<a href="http://sf.net/forum/?group_id=50939">Forums</a>.
+If you still don't find what you're looking for,
+<a href=http://lists.sf.net/lists/listinfo/abbot-users>subscribe</a> and
+post to the <a href="mailto:abbot-users@lists.sf.net">Abbot user's mailing
+list</a> on SourceForge. That way your discoveries will be available to others
+who might share your question.</p> 
+
+<p style='text-align:justify'><a href="http://sourceforge.net/projects/abbot">Abbot
+code development</a> takes place on SourceForge. Developers are welcome; after
+you've submitted a few acceptable patches you may be added to the developer's
+group with privileges to make changes directly to the code base. </p>
+
+<p style='text-align:justify'>If you are looking for additional support for
+Abbot or test integration services, please <a
+href="mailto:twall_AT_users.sourceforge.net">send email</a> and we'll point you
+in the right direction. Commercial support is available and many companies have
+already taken advantage of this. </p>
+
+<p style='text-align:justify'>View the full <a href="CPL.html">License (CPL)</a>.
+Contact <a href="mailto:twall_AT_users.sf.net">via email if you require a
+different license. </a><span class=MsoHyperlink><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'><a href="mailto:twall_AT_users.sf.net"></a><a
+href="mailto:twall_AT_users.sf.net"></a><span class=MsoHyperlink><span
+style='color:blue;text-decoration:none;text-underline:none'><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'><a href="mailto:twall_AT_users.sf.net"><span
+style='color:blue;text-decoration:none;text-underline:none'><o:p></o:p></span></a></p>
+
+<div class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'><a href="mailto:twall_AT_users.sf.net"><span
+style='color:blue;text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1163" type="#_x0000_t75" style='width:6in;
+ height:7.2pt' o:hrpct="0" o:hralign="center" o:hr="t">
+ <v:imagedata src="" o:title="strrulec"/>
+</v:shape><![endif]--><![if !vml]><img border=0 height=10 width=576
+src="README_files\image002.gif" alt=--- v:shapes="_x0000_i1163"><![endif]></span></a></div>
+
+<p class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'></p>
+
+<div align=center>
+
+<table border=0 cellpadding=0 style='mso-cellspacing:1.5pt;mso-padding-alt:
+ 0in 0in 0in 0in'>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>
+  <a href="http://lists.sf.net/lists/listinfo/abbot-users"><span
+ style='color:blue; 
+  text-decoration:none;text-underline:none'>Subscribe to the Abbot Users
+ mailing list</a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><i>Lend a hand at</i><br>
+  <a href="http://sourceforge.net"><span style='color:blue;text-decoration:
+  none;text-underline:none'><img border=0 width=210 height=62 id="_x0000_i1030"
+  src="http://sourceforge.net/sflogo.php?group_id=50939&amp;type=5"
+  alt="SourceForge Logo"></span></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><a
+  href="http://groups.yahoo.com/group/java-gui-testing/join"><span
+  style='color:blue;text-decoration:none;text-underline:none'><img border=0
+  width=91 height=52 id="_x0000_i1031"
+  src="http://groups.yahoo.com/img/ui/join.gif"></span><span style='color:blue'><br>
+  </span>Click to subscribe to java-gui-testing</a></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+

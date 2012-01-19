@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AWTTestScript desc="Create a new script and launch an application" slow="true">
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance" index="1" parent="JRootPane Instance" window="ScriptEditor" />
+  <component class="javax.swing.JPanel" id="JPanel Instance" index="0" parent="JLayeredPane Instance" window="ScriptEditor" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 2" index="1" parent="JPanel Instance" window="ScriptEditor" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 3" index="1" parent="JPanel Instance 2" window="ScriptEditor" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 4" index="0" parent="classpath" window="ScriptEditor" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance" index="0" parent="ScriptEditor" />
+  <component class="javax.swing.JScrollBar" id="JScrollBar Instance" index="1" parent="JScrollPane Instance" window="ScriptEditor" />
+  <component class="javax.swing.JScrollPane" id="JScrollPane Instance" index="2" parent="JSplitPane Instance 2" window="ScriptEditor" />
+  <component class="javax.swing.JSplitPane" id="JSplitPane Instance" index="1" parent="JPanel Instance 3" window="ScriptEditor" />
+  <component class="javax.swing.JSplitPane" id="JSplitPane Instance 2" index="1" parent="JSplitPane Instance" window="ScriptEditor" />
+  <component class="javax.swing.JViewport" id="JViewport Instance" index="0" parent="JScrollPane Instance" window="ScriptEditor" />
+  <component class="javax.swing.JWindow" id="JWindow Instance" parent="shared frame" />
+  <component class="abbot.editor.editors.LaunchEditor" id="LaunchEditor Instance" index="0" parent="JViewport Instance" window="ScriptEditor" />
+  <component class="javax.swing.JMenuItem" id="New Script..." index="0" text="New Script..." window="ScriptEditor" />
+  <component class="javax.swing.JButton" id="Run" index="7" name="Run" parent="JPanel Instance 4" text="Run" window="ScriptEditor" />
+  <component class="javax.swing.JButton" id="Save" title="Save" />
+  <component class="abbot.editor.ScriptTable" id="Script Table" />
+  <component class="abbot.editor.ScriptEditorFrame" id="ScriptEditor" name="ScriptEditor" title="/Test Script Editor.*/" />
+  <component class="javax.swing.JButton" id="Select Test Suite..." index="5" title="/Test Script Editor.*/" />
+  <component class="abbot.editor.widgets.TextField" id="class" index="7" label="Target Class Name" name="class" parent="LaunchEditor Instance" window="ScriptEditor" />
+  <component class="abbot.editor.widgets.ArrayEditor" id="classpath" index="19" label="Classpath" name="classpath" parent="LaunchEditor Instance" window="ScriptEditor" />
+  <component class="abbot.editor.widgets.TextField" id="editor" index="0" name="editor" parent="JPanel Instance 4" window="ScriptEditor" />
+  <component class="javax.swing.SwingUtilities$1" id="shared frame" root="true" title="" />
+  <launch args="[]" class="abbot.editor.Costello" classpath="lib/abbot.jar" method="main" />
+  <wait args="/Test Script Editor.*/" class="abbot.tester.ComponentTester" method="assertFrameShowing" />
+  <annotation component="ScriptEditor" x="269" y="12"><![CDATA[First, create a new script by selecting <b>New Script...</b>
+from the <b>File</b> menu.]]></annotation>
+  <action args="New Script..." method="actionSelectMenuItem" />
+  <annotation component="ScriptEditor" x="275" y="179"><![CDATA[Note that two steps have already been inserted, 
+one to launch the code under test and one to
+dispose of it after the test completes.]]></annotation>
+  <action args="Script Table,0,0" class="abbot.editor.ScriptTable" method="actionSelectCell" />
+  <annotation component="ScriptEditor" desc="Annotation: Select the launch step, and an editor appears  allowing you to configure the launch of the code  you will be testing." x="21" y="184"><![CDATA[Select the launch step, and an editor appears 
+allowing you to configure the launch of the code 
+you will be testing.]]></annotation>
+  <annotation component="class" desc="Annotation: Let's launch a sample application " height="62" width="225" x="39" y="-87"><![CDATA[Let's launch a sample application.
+First, identify the main class.]]></annotation>
+  <action args="class,example.MyCode" class="javax.swing.text.JTextComponent" method="actionEnterText" />
+  <annotation component="editor" desc="Annotation: Next, set the class path appropriately.   Note that both colons and semicolons may be used as path separators.  Note also that the main class will display in red until the class can be found in the given class path." height="123" width="300" x="200" y="-108"><![CDATA[Next, set the class path appropriately.
+Note that both colons and semicolons may be used as path separators.  Note also that the main class will display in red until the class can be found in the given class path.]]></annotation>
+  <action args="editor,lib/example..jar" class="javax.swing.text.JTextComponent" method="actionEnterText" />
+  <annotation height="75" width="296" x="368" y="366"><![CDATA[Now you can launch your application.]]></annotation>
+  <annotation component="ScriptEditor" userDismiss="true" x="150" y="186"><![CDATA[<html><font size=+2><center>Stay Tuned!<br>More to come soon!</center></font></html>]]></annotation>
+  <terminate />
+</AWTTestScript>
+

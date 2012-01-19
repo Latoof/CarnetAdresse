@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Testing A Group of Components (Part II)</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="java, gui, test, software, automated, junit, jfcunit, swingunit, awtunit, record, playback, qa, quality">
+<meta name="description" content="How to use the Abbot Java GUI Test Framework to test a group of components using recording and scripts.">
+<meta name="date" content="2008-03-05">
+</head>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<center><i>
+<font color="#00CC00">A</font><font color="#FF0000">b</font><font color="#00CC00">b</font>ot framework for testing Java GUI components and programs</i><br> 
+All materials Copyright &#169; 2002-2011 All Rights Reserved
+<a href=mailto:twall_AT_users.sourceforge.net>Timothy Wall</a><br><p>
+This version 1.2.0
+</center> 
+
+<h1>Tutorial 3: Testing A Group of Components (Part II)</h1>
+
+<center>
+<i>This project accelerated by</i><br>
+<A href="http://sourceforge.net"> <IMG
+src="http://sourceforge.net/sflogo.php?group_id=50939&type=5" width="210"
+height="62" border="0" alt="SourceForge Logo"></A>
+</center>
+</td>
+</tr>
+</table>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+
+
+
+
+

@@ -1,0 +1,158 @@
+<html>
+
+<head>
+<title>Abbot Examples</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="abbot examples">
+<meta name="description" content="Examples of Abbot usage.">
+<meta name="date" content="2008-03-05">
+</head>
+
+<body bgcolor=white text=black lang=EN-US link="#660000" vlink="#003399" style='tab-interval:
+.5in'>
+<!--[if gte mso 9]><xml>
+ <v:background id="_x0000_s1165" o:bwmode="white" o:targetscreensize="800,600">
+  <v:fill src="" o:title="strbkgde" type="frame"/>
+ </v:background></xml><![endif]-->
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+	<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><i><span
+style='color:#00CC00'>A</span></i><i><span style='color:red'>b</span></i><i><span
+style='color:#00CC00'>b</span>ot framework for automated testing of Java GUI
+components and programs</i><br>
+All materials Copyright © 2002-2011 <a href="mailto:twall_AT_users.sf.net">Timothy
+Wall</a>, All Rights Reserved</p>
+
+<p align=center style='text-align:center'>This version 1.2.0-RC2</p>
+
+<h3>Examples</h3>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+text-align:justify'>You can watch Abbot do its thing by running one of the
+prepared example test suites (as they would appear if run from the JUnit test
+runner). You may want to add &quot;<code><span style='font-size:10.0pt;
+font-family:"Courier New"'>-Dabbot.robot.auto_delay=100</span></code>&quot; to make
+it look like a real person is running the tests:</p>
+
+<p class=MsoNormal style='margin-right:.5in;mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:.5in'><code><span style='font-size:10.0pt;font-family:"Courier New"'>java
+-cp lib/example.jar <a href="../src/example/FontChooserTest.java">example.FontChooserTest</a></span></code><span
+style='font-size:10.0pt;font-family:"Courier New";mso-fareast-font-family:"Courier New"'><br>
+<code>java -cp lib/example.jar <a
+href="../src/example/MyCodeTest.java">example.MyCodeTest</a></code><br>
+<code>java -cp lib/example.jar
+junit.extensions.abbot.ScriptFixture <a href="../src/example/SimpleApplet.xml">../src/example/SimpleApplet.xml</a></code></span></p>
+
+<p>The second example is intended to report a failed assertion, so you can see
+what a failed test looks like. </p>
+
+<p class=MsoNormal style='margin-top:5.0pt;mso-margin-bottom-alt:auto;
+text-align:justify'>Note that the last example passes an Abbot script as an
+argument to the ScriptFixture class to run the script as a JUnit test. For a
+more complete description of the framework, see the <a
+href="api/overview-summary.html#overview_description">overview</a>
+document.<span class=MsoHyperlink><span style='color:blue;text-decoration:none;
+text-underline:none'> </span></span><a href="mailto:twall_AT_users.sf.net"></a><span
+class=MsoHyperlink><span style='color:blue;text-decoration:none;text-underline:
+none'><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'><a href="mailto:twall_AT_users.sf.net"><span
+style='color:blue;text-decoration:none;text-underline:none'><o:p></o:p></span></a></p>
+
+<div class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'><a href="mailto:twall_AT_users.sf.net"><span
+style='color:blue;text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><![endif]--><!--[if gte mso 9]><xml>
+ <v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:627.75pt;height:7.2pt'
+  o:hralign="center" o:hr="t">
+  <v:imagedata src="" o:title="strrulec"/>
+ </v:shape></xml><![endif]--><![if !mso]><img border=0 height=10 width="100%"
+src="" alt=--- v:shapes="_x0000_i1025"><![endif]></span></a></div>
+
+<p class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'></p>
+
+<div align=center>
+
+<table border=0 cellpadding=0 width="100%" style='width:100.0%;mso-cellspacing:
+ 1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a href="http://www.jars.com/"><span style='color:blue;
+  text-decoration:none;text-underline:none'><img border=0 width=103 height=58
+  id="_x0000_i1029" src="http://www.jars.com/images/java_registered.gif"></span></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><i>Sample the latest at</i><br>
+  <a href="http://sourceforge.net"><span style='color:blue;text-decoration:
+  none;text-underline:none'><img border=0 width=210 height=62 id="_x0000_i1030"
+  src="http://sourceforge.net/sflogo.php?group_id=50939&amp;type=5"
+  alt="SourceForge Logo"></span></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><a
+  href="http://groups.yahoo.com/group/java-gui-testing/join"><span
+  style='color:blue;text-decoration:none;text-underline:none'><img border=0
+  width=91 height=52 id="_x0000_i1031"
+  src="http://groups.yahoo.com/img/ui/join.gif"></span><span style='color:blue'><br>
+  </span>Click to subscribe to java-gui-testing</a></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+

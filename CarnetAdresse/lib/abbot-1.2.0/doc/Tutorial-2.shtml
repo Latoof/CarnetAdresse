@@ -1,0 +1,190 @@
+<html>
+<head>
+<title>Testing A Group of Components (Part I)</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="java, gui, test, software, automated, junit, jfcunit, swingunit, awtunit, record, playback, qa, quality">
+<meta name="description" content="How to use the Abbot Java GUI Test Framework to test a group of components using Java code.">
+<meta name="date" content="2008-09-02">
+</head>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<center><i>
+<font color="#00CC00">A</font><font color="#FF0000">b</font><font color="#00CC00">b</font>ot framework for testing Java GUI components and programs</i><br> 
+All materials Copyright &#169; 2002-2011 All Rights Reserved
+<a href=mailto:twall_AT_users.sourceforge.net>Timothy Wall</a><br><p>
+This version 1.2.0-RC2
+</center> 
+
+<h1>Tutorial 2: Testing A Group of Components (Part I)</h1>
+This is a short example of how to write tests against a composite component
+prior to writing it.  This example is written in the context of JUnit, and
+assume you're familiar with that framework.  If not, read
+<a href="http://junit.sourceforge.net/doc/cookbook/cookbook.htm">the
+cookbook</a> first.
+<p>
+<h2>How to write a simple test fixture</h2>
+In this example, we want to write a component which displays the currently
+selected item from list in a label below that list.  We first write a test
+fixture that displays our LabeledList (the main routine automatically runs the
+test suite for this fixture, or runs a single test if one is specified on the
+command line).  Explicitly disposing of the frame is not necessary, since the
+ComponentTestFixture will dispose of any frames after tests finish running.
+<p>
+<pre><code>
+import java.awt.*;
+import javax.swing.*;
+import junit.framework.*;
+import junit.extensions.abbot.*;
+
+import abbot.script.ComponentReference;
+import abbot.tester.ComponentTester;
+
+public class LabeledListTest extends ComponentTestFixture {
+
+    public void testLabelChangedOnSelectionChange() throws Throwable {
+        String[] contents = { "one", "two", "three" };
+        final LabeledList labeledList = new LabeledList(contents);
+        Frame frame = showFrame(labeledList);
+        // ...
+    }
+
+    public LabeledListTest(String name) { super(name); }
+
+    public static void main(String[] args) {
+        TestHelper.runTests(args, LabeledListTest.class);
+    }
+}
+</code></pre>
+
+This won't compile until we get a LabeledList to test against, so let's do
+that. 
+
+<pre><code>
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class LabeledList extends JPanel {
+    private JList list;
+    private JLabel label;
+    public LabeledList(String[] initialContents) {
+        setLayout(new BorderLayout());
+        list = new JList(initialContents);
+        add(list, BorderLayout.CENTER);
+        label = new JLabel("Selected: ");
+        add(label, BorderLayout.SOUTH);
+    }
+}
+</code></pre>
+
+Now we go back and add to the test.  We want to select a list item and ensure
+that the label reflects the selected item.  So we first look up the list.
+Note that while we could make the LabeledList member public or otherwise
+directly accessible, that's making private data visible solely for the sake of
+a test, and ends up cluttering the interface.  Let the Abbot framework do the
+work instead...<br>
+<pre><code>
+    import abbot.finder.matchers.*;
+
+    ...
+
+    public void testLabelChangeOnSelectionChange() throws Exception {
+        // ...
+        // The interface abbot.finder.Matcher allows you to define whatever
+        // matching specification you'd like.  We know there's only one
+        // JList in the hierarchy we're searching, so we can look up by
+        // class with an instance of ClassMatcher (a very simple
+        // implementation of abbot.finder.Matcher).
+        Component list = getFinder().find(new ClassMatcher(JList.class));
+
+</code></pre>
+Abbot will search the available GUI hierarchy until the first match is found
+(you can use the <code>abbot.finder.MultiMatcher</code> interface if there
+might be more than one match).  You can customize the matching
+criteria to whatever fits your needs.  You can also optimize the
+search by providing a starting component as the first argument to
+<code>find</code>.
+<p>
+In order to play actions on the list, we want a ComponentTester object that
+knows how, so we can create a JListTester (or let the ComponentTester do it
+and cache the result for future tests).<br>
+<pre><code>
+        JListTester tester = new JListTester();
+        tester.actionSelectRow(list, new JListLocation(1)); 
+        // or select by value
+        // tester.actionSelectRow(list, new JListLocation("two"));
+</code></pre>
+
+Note the use of JListLocation here.  Abbot supports the concept of
+component-specific locations, which means any given component may provide
+internal substructure (cells in a table, rows in a tree, items in a list,
+etc).  This substructure is identified by <ComponentType>Location classes.
+For example, a JTableLocation may be constructed with a Point (raw
+coordinates), a [row, col] pair, or a String value for the desired cell.
+
+At this point the selection has finished and any listening events propagated,
+so you can check the results:<br>
+<pre><code>
+        // We could also use an instance of ClassMatcher, but this shows
+        // how you can put more conditions into the Matcher.
+        JLabel label = (JLabel)getFinder().find(labeledList, new Matcher() {
+            public boolean matches(Component c) {
+                return c.getClass().equals(JLabel.class)
+                    && c.getParent() == labeledList;
+            }
+        });
+        assertEquals("Wrong label after selection",
+                     "Selected: two", label.getText());
+    }
+</code></pre>
+
+Now run the test.  It will fail, because we haven't implemented anything in
+the LabeledList to update the label when a selection is made.  We do so
+now.<br> 
+<pre><code>
+    public LabeledList(String[] initialContents) {
+        // ...
+        list.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent lse) {
+                label.setText("Selected: " + list.getSelectedValue());
+            }           
+        });
+    }
+</code></pre>
+
+Recompile and the test should now pass.
+<p>
+See the full source code for the component
+<a href=../src/example/LabeledList.java>example.LabeledList</a>,
+and its TestCase,
+<a href=../src/example/LabeledListTest.java>example.LabeledListTest</a>.
+<p>
+<center>
+<i>This project runs on</i><br>
+<A href="http://sourceforge.net"> <IMG
+src="http://sourceforge.net/sflogo.php?group_id=50939&type=5" width="210"
+height="62" border="0" alt="SourceForge Logo"></A>
+</center>
+</td>
+</tr>
+</table>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+
+
+
+
+

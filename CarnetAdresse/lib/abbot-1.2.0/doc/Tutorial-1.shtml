@@ -1,0 +1,196 @@
+<html>
+<head>
+<title>Unit Testing A Single GUI Component</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="java, gui, test, software, automated, junit, jfcunit, swingunit, awtunit, record, playback, qa, quality">
+<meta name="description" content="How to use the Abbot Java GUI Test Framework to unit test a single GUI component.">
+<meta name="date" content="2008-03-05">
+</head>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<center><i>
+<font color="#00CC00">A</font><font color="#FF0000">b</font><font color="#00CC00">b</font>ot framework for testing Java GUI components and programs</i><br> 
+All materials Copyright &#169 2002-2011 All Rights Reserved
+<a href=mailto:twall_AT_users.sourceforge.net>Timothy Wall</a><br><p>
+This version 1.2.0-RC2
+</center> 
+
+<h1>Tutorial 1: Unit Testing A Single GUI Component</h1>
+
+So you're a fan of test-first development.  Let's write a test for a component
+that hasn't been written yet (well, it has, but let's pretend).  The component
+we want to write is a button with the following behavior:<p>
+<ul>
+<li>Points in one of four directions
+<li>Fires an event when pressed once
+<li>Fires continuous events when held down
+</ul>
+With this simple spec, we can outline a unit test for it:<p>
+
+<blockquote><code><pre>
+package example;
+
+import junit.extensions.abbot.*;
+import abbot.tester.*;
+
+// ComponentTestFixture automatically handles disposal of GUI components,
+// among (many) other things.  Always use it when testing GUI components.
+public class ArrowButtonTest extends ComponentTestFixture {
+
+    public ArrowButtonTest(String name) { super(name); }
+
+    public static void main(String[] args) {
+        TestHelper.runTests(args, ArrowButtonTest.class);
+    }
+}
+</pre></code></blockquote>
+<p>
+
+We'll need to put the component into a frame for most tests, but there's
+already a "showFrame" method in the ComponentTestFixture that we inherit.
+That method puts a nice fat border around our component to make it visible,
+although that's not strictly necessary.  We'll need a ComponentTester to play
+actions on our component, so add that to the setup:<p> 
+<blockquote><code><pre>
+    private ComponentTester tester;
+    protected void setUp() {
+        tester = new ComponentTester();
+    }
+    protected void tearDown() {
+        // Default JUnit test runner keeps references to Tests for its
+        // lifetime, so TestCase fields won't be GC'd for the lifetime of the
+        // runner. 
+        tester = null;
+    }
+</pre></code></blockquote>
+<p>
+Now write the first test, which ensures that an action is fired when the
+button is clicked.
+
+<blockquote><code><pre>
+import java.awt.event.*;
+import javax.swing.*;
+    ...
+
+    private String clickType;
+    public void testClick() {
+        ActionListener al = new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                clickType = ev.getActionCommand();                            
+            }
+        };
+
+        ArrowButton left = new ArrowButton(ArrowButton.LEFT);
+        ArrowButton right = new ArrowButton(ArrowButton.RIGHT);
+        ArrowButton up = new ArrowButton(ArrowButton.UP);
+        ArrowButton down = new ArrowButton(ArrowButton.DOWN);
+
+        left.addActionListener(al);
+        right.addActionListener(al);
+        up.addActionListener(al);
+        down.addActionListener(al);
+
+        JPanel pane = new JPanel();
+        pane.add(left);
+        pane.add(right);
+        pane.add(up);
+        pane.add(down);
+        // ComponentTestFixture provides the frame
+        showFrame(pane);
+
+        clickType = null;
+        tester.actionClick(left);        
+        assertEquals("Action failed (left)", ArrowButton.LEFT, clickType);
+        clickType = null;
+        tester.actionClick(right);        
+        assertEquals("Action failed (right)", ArrowButton.RIGHT, clickType);
+        clickType = null;
+        tester.actionClick(up);        
+        assertEquals("Action failed (up)", ArrowButton.UP, clickType);
+        clickType = null;
+        tester.actionClick(down);        
+        assertEquals("Action failed (down)", ArrowButton.DOWN, clickType);
+    }
+</pre></code></blockquote>
+
+If we were writing the ArrowButton from scratch, we'd have identified by this
+test a few things that we need:
+<p>
+<ul>
+<li>A set of constants for the arrow direction.
+<li>An addActionListener method (and probably a remove as well).
+<li>A constructor that takes the direction as its only argument.
+</ul>
+
+Well, let's assume we went off and implemented those functions (this tuturial
+is one about testing GUI components, not unit testing or XP in general).
+After compiling, run the example.ArrowButtonTest class, and repeat the
+code/test/debug cycle until the test passes.
+<p>
+<blockquote><code><pre>
+java -Dabbot.robot.auto_delay=200 -cp classes example.ArrowButtonTest<br>
+</pre></code></blockquote>
+Note that the auto-delay setting is only there to prevent the test from
+running so fast you don't see it; normally you can omit it.
+<p>
+That leaves only the last bullet to test, repeated events when held down.
+<p>
+<blockquote><code><pre>
+    private int count = 0;
+    public void testRepeatedFire() {
+        ArrowButton arrow = new ArrowButton(ArrowButton.LEFT);
+        ActionListener al = new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                ++count;
+            }
+        };
+        arrow.addActionListener(al);
+        showFrame(arrow);
+
+        Dimension size = arrow.getSize();
+        // Hold the button down for 5 seconds
+        tester.mousePress(arrow);
+        tester.actionDelay(5000);
+        tester.mouseRelease();
+        assertTrue("Didn't get any repeated events", count > 1);
+    }
+</pre></code></blockquote>
+Run the test case again, and (if you were writing ArrowButton from scratch)
+the second test would fail.  Go back and implement the repeated fire function
+in example.ArrowButton, and debug and test until testRepeatedFire passes.
+Now you've increased your confidence that subsequent changes to ArrowButton
+which break the desired behavior will break the tests and you'll know about
+it.  You've also just documented the expected behavior, which can mean the
+difference between someone understanding your code or someone using it
+incorrectly based on out-of-date or missing documentation. 
+<p>
+See the full source code for the component
+<a href=../src/example/ArrowButton.java>example.ArrowButton<a>, 
+and its TestCase, 
+<a href=../src/example/ArrowButtonTest.java>example.ArrowButtonTest<a>.
+<p>
+<center>
+<i>This project helped in a big way by</i><br>
+<A href="http://sourceforge.net"> <IMG
+src="http://sourceforge.net/sflogo.php?group_id=50939&type=5" width="210"
+height="62" border="0" alt="SourceForge Logo"></A>
+</center>
+</td>
+</tr>
+</table>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+

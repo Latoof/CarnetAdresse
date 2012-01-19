@@ -1,0 +1,118 @@
+<html>
+<head>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="java, gui, test, testing, unit, software, automated, junit, jfcunit, swingunit, awtunit, record, playback, qa, quality">
+<meta name="description" content="Abbot Java GUI Testing Framework: Record and play back actions to test your Java GUI, suitable for use by developers and QA.">
+<meta name="date" content="2008-03-05">
+<title>Abbot framework for automated testing of Java GUI components and programs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor=white text=black lang=EN-US link="#660000" vlink="#003399"> 
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<div class=Section1> 
+  <p class=MsoNormal align=center style='text-align:center'><i><span
+style='color:#00CC00'>A</span></i><i><span style='color:red'>b</span></i><i><span
+style='color:#00CC00'>b</span>ot framework for automated testing of Java GUI components and programs</i><br> 
+    All materials Copyright © 2002-2011 <a href="mailto:twall_AT_users.sf.net">Timothy Wall</a>, All Rights Reserved</p> 
+  <p align=center style='text-align:center'>This version 1.2.0</p> 
+  <h1 align=center style='text-align:center'>Getting Started with the Abbot Java GUI Test Framework</h1> 
+  <h2 align=center style='text-align:center'><i>Building unit tests and functional tests (AWTUnit/SwingUnit)</i></h2> 
+  <p class=MsoBodyText>Abbot helps you test your Java UI. It comprises Abbot, which lets you programmatically drive UI components, and Costello (built on Abbot) which allows you to easily launch, explore and control an application. The framework may be used with both scripts and compiled code.</p> 
+  <table border=0 cellspacing=0 cellpadding=0 align=right> 
+    <tr> 
+      <td width=199 valign=top> <p class=MsoNormal align=center style='text-align:center;    '><span style='color:windowtext'><a
+  href="images/costello.png" target=screenshot><span
+  style='color:windowtext'>Costello Screen Shot</span></a></span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=199 valign=top> <p class=MsoNormal align=center style='text-align:center;    '><span style='color:windowtext'><a
+  href="images/costello.png"><span style='color:windowtext;text-decoration:none;
+  text-underline:none'><img
+  src="images/costello-thumb.png" alt=Costello screenshot name="Costello Screenshot" width=150 height=113 hspace=10
+  vspace=10 border=0 id="_x0000_i1157"></span></a></span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=199 valign=top> <p class=MsoNormal align=center style='text-align:center;    '><span style='color:windowtext'><a
+  href="../abbot.jnlp"><span style='color:windowtext'>Run Costello</span></a></span></p> 
+      <p class=MsoNormal align=center style='text-align:center;    '><span style='color:windowtext'><a
+  href="http://java.sun.com/products/javawebstart/download.html"><span
+  style='color:windowtext'>(Get Webstart here)</span></a></span></p></td> 
+    </tr> 
+  </table> 
+  <p class=MsoNormal style='text-align:justify'> <a href="api/overview-summary.html#overview_description">This overview</a> of the Abbot system will give you an idea of the different system components and how it is used. There is also <a href="api/abbot/doc-files/about.html">some background</a> concerning the issues involved with Java GUI testing.</p> 
+  <p style='text-align:justify'>You can see what Costello (the script editor) looks like or try it out via Java Web Start by using the links to the right.
+ The screen shot shows a sample application, its UI hierarchy, and some component properties as displayed by Costello. 
+  <p style='text-align:justify'>Here is what GUI unit test code looks like using Abbot (see <a href="Tutorial-1.shtml">Tutorial 1</a> or <a href="Tutorial-2.shtml">Tutorial 2</a> for more examples). <br> 
+  <code> 
+  <pre>
+    <font color=brown>// Suppose MyComponent has a text field and a button...</font>
+    MyComponent comp = new MyComponent();
+    <font color=brown>// Display a frame containing the given component</font>
+    showFrame(comp);
+
+    JTextField textField = (JTextField)getFinder().
+        find(new ClassMatcher(JTextField.class));
+    JButton button = (JButton)getFinder().find(new Matcher() {
+        public boolean matches(Component c) {
+            <font color=brown>// Add as much information as needed to distinguish the component</font>
+            return c instanceof JButton && ((JButton)c).getText().equals("OK");
+        }
+    });
+    JTextComponentTester tester = new JTextComponentTester();
+    tester.actionEnterText(textField, "This text is typed in the text field");
+    tester.actionClick(button);
+    <font color=brown>// Perform some tests on the state of your UI or model</font>
+    assertEquals("Wrong button tooltip", "Click here to accept", button.getToolTipText());
+</pre> 
+  </code> 
+  <p>Refer to the API documentation for the <a href="api/junit/extensions/abbot/ComponentTestFixture.html">ComponentTestFixture</a>, <a href="api/abbot/tester/ComponentTester.html">ComponentTester</a> and <a href="api/abbot/tester/Robot.html">Robot</a> classes, as well as the framework tests in the test source subdirectory.</p> 
+  <p style='text-align:justify'>You can also record user actions directly into a script which controls the event playback and testing. This form of test is more suitable to integration/functional testing. The <a href="user-guide.shtml">Costello script editor</a> is provided which can record user actions and facilitate script construction and maintenance. It also provides insight into the hierarchy of the application under test. You can launch the editor with the Web Start link above and immediately point it at any application you wish to launch and examine. The editor provides a hieararchy browser which displays all components in use by the application, as well as a wealth of information about any component selected in the hierarchy. </p> 
+  <p style='text-align:justify'> <a href="http://www.junit.org">JUnit</a> is used as the controlling harness for running tests and suites of tests, but scripts can easily be wrapped to run in other environments. Scripts may also be used to create a demo or tutorial for an application. You can drive the actual application and provide popup annotations while it is running.</p> 
+  <p><a name=QuickStart></a>Abbot is provided under the <a href="CPL.html">Common Public License (CPL)</a>. Contact us <a href="mailto:twall_AT_users.sf.net">via email if you require a different license. </a></p> 
+  <p class=MsoNormal style='text-align:justify'>For latest changes, see the <a href="news.shtml">latest news</a> and <a href="RELNOTES.shtml">release notes</a>. </p> 
+  <p style='text-align:justify'>Please direct all questions and help requests to the <a href="http://sf.net/mail/?group_id=50939"> Abbot user's mailing list</a>, <b><i>after</i></b> searching the <a href="http://sf.net/mailarchive/forum.php?forum_name=abbot-users">the mailing list archives</a> and older discussions in the SourceForge <a href="http://sf.net/forum/?group_id=50939">Forums</a>.</p> 
+  <div class=MsoNormal align=center style='text-align:center'><a href="mailto:twall_AT_users.sf.net"></a></div> 
+  <div align=center> 
+    <table border=0 cellpadding=0> 
+      <tr> 
+        <td> <a href="http://lists.sf.net/lists/listinfo/abbot-users"><span style='color:blue;
+  text-decoration:none;text-underline:none'>Join the Abbot Mailing List</span></a><p>
+<a
+  href="http://groups.yahoo.com/group/java-gui-testing/join"> 
+        Click to subscribe to java-gui-testing</a><p></td> 
+        <td>&nbsp; </td> 
+        <td> <p class=MsoNormal><i>Get the whole picture at</i><br> 
+            <a href="http://sourceforge.net"><span style='color:blue;text-decoration:
+  none;text-underline:none'><img border=0 width=210 height=62 id="_x0000_i1030"
+  src="http://sourceforge.net/sflogo.php?group_id=50939&amp;type=5"
+  alt="SourceForge Logo"></span></a></p></td> 
+        <td>&nbsp; </td> 
+        <td><i>For all things Java</i><br>
+            <a href="http://www.java.net"><img border=0 
+             src="http://today.java.net/images/javanet_button_170.gif" 
+             alt="Java.net Logo"></a></td>
+      </tr> 
+    </table> 
+  </div> 
+</div> 
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+

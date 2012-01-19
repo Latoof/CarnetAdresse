@@ -1,0 +1,16 @@
+abbot
+abbot.editor
+abbot.editor.actions
+abbot.editor.editors
+abbot.editor.recorder
+abbot.editor.widgets
+abbot.finder
+abbot.finder.matchers
+abbot.i18n
+abbot.script
+abbot.script.parsers
+abbot.tester
+abbot.tester.extensions
+abbot.util
+example
+junit.extensions.abbot

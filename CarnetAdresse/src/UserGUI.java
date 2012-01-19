@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.Vector;
 
+import junit.extensions.abbot.*;
+
 /**
  * 
  * Limites : On ne visualisera/modifiera que les premiers elements des listes multiples (email, prenoms, etc)

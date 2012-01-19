@@ -1,0 +1,110 @@
+#
+# Available Abbot framework properties.  Note that this file is for reference
+# only; the given default values are set within the code itself in the absence
+# of the property actually being set.
+#
+
+# One of awt, robot
+abbot.robot.mode=robot
+
+# Whether to validate robot operation on startup
+abbot.robot.verify=false
+
+# If set true, doesn't install a SM
+abbot.no_security_manager=false
+
+# If set, the security manager class to use
+abbot.security_manager
+
+# Slow down event generation
+abbot.robot.auto_delay=0
+
+# Default timeout for the next two delay settings
+abbot.robot.default_delay=30000
+
+# Maximum ms to wait for a popup to appear
+abbot.robot.popup_delay=30000
+
+# Maximum ms to wait for a component to appear
+abbot.robot.component_delay=30000
+
+# Delay after mouse press before moving to register a drag (X11)
+abbot.robot.drag_delay=100
+
+# Delay after mouse move before release to register a drop (w32)
+abbot.robot.drop_delay=200
+
+# Delay between posting a native event with Robot and seeing it on the Java
+# EventQueue 
+abbot.robot.event_post_delay=100
+
+# Amount of time to wait when checking for a stuck java.awt.PopupMenu
+abbot.treelock_wait=100
+
+# Delay for slow playback
+abbot.script.slow_delay=200
+
+# Whether to validate scripts on load
+abbot.script.validate=true
+
+# Whether to capture key repeat events for modifier keys (w32)
+abbot.capture_modifier_repeats=false
+
+# Minimum drag threshold when recording
+abbot.capture.drag_threshold=5
+
+# Annotation minimum display time
+abbot.annotation.min_delay=5000
+
+# Annotation display time in ms, per word
+abbot.annotation.delay_unit=500
+
+# Log all events seen by the editor, regardless of whether the component
+# on which they happen has been filtered.
+abbot.editor.log_all_events=false
+
+# Whether to catalog and warn about missing resources/translations
+abbot.show_missing_resources=false
+
+# Which events get logged by ComponentTestFixture
+abbot.fixture.log_events=false
+abbot.fixture.event_mask=<EventRecorder.RECORDING_EVENT_MASK>
+
+# Timeouts for forked VM execution
+abbot.runner.launch_delay=60000
+abbot.runner.terminate_delay=30000
+
+# Delay between WINDOW_OPENED and window ready for input
+abbot.window_ready_delay=10000
+
+# Whether to track events on the java plugin console
+abbot.applet.track_console=false
+
+# Which class to use as the LAF ("system" and "default" are also valid)
+abbot.editor.look_and_feel=default
+
+# Whether the recorder logs events
+abbot.recorder.log_events=false
+
+# Whether the abbot framework is active; may be set by the editor or the
+# script runner
+abbot.framework.launched=false
+
+# Class which provides KeyStroke to keyChar mappings
+abbot.keystroke_map_generator=null
+
+# Set the default locale, country and variant
+abbot.locale.language=<default>
+abbot.locale.country=
+abbot.locale.variant=
+
+# Set the editor function keys (shift is always implied)
+abbot.editor.select_key=F1
+abbot.editor.capture_key=F2
+abbot.editor.capture_image_key=F3
+
+# Skip tests based on ComponentTestFixture
+abbot.skip_ui_tests=
+
+# Don't attempt to restore script editor LAF
+costello.no_laf_restore=

@@ -1,0 +1,831 @@
+<html>
+<head>
+<title>Abbot Release Notes</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="abbot release notes">
+<meta name="description" content="Release notes for Abbot.">
+<meta name="date" content="2008-03-05">
+</head>
+
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<h1>Abbot Release Changes</h1>
+
+<h2>Release 1.2</h2>
+<h3>Features</h3>
+<ul>
+<li>Refreshed to a whole new dependency stack
+<li>Tested against JDK 1.6, will work wth JDK 1.7
+<li>Replaced BeanShell scripting engine
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Many miscellaneous fixes.
+</ul>
+
+<h2>Release 1.0.1 (080305)</h2>
+<h3>Features</h3>
+<ul>
+<li>Refactor jar files into abbot library and editor jars.
+<li>Update OSX application adapter support.
+<li>Improve cell matching (gdavison).
+<li>Refactor test fixture setup/teardown to allow standalone usage.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Many miscellaneous fixes.
+<li>Avoid NPE during ctor of WindowTracker (coxen).
+<li>Update xerces jar and note version (sburoff).
+<li>Include explicit version on dependent jars.
+<li>Use PNG encoding for image comparisons, if available.
+</ul>
+<h2>Release 1.0.0.rc5 (061027)</h2>
+<h3>Features</h3>
+<ul>
+<li>Provide object-based JListLocation.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Include missing bits in released src.jar.
+<li>Ensure JComboBox tester works on LAFs not based on Basic.
+<li>Improve JFileChooserTester methods and javadoc.
+<li>Provide frame waiting methods in ComponentTester to replace deprecated ones.
+<li>Fix conflict caused by explicitly referencing an older SAXParser in JDOM.
+</ul>
+<h2>Release 1.0.0.rc4 (061001)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix actionActionMap failure (metasim).
+</ul>
+<h2>Release 1.0.0.rc3 (060812)</h2>
+<h3>Features</h3>
+<ul>
+<li>Better native drag/drop recording (now works on OSX and X11).
+<li>If a given keystroke for a JComponent action is unavailable on the current
+keyboard, try others keystrokes, if available.
+<li>Throw an ActionFailedException if a required menu is disabled.
+<li>Provide ComponentLocation-based Robot.sample().
+<li>Add drag/drop modifier mask and action constants.
+<li>Provide methods on fixture to press/release modifier keys, and
+automatically reset them after the test.
+<li>Added no_NO keymaps (fjankk).
+<li>Added abbot.skip_ui_tests to globally skip UI tests.
+<li>Project version control has been moved to Subversion.
+<li>Make invokeLater/invokeAndWait methods on ComponentTestFixture.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Clean up most test failures on linux and OSX.
+<li>Avoid extraneous mouse release and ESCAPE key presses on fixture teardown,
+which would lead to odd system behavior after a test run.
+<li>Fix NPE in tabbed pane operation.
+<li>Save/restore locking keys state around test runs rather than while the
+editor is running.
+<li>Fix race condition when rapidly showing/hiding popups which left some
+components incorrectly filtered.
+<li>Avoid beeping on actionEnterText when there is no existing text to replace.
+<li>Fix some sporadic failures due to modal dialogs not yet having focus.
+<li>Avoid triggering w32 windows menu on editor exit.
+<li>Fix drag/drop and many other tests on Linux.
+<li>Enable property substitution when using ComponentLocation arguments
+(e.g. actionClick(list, "${click.target}").
+<li>Catch junit.framework.AssertionFailedError rather than the abbot wrapper
+(J-F Poilpret).
+<li>Look for abbot.no_security_manager, not abbot.use_security_manager in
+StepRunner. 
+<li>Fix multiple component search exception when looking up the shared root
+frame from an applet.
+</ul>
+<h2>Release 1.0.0rc2 (051222)</h2>
+<h3>Features</h3>
+<ul>
+<li>Added JToolBarTester to float/unfloat a JToolBar.
+<li>Improved window-ready tracking.
+<li>Auto-release pressed buttons on ComponentTestFixture teardown (prevents
+unexpected coupling between tests).
+<li>Added no-arg constructor to ScriptTestSuite to facilitate defining suites
+of scripts from an Ant task (Paul King).
+<li>Explicitly indicate exceptions thrown from the EDT.
+<li>Allow inspection of non-public properties (for instance, in a class with
+default access).
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Work around NPE thrown by some custom components if getName is called
+during component initialization.
+<li>Fixed custom class loader not getting installed on the EDT (showed up when
+using dynamically-loaded LookAndFeel) (Peter Warren).
+<li>Fixed lockup on fast linux systems when causing a modal dialog to display
+(thanks Russel Winder and jchild).
+<li>Fixed potential NPE in JComboBoxTester (Josh Passenger).
+</ul>
+<h2>Release 1.0.0rc1 (050916)</h2>
+<h3>Features</h3>
+<ul>
+<li>Add selection of menu item by path.
+<li>Application fixtures (finally!).  Run one application instance, perform
+many tests.
+<li>When exceptions are caught <i>both</i> on the event dispatch thread and
+the main test thread, fail with the one that was caught first.  Previously
+test thread exceptions always took priority, which would often hide event
+dispatch exceptions.
+<li>Wait for contents of expanded tree nodes to appear if slow-loading.
+<li>Added keymap for de_DE (w32) (Niels Stargardt), ja_JP (w32/mac) (kaz),
+fr_FR (w32) (jean Thieser).
+<li>Added JGraph example extension.
+<li>Exit on close for frames used by ComponentTestFixture, so if a test hangs,
+you can easily kill it.
+<li>Make JTreeTester work with lazily-created tree nodes (pat dumais).
+<li>Add assert for tree path existence in JTreeTester (pat dumais).
+<li>Clear text fields when actionEnterText is called with an empty string.
+<li>Allow for class path changes when looking for test suites to load.  Ensure
+abbot.jar is always implicitly in the path.
+<li>Allow different function keys to be mapped in Costello.
+<li>Added tester for JTextField (commit actions).
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix sporadic submenu activation failure on w32.
+<li>Fix dropped 'sz' characters with German input (Mario Boller).
+<li>Fix image capture test to not hang if images are missing (Art Hampton).
+<li>Fix recording labels for with vs w/o motion (pdham).
+<li>Fix array index bounds exception when looking up "/" (Slimane Amar).
+<li>Lots of javadoc cleanup.
+<li>Fix NPE in ArgumentParser when toString() returns null.
+<li>Fix JComboBox to work with table cell editors.
+<li>Fix sporadic text selection error (drop fails before drag starts).
+<li>Ensure relative directory gets set prior to load (opeongo).
+<li>Fix bug selecting text outside of visible bounds.
+<li>Restore system state on script terminate steps only, instead
+of at the end of every ScriptFixture.
+<li>Remove 1.4 VM dependencies.
+<li>Fix bug specifying a unique AWT menu item by path.
+<li>Avoid hang when appletviewer is closed via the window manager.
+<li>Fix NPE in J{Table|Tree|List}Tester when a renderer text is null
+(patrick dumais). 
+<li>Fix exception thrown in editor when the filename for an included
+script/fixture is cleared.
+<li>Fix some minor Costello UI appearance bugs.
+<li>Fix bug repositioning annotations.
+<li>Fix bug scrolling a JTextField into visibility.
+</ul>
+<h2>Release 0.13.1 (041111)</h2>
+<h3>Features</h3>
+<ul>
+<li>Allow test cases with no-arg constructors.
+<li>Allow arbitrary mnemonics in the editor; use ampersand when defining a
+label in localizations.  For example, an O-umlaut can be tied to Alt-O.
+<li>KeyStroke map generator is included.  Please run it for your locale if
+your locale and/or platform is not already included.  Run <a
+href="http://abbot.sf.net/doc/api/abbot/tester/MapGenerator.html">this
+class</a>. 
+<li>Editor always keeps the same LAF, regardless of changes made by the code
+under test (thanks to a little insight triggered by Art Hampton).
+<li>When capturing an image, Shade the entire target component.
+<li>Update to gnu-regexp-1.1.4.
+<li>Allow selection of popup menu items by path.
+<li>Refactor system state save/restore into its own class.
+<li>ScriptFixture now allows multiple scripts to be aggregated in a TestSuite
+and share an enclosing launch/terminate. 
+<li>Added ComponentTester.actionDragOver (bigmike_f).
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Close JInternalFrames without additional side effects.
+<li>Enable "." to match newlines in multi-line regexp.
+<li>Fixed dropping of empty string arguments in script read.
+<li>Fixed a large number of intermittent failures on OSX and Linux.
+<li>Allow text selections to be made in either direction.
+<li>Fix exception thrown clicking approve button in JFileChooser
+(jim.mcmaster). 
+<li>Allow Call step "args" attribute to be omitted (heidl).
+<li>Avoid incorrectly matching existing references (shift-F1 on a component in
+the editor would select the right component but the wrong reference).
+<li>Image capture on frames/dialogs will now include decorations.
+<li>Property catch and re-throw event dispatch exceptions in test fixtures.
+<li>Fix NPE when attempting to select an out of bounds row in a tree.
+<li>Fix JTreeTester.actionMakeVisible to use either object-based or
+string-based TreePaths, and throw an ActionFailedException if the path is not
+found. 
+</ul>
+<h2>Release 0.13.0 (040816)</h2>
+<h3>Features</h3>
+<ul>
+<li>Added Java expression evaluation in the new Expression step.  You can
+even poke at your application while it's running.  Details are in the
+Costello user's guide.
+<li>Add switch to explicitly play back scripts in AWT mode (mtrumpler). 
+<li>Improve image comparison performance (Udo Borkowski).
+<li>Added menu items to editor to access mailing list, website, and user guide.
+<li>Automatically ignore windows that have been disposed.
+<li>Update JDOM to b10.
+<li>Allow specification of expansion control in JTreeLocation using a "+"
+prefix. 
+<li>Add support for TextComponent, JScrollBar, JSplitPane.
+<li>Added more extensive keymaps for w32.
+<li>Explicitly record focus accelerators (ibhag).
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix loading of suites of scripts from editor.
+<li>Fix absolutely dreadful freeze when matched components are hidden and new
+references created (test case provided by kartikn).
+<li>Fix NPE when table/list values are null.
+<li>Disallow moving anything prior to a launch step.
+<li>Fix exception thrown deleting script steps.
+<li>Fix recording failure when expanding tree nodes that don't have a toString
+rpresentation. 
+<li>Fix NPE when selecting text under X11 systems.
+<li>Fix failing TreePath comparisons (such as asserting a selected tree path).
+<li>Fix class cast exception on certain appletviewer menu selections.
+<li>Forked scripts are properly forked when run independently (Christian
+Heldstab). 
+</ul>
+<h2>Release 0.12.4 (040708)</h2>
+<h3>Features</h3>
+<ul>
+<li>Allow abbot.tester.Robot to be used with AWT Popups on w32 systems.
+<li>Allow resolution of AWT menu items with duplicate labels by specifying the
+path.  These paths are recorded automatically if necessary.
+<li>Allow resolution of multiple PopupMenus on a single component.
+<li>Add several java.awt.Menu-related utility functions to abbot.util.AWT.
+<li>Added basic tester support for java.awt.List.
+<li>Allow robot/AWT mode to be changed on the fly.
+<li>Standardized platform/VM bug detection and tests (see abbot.util.Bugs).
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Changes to reference IDs are now detected by the Script.
+<li>Fixed slow reference creation performance which would cause apparent
+freezes when recording or with shift-F1 (jkdoyle).
+<li>Fix a bug when editing the text of an action method which would leave the
+editor in a strange state.
+<li>Fix sporadic menu selection failure on w32.
+<li>Fix sporadic window show/hide tracking failure on w32.
+<li>Fix deadlock in internal tests on fast dual CPU OSX box.
+<li>Fix recursive save bug when saving a new script in a temporary directory.
+</ul>
+<h2>Release 0.12.3 (040611)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix apparent hang/freeze when recording/selecting components, especially
+with children of JTabbedPanes or other components which hide their children.
+<li>Fix XSD; args attribute is not required on call steps.
+<li>Fix strongly held reference when filtering components (nixnixnix).
+<li>Fix NPE when recording null-valued selections in JTable/JList.
+<li>Fix class cast exception when running scripts and reporting step status.
+<li>Workaround disabled menus bug on OSX.  Fix Robot verification w/1.4.2_04.
+<li>Fix broken example scripts (fontchooser) (thanks to quikdraw).
+<li>Fix editor tutorial script so that it runs outside of the editor.
+<li>Fix several bugs selecting methods in the Assert step.
+<li>Fix script context parsing error with w32 drive letters.
+<li>Removed deprecated classes.
+<li>Ensure most objects used in a test may be GC'd after a test run.  Mostly
+affects the Abbot test suite.
+<li>Fix test fixture timing issues that were causing lost key/mouse events.
+</ul>
+
+<h2>Release 0.12.2 (040318)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Make class path editor in launch step show full path, not just the base
+name of the file.
+<li>Avoid inadvertent change to selected method in Call steps when the list is
+refreshed on class/classpath changes.
+<li>Ensure enabled state of Assert/Sample buttons is correct as the component
+selection changes.
+</ul>
+
+<h2>Release 0.12.1 (040318)</h2>
+<h3>Features</h3>
+<ul>
+<li>Scripts now support the appletviewer step, which automatically sets things
+up for testing an applet.
+<li>Highlight Call step target class names and methods which are not found.
+Also highlight method name if the number of arguments doesn't match an
+existing method.
+<li>Automatically change interrelated Assert step settings.
+<li>Preserve property selection when other selections change.
+<li>Provide access to InputMap/ActionMap for the selected component.
+<li>Added specific location support for JTableHeader (flexcode).
+<li>Assertion failures now provide the file and line number in the exception
+message (suggested by Niels Stargardt). 
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix some null value comparison bugs in Assert steps.  Note that a literal
+null value is represented by the String "null" in an argument list (no quotes)
+(nickoliver24).
+<li>Asserts on array-valued properties are now generated properly.
+<li>Pseudo-property assertions (e.g. JTabbedPane.getTabs) are now handled
+properly when created and edited.  Previously the target class was sometimes
+incorrect, causing runtime errors.
+<li>Call/Assert/Sample step editors now auto-update the list of available
+methods when the class is changed.
+<li>Fixed several cosmetic editor bugs.
+<li>Fixed class loader error switching between scripts in a suite.
+<li>Fixed recording bug with invisible windows 2000 PLAF default frame.
+<li>Ensure tabbed pane plays back recorded tab selections (niels.stargardt).
+<li>Ensure any references to hierarchy components are weak so that they can be
+GC'd.  
+<li>Many OSX bug fixes for JDK1.4.2.  It's <i>really</i> unfriendly to Robot.
+<li>Fix editor misbehavior after script renaming/save as.
+</ul>
+
+<h2>Release 0.12.0 (040224)</h2>
+<h3>Features</h3>
+<ul>
+<li>Much more convenient component search for hand-coded unit tests.
+<li>Pressing ESC on text fields reverts to the last "saved" value; pressing
+Enter "saves" the value.
+<li>Improved readability and tracking in the Component browser; includes popup
+menus and tooltips in the hierarchy under their invoking components.
+<li>Added testers for javax.swing.JSpinner (1.4 only), JSlider, JFileChooser.
+<li>Added testers for java.awt.Button, Checkbox (req'd in AWT mode).
+<li>Ignore inadvertent drags during clicks
+(daniel.kasmeroglu@daimlerchrysler.com).
+<li>Accept all input from step editors immediately instead of waiting for
+Enter or focus changes (recommended by mbisping).
+<li>Provide more convenient editing of arguments and classpaths
+(daniel.kasmeroglu).  Check out that nice ArrayEditor component, which has
+been unit tested with the framework.
+<li>Added support for localized keymaps.
+<li>Allow inserting of new, non-existent scripts into an existing script
+(opeongo). 
+<li>Allow explicit editing of ComponentReference attributes.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix drag/drop recording/playback on JTree/JTable.
+<li>Fix failure to properly terminate drop actions.
+<li>Warn when opening a new script when the current one hasn't been saved.
+<li>Properly handle hidden roots in JTrees.
+<li>Fix failure to parse locations in a JTree by value or row.
+<li>Fix IllegalStateException thrown on certain window show/disposal.
+<li>Don't allow script editor to be hidden by code under test.
+<li>Don't dispose windows on normal script termination unless there's a
+terminate step in the script (mtrumpler).
+<li>Fix some AWT-mode bugs with applets and JTree selection.
+<li>Properly activate editable JComboBoxes.
+<li>Fix bugs when entering quoted arguments or embedded commas.
+</ul>
+
+<h2>Release 0.11.0 (040107)</h2>
+<h3>Features</h3>
+<ul>
+<li>When recording drag, drop, popup, or click actions on JList, JTable, 
+JTree, and JTabbedPane, you get component-specific locations (value, row,
+cell, etc). 
+<li>Reset locking keys (caps lock, num lock, etc) prior to running any tests. 
+<li>Support popup, select, click, drag, and drop on component substructure
+(row, cell, value, etc) by using an abstract, component-specific location.
+<li>Perform JTable, JList, and JTree actions by value in addition to
+indexed location. 
+<li>Provide component-oriented keyboard methods on abbot.tester.Robot.
+<li>Add support for java.awt.PopupMenu.
+<li>Add support for java.awt.CheckBoxMenuItem 
+<li>Provide component lookup from an arbitrary root component.
+<li>Component lookup/addition time reduced by up to 80%.
+<li>Record drag/drop on 1.4 VMs.  Pre-1.4 VMs do not provide sufficient
+information to record drag/drop actions completely.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Remove spin locks in ComponentTestFixture that might interfere with test
+startup. 
+<li>Properly record double click when the component disappears as a result of
+the click.
+<li>Fix key modifier mask generation in AWT mode.
+<li>Clarify exceptions thrown on failed JInternalFrame actions.
+<li>Properly save more than 2 levels of nested scripts.
+<li>Prevent editor status window from being too wide.
+<li>Fix several keystroke-generation bugs in AWT mode.
+<li>Fix several mouse event bugs in AWT mode.
+</ul>
+
+<h2>Release 0.10.1 (031010)</h2>
+<h3>Features</h3>
+<ul>
+<li>Speed up hierarchy export significantly.
+<li>Don't record extraneous shortcut modifier keystrokes.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Avoid InvalidScriptException when loading Assert steps which use
+ComponentReferences for custom GUI classes.
+<li>ComponentTestFixture reports exceptions thrown on the event dispatch
+thread as errors.
+<li>Fix NPE when exporting component hierarchy.
+<li>Fix NPE when comparing Assert values against null.
+<li>Don't let AUT get hidden when recording starts (w32).
+<li>Don't show status dialog if there is no obscured text.
+<li>Don't record window movement/resize until the window is actually showing.
+<li>Properly play back w32 drive selection in JFileChooser.
+<li>Avoid excessive CPU usage by the component hierarchy browser.
+<li>Make actionFocus work with Applets.
+<li>Avoid disappearing applet nodes in hierarchy browser.
+<li>Ensure drop ends on w32.
+<li>Fix AWT-mode submenu selection.
+<li>Optimize some component lookups that proved to be slow.
+<li>Fix Color<-->String comparisons (sometimes resulted in NPE).
+</ul>
+
+<h2>Release 0.10.0 (030828)</h2>
+<h3>Features</h3>
+<ul>
+<li>Allow running of selected steps of a script.
+<li>Better resolution and tracking of applets (mtrumpler). 
+<li>Cache component lookup to improve recording and playback performance
+(mtrumpler). 
+<li>Simplify component reference usage.
+<li>Allow regexp pattern matching in component reference attributes.
+<li>Add support for AWT FileDialog (avenet).
+<li>Allow reference to system properties (ala ant, e.g. ${user.dir}).
+<li>Preserve System.out/err across test runs.
+<li>Provide export of entire GUI hierarchy from Costello.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix drag actions to work more reliably.
+<li>Always insert Terminate steps last in Costello.
+<li>Allow launch step to appear anywhere in a script.
+<li>Fix some slowness in recording (mostly due to ComponentReference creation).
+<li>Don't record both an action and a keystroke on Enter and other similar
+keystrokes which produce both an action and text input.
+<li>Properly track a Dialog with the same name as its parent.
+<li>Add missing attributes (vmargs) to schema.
+<li>Use a single WindowTracker to avoid sporadic lookup failures.
+<li>Be smarter when recording the value for a combo box selection.
+<li>Properly handle invalid accelerators from property files.
+<li>Properly capture ESC key when recording.
+<li>Show confirmations on script delete/clear.
+</ul>
+<h2>Release 0.9.1 (030711)</h2>
+<h3>Features</h3>
+<ul>
+<li>Add support for internal frames.
+<li>Add new component references with alt+shift+F1.
+<li>Capture setting of caret position in text fields.
+<li>Preserve System property settings across test code invocations.
+<li>Add XML validation on script load (ckoelle).
+<li>XML schema/DTD included in docs (ckoelle).
+<li>Preserve order of ComponentReferences in script XML (javajosh).
+</ul>
+<h3>Bug fixes</h3>
+<ul>
+<li>Ensure windows are ready for input before sending events, since isShowing
+and WINDOW_OPENED/COMPONENT_SHOWN aren't sufficient indicators (this
+previously sometimes required an explicit delay after waiting for a window to
+show).   
+<li>Don't auto-encode commas in array argument lists.
+<li>Don't accept directories as "new script" (OSX).
+<li>Properly update default step descriptions when steps are edited.
+<li>Do better error handling on editor startup (esp. invalid script errors).
+<li>Generate accurate modifiers in AWT mode, work around 1.4.1
+java.awt.Rectangle bug.  
+<li>Ensure proper class loader is used with threaded launch.
+<li>Update to newer xerces implementation.
+</ul>
+<h2>Release 0.9.0 (030527)</h2>
+<h3>Features</h3>
+<ul>
+<li>Greatly improved step editing support in the script table, including
+drag/drop, multiple selections, and grouping.
+<li>Support saving component property values for later use as ${property}
+(sebastian). 
+<li>Provide detailed descriptions of action arguments when inserting actions
+(extracted from javadoc).
+<li>Provide file:line information of the source XML script on failures.
+<li>German translations added (ckoelle).
+<li>Record/playback frame maximize/normalize (ckoelle).
+<li>Started a tutorial for the script editor which is actually a test script
+which uses annotations.
+<li>Record/playback for AWT Choice component.
+<li>Expose some system timeouts as properties.
+<li>Auto-fill the argument list with the currently selected component when
+manually inserting an action or assertion. 
+<li>Store the least-derived class possible for assertions and actions.
+<li>Add component-specific popup actions (ghmorgan).
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Automatically escape commas in individual arguments which contain commas.
+<li>Fix many JComboBox recording bugs.
+<li>Don't terminate AUT on script name changes.
+<li>Fix property list filtering in editor.
+<li>Keyboard cut in script table now works.
+<li>Image capture fixed (mostly).
+<li>Report first XML parse error instead of last when loading scripts
+(mtrumpler).  
+<li>Enable menu selections when a parent menu is already opened.
+<li>Fix some synchronization bugs with multiple simultaneous event dispatch
+threads. 
+<li>HierarchyEvents are no longer used in recording, which should avoid NPEs
+on pre 1.4 VMs.
+<li>Catch null-parented dialogs (from applets) (mtrumpler).
+<li>Fix some bugs in tutorial #2.
+<li>Remove ambiguity in Call/Assert step classes when resolving methods and
+target classes.
+</ul>
+<h2>Release 0.8.4 (030402)</h2>
+<h3>Features</h3>
+<ul>
+<li>Annotations to facilitate playing back a program as a user tutorial.
+<li>Track JInternalFrames (pickens).
+<li>Stop recording if the editor window is activated.
+<li>Added a stress-test example.
+<li>Add step editors for raw AWTEvents.
+<li>Record window closings triggered by the window manager (i.e. click in
+close box). 
+<li>Extend component selection for image capture (pickens).
+<li>Timeouts are set to the actual time elapsed during recording (pickens).
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Don't record tooltip displays (pickens).
+<li>Properly cache recorders for inner classes.
+<li>Fix start/stop recording bugs.
+<li>Fix dropped key events during recording (pickens).
+<li>Fix recording/editor bug which would sometimes reorder incoming events,
+causing inconsistent recordings and sometimes a stack overflow.
+<li>Fix bug which only allowed void-returning methods in a Call invocation.
+</ul>
+<h2>Release 0.8.3 (030115)</h2>
+<h3>Features</h3>
+<ul>
+<li>Added a JUnit fixture (derived from TestCase) to facilitate component unit
+tests. 
+<li>Use separate event queues for applications under test.
+<li>Improved support for multiple clicks.
+<li>Improved feedback for text entry on editors.
+<li>Preserve Costello layout across invocations.
+<li>Add method selection popups in editors for Call, Assert, Action, and
+Launch. 
+<li>Include extra properties in the component browser property list (such as
+getMenuLabels for JPopupMenu components).
+<li>Major rework of class reloading to more closely mimic the default
+AppClassLoader. 
+<li>Return values for default ScriptTestSuite execution now match that of the
+junit test runners, so failures and errors will be caught by Ant. 
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix playback of JTextComponent recordings (jcapitao).
+<li>Track context in Component Browser reference list.
+<li>Various nested script bugs.
+<li>Use OSX quit and about hooks.
+<li>Avoid w32 drive a: bug with file choosers in standalone tests.
+</ul>
+<h2>Release 0.8.2 (021201)</h2>
+<h3>Features</h3>
+<ul>
+<li>JTextComponent support for miscellaneous selections, cut, copy, paste, etc.
+<li>ActionMap support.  Robot will generate the appropriate keystrokes to
+invoke a particular action on a component, e.g. select-all on a text component
+would be ctrl-a on w32 systems, or command-a on a Mac.
+<li>Image capture/comparison.  Comparisons can be inserted manually or while
+recording events by pressing F3.
+<li>Added arbitrary method invocation step ("call") (bchristen).  New step
+types can be added by simply dropping in an appropriately named class.
+<li>Add non-modal window for displaying long errors and stack traces.
+<li>Visibly disable editor UI while recording the GUI under test.  This
+provides better feedback about the state of the recording.
+<li>Provide more ComponentReference ctors to facilitate hand-generated
+references. 
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix some failing Assert step method lookups.
+<li>Fix recording of BACK_SPACE and other special keys.
+<li>Adding a boolean property check where the value was "false" would save a
+check for "true" instead.
+<li>Avoid disposing the JUnit Swing TestRunner (or any other test running
+environment) when running a test script.
+<li>Classes derived from ScriptTestCase were not used when generating a suite
+with ScriptTestSuite (ScriptTestCase instances were created instead).
+<li>Fixed several potential deadlocks.
+</ul>
+<h2>Release 0.8.1 (021103)</h2>
+<h3>Features</h3>
+<ul>
+<li>Provide "breakpoint" capability to run up until a selected step, to
+facilitate getting a GUI into a desired state before editing or recording.
+<li>Capture InputMethod events (required for Chinese, Japanese, and other
+extended characters sets, as well as special character input on Macintosh).
+Many thanks to Sarif Koichi and Matt Pekar for helping to get this working.
+<li>JListTester provides property-like access to list configuration
+(bchristen). 
+<li>Japanese (sarif), Russian (iryna.z), Polish (pawel korbut), Italian
+(antonio-petrelli) locales added. 
+<li>Auto-detect some w32 Java/Robot bugs (ptardif).
+<li>Provide option for capturing mouse motion when recording events.
+<li>Consolidate key recordings into a single text string if possible.
+<li>Added a FAQ.
+<li>Support VM args passed to a forked script.
+<li>Allow recording to be started and stopped using F2.  This facilitates
+starting a recording while modal dialogs are showing.
+<li>Allow component selection in the GUI under test using F1.  Neither of
+these facilities will interfere with their handling by the code under test.
+<li>Refactored event recorder such that it doesn't dependon the rest of the
+framework. 
+<li>Provide a ComponentReference ctor for use in hand-generated code.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fixed several capture bugs (0.8.1.1).
+<li>Fix a bunch of Windows XP failures.
+<li>Avoid a large class of application startup deadlocks caused by the
+application assuming the event thread has not yet started (which isn't the
+case when launching from the editor or within a suite of GUI tests).
+<li>Cleaned up boot class loading; explicitly check for classes in the boot
+path rather than depending on a package list to exclude from reloads.
+<li>Fix capture of some extraneous key modifiers.
+<li>Don't abort applications which call JFrame.setDefaultCloseOperation.
+<li>Ensure all frames are found when running applets.
+<li>Fix null package on some loaded classes.
+<li>Steps now move in and out of sequences properly.
+<li>Component Reference generation works with nested dialogs.
+</ul>
+<h2>Release 0.8.0 (021007)</h2>
+<h3>Features</h3>
+<ul>
+<li>Updated to work properly under Java 1.4.
+<li>Support for forked scripts.  It is now possible to run a script in a
+separate VM while tracking its progress.  Full exception/failure backtrace
+information is preserved and the script step execution is visible in the
+editor.  This provides a solution for those cases where the reloading class
+loader is not sufficient to clean up after the code under test.
+<li>Support for image capture (arbitrary and component contents) and single
+pixel sampling. 
+<li>Improved XML handling to preserve locale-specific character encodings.
+Using JDOM is a lot easier than xerces.
+<li>Improved editing of existing script steps.  Custom GUI editors are
+provided instead of requiring raw XML editing.
+<li>Support for AWT menus (actions and recording).
+<li>Confirm script save before editor exit.
+<li>Support persistent script comments.
+<li>Provide a Web Start launch.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Require complete method names for Action/Assert steps.
+<li>Repaint issues fixed under 1.4.
+<li>No more spewage when application under test exits from event dispatch.
+<li>Fixed popup menu recording bug for w32.
+<li>Scripts should work properly under ANT (fixed a classpath recursion bug
+when scanning ANT's embedded classpath).
+<li>Menus can now be properly used under OSX with useScreenMenuBar=true.
+</ul>
+<h2>Release 0.7.3 (020913)</h2>
+<h3>Features</h3>
+<ul>
+<li>Launch steps can be threaded, e.g. if your main method doesn't return in a
+timely fashion, or directly invokes something like Dialog.show that requires
+input.  
+<li>Initial i18n support (please contribute your own locale!)
+<li>Initial JTree support.
+<li>Include source in base file release.
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fix step insertion bugs when the code under test is not yet launched.
+<li>Fix editor self-test to work properly with dynamic class reloading.  With
+reload support, the editor no longer needs to maintain context information.
+<li>More robust dynamic class loader (set delegate=false in Launch).
+<li>Recording now works on a threaded launch.
+<li>Fix applet sample html page.
+</ul>
+<h2>Release 0.7.2 (020830)</h2>
+<ul>
+<li>Include docs in base file release.
+<li>Reduce robot auto-delay times to speed up test playback; most significant
+effect can be seen in text playback.  All tests, recordings, and actions are
+significantly more robust.
+<li>Fix rather annoying bug which caused recording to fail when closing a
+dialog. 
+<li>Ensure recording failures don't drive the editor batty, and provide the
+failure information in bug report format.
+</ul>
+<h2>Release 0.7.1 (020826)</h2>
+<ul>
+<li>Added support for providing bug reporting information in exceptions,
+especially for failed recordings.
+<li>Robot after-event delay may now be set as a property,
+abbot.robot.auto_delay. 
+<li>Dynamic class loader now uses the Class-Path from the manifest (if
+available) when loading jar files.
+<li>Added Frame/Dialog move/resize/iconify support (and tests).
+<li>Added JTabbedPane support (and tests).
+<li>Added class paths to jar files to facilitate launching (no longer need to
+set a long class path explicitly).
+<li>Fix resource loading from custom class paths (SwingSet2 now loads properly)
+<li>Default to non-reloading class loader.  Fixed several issues when
+reloading is enabled.
+<li>Add JComboBox recorder, cleaned up JComboBoxTester (and tests).
+</ul>
+<h3>Known bugs</h3><br>
+Several recorder tests are known to fail on linux and w32.  Some are
+timing-related and some are not.<br>
+
+<h2>Release 0.7 (020726)</h2>
+<ul>
+<li>Use a more robust component search mechanism using weighted propeties;
+store more attributes in auto-generated component references, but still work
+well with minimal hand-entered ones.
+<li>Launch application automatically when recording, if not already launched.
+<li>Allow classpath to be specified directly in the Launch step.  
+<li>Use reloading class loader for launching classes.
+<li>Added support for applets under Sun's applet viewer, and an applet example
+(kelvinr).
+</ul>
+
+<h2>Release 0.6.2 (020627)</h2>
+<ul>
+<li>Added support for auto-formatting of dialogs and tooltips (TextFormat).
+<li>Fixed annoying drive A: bug on w32.
+<li>Added more recorder and tester tests, including a full test suite.
+<li>Improve launching of the GUI under test.
+<li>Many w32 event capture/playback bugfixes, especially popups and key
+capture. 
+<li>Split editor code into model/view (onthemark,kgirard)
+<li>Added a filter for Component properties (jeffg).
+<li>Added scrolling action for JComponent (kgirard).
+<li>Changed menu structure for consistency (kgirard).
+<li>Added icons, accelerator keys, and mnemonics for most menu items (kgirard).
+</ul>
+
+<h2>Release 0.6.1 (020528)</h2>
+<ul>
+<li>Fix script paths for examples to fit new directory structure.
+<li>Fixed semantic recorder.  Now correctly captures window
+show/hide/activate, click, key, menu, popup, drag, and drop.
+<li>Completed recorder tests.  These have been run on OSX, w32, and linux x86.
+</ul>
+
+<h2>Release 0.6 (020522)</h2>
+<ul>
+<li>Support relative script paths for embedded scripts.
+<li>Added better support for capturing semantic events (SemanticRecorder).
+<li>Directly handle Drag & Drop semantic events (not done yet).
+<li>Better heuristics and debugging for component reference lookup.
+<li>Added tests for ComponentTester and ComponentRecorder classes.
+<li>Revised package hierarchy, since only a few classes have anything to do
+with JUnit.
+</ul>
+
+<h2>Release 0.5 (020416)</h2>
+<ul>
+<li>Added JComboBox actions (still need recorder support).
+<li>Added methods for documentation of ComponentTester actions (menus,
+arguments, icons, etc.).
+</ul>
+
+<h2>Release 0.4</h2>
+<ul>
+<li>Allow top-level script to continue even if sub-sequences fail.
+<li>Allow movement of individual script steps.
+<li>Failures are now colorized to explicitly highlight failed steps.
+<li>Event Stream recorder can parse more semantic events and eliminates
+unneeded events.
+<li>Added a cursor to the script editor table.
+</ul>
+
+<h2>Release 0.3 (2002/04/07)</h2>
+<ul>
+<li>Drag events are now captured in the Event Stream recorder.
+<li>ESC now cancels any recording in progress.
+<li>Added launch/terminate step for scripts so that scripts may be run
+independently of junit test cases/suites.  It's also a lot easier to start
+from scratch now, no testsuite or testcase required.
+</ul>
+
+<h2>Release 0.2 (2002/04/03)</h2>
+<ul>
+<li>Allow regexp matches in string comparisons.
+<li>Component references are now specific to the current script context.
+<li>Added component hierarchy browser.
+<li>A new simple GUI component test suite example (FontChooser).
+<li>System.exit handling prevents an application under test from killing the
+editor. 
+</ul>
+
+<h2>Release 0.1 (2002/03/22)</h2>
+Release for preliminary interface feedback.<p>
+</td>
+</tr>
+</table>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+

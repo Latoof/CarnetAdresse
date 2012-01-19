@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Abbot News</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="description" content="Latest Abbot news.">
+<meta name="date" content="2008-03-05">
+<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body> 
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<div class=Section1> 
+  <p class=MsoNormal align=center style='text-align:center'><i><span style='color:lime'>A</span></i><i><span style='color:red'>b</span></i><i><span style='color:lime'>b</span>ot framework for automated testing of Java GUI components and programs</i><br> 
+    All materials Copyright &#169; 2002-2011 <a href="mailto:twall_AT_users.sf.net">Timothy Wall</a>, All Rights Reserved</p> 
+  <p align=center style='text-align:center'>This version 1.2.0-RC2 (111118)</p> 
+  <h2>NEWS</h2> 
+  <ul>
+    <li><b>12/2011</b> 1.2 Released 
+    <li><b>11/22/2011</b> Abbot and Costello are alive and well, please see http://sourceforge.net/project/abbot for latest 
+    <li><b>11/22/2011</b> 1.2RC2 is, out with all new dependencies
+    <li><b>10/10/2006</b> 1.0.0rc4 AWT is out.  Lots of per-platform fixes.
+    <li><b>06/05/2006</b> Everything moved to subversion.  Whew!
+    <li><b>09/16/2005</b> 1.0.0rc1 AWT is out.
+    <li><b>04/04/2005</b> French keymap, thanks jean Thieser.
+    <li><b>02/22/2005</b> Fixtures are in.  Get 'em hot from CVS.
+    <li><b>01/24/2005</b> Added an example custom tester for the
+<a href=http://www.jgraph.com>JGraph</a> component.
+    <li><b>12/29/2004</b> Thanks to N. Stargardt and kaz for German and
+Japanese keymaps, respectively.
+    <li><b>12/06/2004</b> Please submit keymaps for non-US locales.  Run
+abbot.tester.MapGenerator to generate a keymap for your locale.
+    <li><b>11/11/2004</b> Getting closer to 1.0.  Need to finish built-in fixtures, then it will go out.  Unfortunately, I'm really busy with other things...
+    <li><b>9/23/2004</b> Translations may use '&amp;' to indicate mnemonics, e.g. &amp;File (see <code>
+<a href=api/abbot/editor/widgets/Mnemonic.html#getMnemonic(java.lang.String)>abbot.editor.widgets.Mnemonic</a></code> for details).
+    <li><b>9/11/2004</b> A keymap generator has been added to CVS and a custom keymap for de_CH (thanks to Christian Heldstab).  Please submit keymaps for your locale if you're having difficulty generating certain characters with actionKeyStroke().
+    <li><b>7/27/2004</b> Use arbitrary Java expressions with the Expression Step. If you can't do it with actions and assertions, drop down to scripted Java.  <a href=http://www.beanshell.org>Beanshell</a> is used for the interpreter.
+    <li><b>7/21/2004</b> Clover test code coverage reports are enabled and <a href=reports/clover/pkgs-summary.html>published</a>. So are JUnit test results, <a href=reports/junit>by platform</a>.
+    <li><b>7/20/2004</b> Working hard to get 1.0 out. Target date is 9/30.
+    <li><b>6/17/2004</b> The freeze/lockup/slowdown on recording/shift-F1 has been fixed (thanks to jkdoyle). Get it from CVS.
+    <li><b>6/17/2004</b> Robot now works properly when AWT popup menus are active. We still haven't a clue where such things actually reside on the screen, but at least your test fixture won't freeze if you activate one. For those interested in the hacks, see the additions to abbot.util.AWT.
+    <li><b>6/14/2004</b> 0.12.3 is out. Those SWT guys better hurry or they'll miss the 1.0 release :)
+    <li><b>6/10/2004</b> I'm working on getting 0.12.3 out after ensuring self-tests pass. I'm not the only one that would like to see Jim Doyle's performance fix get applied soon. It'll make it into 0.12.4 (0.13?) for certain.
+    <li><b>5/3/2004</b> Vincent Massol has contributed an Abbot plugin and Web Start script launcher (for testing Web Start apps). It is available from the Maven site at http://maven.apache.org/reference/plugins/abbot.
+    <li><b>5/2/2004</b> Several books are now out that include some treatment of Abbot. Please post to <a href="mailto:abbot-users@lists.sf.net">abbot-users</a> if you see one worth reading.
+    <li><b>3/29/2004</b> I'd like to get individual test class output from junitreport, but it's not feasible to fork each suite into a separate VM. Any junitreport gurus out there?
+    <li><b>3/24/2004</b> Abbot/SWT is available from CVS. Tom's still cleaning up the build, but feel free to try it out and provide feedback.
+    <li><b>3/18/2004</b> Oops, make that <b>0.12.2</b>.
+    <li><b>3/18/2004</b> <b>0.12.1</b> is out. Mostly a bug-fix release.
+    <li><b>3/17/2004</b> A <a href=http://maven.apache.org>Maven</a> plugin for Abbot is in the works, as well as a launcher for testing Java Web Start apps, thanks to Vincent Massol (vmassol).
+    <li><b>3/9/2004</b> The framework test suite (abbot.UnitTestSuite) is now auto-generated, for use directly or from the ant "test" target.
+    <li><b>3/3/2004</b> An applet launcher step now handles setup for applet testing. Use the "appletviewer" step instead of a launch step.
+    <li><b>2/24/2004</b> Build version 0.12.0 now available. This is targeted towards hand-coded tests.
+    <li><b>2/18/2004</b> Costello: the component browser has gotten a facelift, with custom component icons which make it a little easier to read the hierarchy. Component reference attributes are now editable in a table (instead of raw XML). Custom component icons will be automatically loaded if they're named the right thing in the right place, see abbot.editor.ComponentTreeIcons.java for details.
+    <li><b>2/18/2004</b> abbot.finder.*: this new package provides a completely revamped ComponentFinder which is a whole lot easier to use than the old one. It is specifically designed for use in unit tests (the old one was designed for generic script access, and putting it to use in unit tests didn't really help anybody).
+    <li><b>2/18/2004</b> Component references and lookup have been refactored significantly. <b>This may have some effect on existing scripts.</b> Instead of capturing a minimal set of attributes, references now store as many as possible. The "tag" attribute is now deprecated, replaced by an explicitly named attribute; if the tag was the component's title, the reference will now have an explicit "title" attribute. The <code>getTag()</code> method also caused a lot of unnecessary recursion during lookups.
+    <li><b>2/18/2004</b> Web site reorganized. Duh. 
+    <b> 
+    <li><b>2/17/2004</b> JUnit upgraded to 3.8.1.<b> 
+  </ul> 
+  <div align=center> 
+    <table border=0 cellpadding=0> 
+      <tr> 
+        <td> <p><a href="http://www.jars.com/"><img border=0 width=103 height=58 src="http://www.jars.com/images/java_registered.gif"></a></p></td> 
+        <td> </td> 
+        <td> <p><i>Read all about it at</i><br> 
+            <a href="http://sourceforge.net"><span style='color:blue;text-decoration:
+  none;text-underline:none'><img border=0 width=210 height=62 id="_x0000_i1030"
+  src="http://sourceforge.net/sflogo.php?group_id=50939&amp;type=5"
+  alt="SourceForge Logo"></span></a></p></td> 
+        <td>&nbsp; </td> 
+        <td> <p class=MsoNormal align=center style='text-align:center'><a
+  href="http://groups.yahoo.com/group/java-gui-testing/join"><span
+  style='color:blue;text-decoration:none;text-underline:none'><img border=0
+  width=91 height=52 id="_x0000_i1031"
+  src="http://groups.yahoo.com/img/ui/join.gif"></span><br> 
+            Click to subscribe to java-gui-testing</a></p></td> 
+      </tr> 
+    </table> 
+  </div> 
+</div> 
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+

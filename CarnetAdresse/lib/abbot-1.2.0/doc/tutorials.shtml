@@ -1,0 +1,135 @@
+<html>
+
+<head>
+<title>Abbot Tutorials</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="abbot tutorials">
+<meta name="description" content="Tutorials for Abbot.">
+<meta name="date" content="2008-03-05">
+</head>
+
+<body bgcolor=white lang=EN-US
+link="#660000" vlink="#003399" style='tab-interval:.5in'>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><i><span
+style='color:#00CC00'>A</span></i><i><span style='color:red'>b</span></i><i><span
+style='color:#00CC00'>b</span>ot framework for automated testing of Java GUI
+components and programs</i><br>
+All materials Copyright © 2002-2011 <a href="mailto:twall_AT_users.sf.net">Timothy
+Wall</a>, All Rights Reserved</p>
+
+<p align=center style='text-align:center'>This version 1.2.0 </p>
+
+<h3><a name=QuickStart></a>Tutorials</h3>
+
+<ul>
+<li><a href="Tutorial-1.shtml">Manually testing a single component under
+development</a>. This tutorial invokes the framework to test a single GUI
+component using Java code within a JUnit test case. </p>
+
+<li><a href="Tutorial-2.shtml">Testing a group of components (Part I)</a>. This
+tutorial invokes the framework to test a group of components using Java code
+within a JUnit test case. </p>
+
+<!--
+<p>
+<a href="Tutorial-3.shtml">Testing a group of components (Part II)</a>. This
+tutorial explains usage of the framework on a complex application, using the
+script editor to generate and maintain scripts. </p>
+-->
+
+<p>
+<li>Costello Demo Script<br>
+<code>java -cp lib/costello.jar
+junit.extensions.abbot.ScriptFixture doc/editor-tutorial-1.xml</code><br>
+This is a tutorial of the Costello editor, written using the Abbot framework
+itself, showing how the framework can be used to show how to use an
+application. </p>
+
+<p>See also Satadip Dutta's Abbot article in the
+<a href="http://www.sys-con.com/story/?storyid=37456&DE=1">Java Developer's Journal</a>
+<a name=Examples></a><a href="mailto:twall_AT_users.sf.net"></a><span
+class=MsoHyperlink><span style='color:blue;text-decoration:none;text-underline:
+none'><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'><a href="mailto:twall_AT_users.sf.net"><span
+style='color:blue;text-decoration:none;text-underline:none'><o:p></o:p></span></a></p>
+
+<div class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'><a href="mailto:twall_AT_users.sf.net"><span
+style='color:blue;text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1163" type="#_x0000_t75" style='width:6in;height:7.2pt' o:hrpct="0"
+ o:hralign="center" o:hr="t">
+ <v:imagedata src="" o:title="strrulec"/>
+</v:shape><![endif]--><![if !vml]><img border=0 height=10 width=576 src=""
+alt=--- v:shapes="_x0000_i1163"><![endif]></span></a></div>
+
+<p class=MsoNormal align=center style='margin-top:5.0pt;mso-margin-bottom-alt:
+auto;text-align:center'></p>
+
+<div align=center>
+
+<table border=0 cellpadding=0 style='mso-cellspacing:1.5pt;mso-padding-alt:
+ 0in 0in 0in 0in'>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a href="http://www.jars.com/"><span style='color:blue;
+  text-decoration:none;text-underline:none'><img border=0 width=103 height=58
+  id="_x0000_i1029" src="http://www.jars.com/images/java_registered.gif"></span></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><i>This project described socratically at</i><br>
+  <a href="http://sourceforge.net"><span style='color:blue;text-decoration:
+  none;text-underline:none'><img border=0 width=210 height=62 id="_x0000_i1030"
+  src="http://sourceforge.net/sflogo.php?group_id=50939&amp;type=5"
+  alt="SourceForge Logo"></span></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><a
+  href="http://groups.yahoo.com/group/java-gui-testing/join"><span
+  style='color:blue;text-decoration:none;text-underline:none'><img border=0
+  width=91 height=52 id="_x0000_i1031"
+  src="http://groups.yahoo.com/img/ui/join.gif"></span><span style='color:blue'><br>
+  </span>Click to subscribe to java-gui-testing</a></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+

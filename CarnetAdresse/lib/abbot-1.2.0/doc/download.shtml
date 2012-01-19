@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>Abbot Downloads</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="abbot download links">
+<meta name="description" content="Download links for Abbot.">
+<meta name="date" content="2008-03-05">
+</head>
+
+<body bgcolor=white lang=EN-US link="#660000" vlink="#003399" style='tab-interval:
+.5in'>
+
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+	<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><i><span
+style='color:#00CC00'>A</span></i><i><span style='color:red'>b</span></i><i><span
+style='color:#00CC00'>b</span>ot framework for automated testing of Java GUI
+components and programs</i><br>
+All materials Copyright © 2002-2011 <a href="mailto:twall_AT_users.sf.net">Timothy
+Wall</a>, All Rights Reserved</p>
+
+<p align=center style='text-align:center'>This version 1.2.0 </p>
+
+<h2>Download</h2>
+
+<p>The latest abbot package is available in [<a
+href="http://prdownloads.sf.net/abbot/abbot-1.2.0-RC2.tgz?download"><span
+style='color:black'>tgz</span></a>] [<a
+href="http://prdownloads.sf.net/abbot/abbot-1.2.0-RC2.zip?download"><span
+style='color:black'>zip</span></a>] formats, which includes source. You can
+also browse the files available at <a
+href="http://sourceforge.net/project/showfiles.php?group_id=50939">SourceForge</a>,
+which include IDE plugins.<a name=QuickStart></a><a name=Tutorials></a></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Times New Roman";color:windowtext'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><![endif]--><!--[if gte mso 9]><xml>
+ <v:shape id="_x0000_i1055" type="#_x0000_t75" style='width:627.75pt;height:7.2pt'
+  o:hralign="center" o:hr="t">
+  <v:imagedata src="" o:title="strrulec"/>
+ </v:shape></xml><![endif]--><![if !mso]><img border=0 height=10 width="100%"
+src="quick-start_files\image003.gif" alt=--- v:shapes="_x0000_i1055"><![endif]></span></div>
+
+
+<div align=center>
+
+<table border=0 cellpadding=0 width="100%" style='width:100.0%;mso-cellspacing:
+ 1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><a
+  href="http://www.jars.com/"><span style='color:blue;text-decoration:none;
+  text-underline:none'><img border=0 width=103 height=58 id="_x0000_i1052"
+  src="http://www.jars.com/images/java_registered.gif"></span></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><i>Get the latest
+  at<o:p></o:p></i></p>
+  <p class=MsoNormal align=center style='text-align:center'><a
+  href="http://sourceforge.net"><span style='color:blue;text-decoration:none;
+  text-underline:none'><img border=0 width=210 height=62 id="_x0000_i1053"
+  src="http://sourceforge.net/sflogo.php?group_id=50939&amp;type=5"
+  alt="SourceForge Logo"></span></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><a
+  href="http://groups.yahoo.com/group/java-gui-testing/join"><span
+  style='color:blue;text-decoration:none;text-underline:none'><img border=0
+  width=91 height=52 id="_x0000_i1054"
+  src="http://groups.yahoo.com/img/ui/join.gif"></span><span style='color:blue'><br>
+  </span>Click to subscribe to java-gui-testing</a></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p><a href="mailto:twall_AT_users.sf.net"></a></p>
+
+</div>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+
+
+
+
+

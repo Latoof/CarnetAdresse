@@ -1,0 +1,307 @@
+<html>
+<head>
+  <title>Abbot FAQ</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="java, gui, test, testing, unit, software, automated, junit, jfcunit, swingunit, awtunit, record, playback, qa, quality">
+<meta name="description" content="Abbot Java GUI Testing Framework: Record and play back actions to test your Java GUI, suitable for use by developers and QA.">
+<meta name="date" content="2008-11-07">
+</head>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+	<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<center><i>
+<font color="#00CC00">A</font><font color="#FF0000">b</font><font color="#00CC00">b</font>ot framework for automated testing of Java GUI
+components and programs</i><br>  
+All materials Copyright &#169; 2002-2011
+<a href=mailto:twall_AT_users.sf.net>Timothy Wall</a>,
+All Rights Reserved<br><p>
+This version 1.2.0<br>
+</center> 
+
+<h1>FAQ:
+<i>Frequently Asked Questions, and their answers</i>
+</h1>
+
+<h3>Creating Tests</h3>
+<ul>
+<li><a href="#q100">Creating Test Cases</a>
+<li><a href="#q101">Setting the classpath</a>
+<li><a href="#q102">Testing Applets</a>
+<li><a href="#q103">Customizing Abbot</a>
+<li><a href="#q104">Setting VM arguments</a>
+<li><a href="#q105">Adding assertions about a modal Dialog</a>
+</ul>
+<h3>Running Tests</h3>
+<ul>
+<li><a href="#q200">Running scripts under JUnit</a>
+<li><a href="#q201">Costello launches my app, but then nothing happens</a>
+<li><a href="#q202">When running my script I get an InvalidScriptException complaining about a property not recognized for SAX</a>
+<li><a href="#q203">Can I run tests without making my machine unusable
+(running tests headless/without a display)?</a>
+<li><a href="#q204">Can I match things against regular expressions?</a>
+<li><a href="#q205">How can I check a multi-line text field value?</a>
+<li><a href="#q206">Why do I get IllegalArgumentExceptions when generating key
+input?</a>
+<li><a href="#q207">My images are missing!</a>
+</ul>
+<h3>Contributions</h3>
+<ul>
+<li><a href="#q300">How can I contribute?</a>
+</ul>
+<hr>
+
+<a name=q100></a>
+<h3>When should I use an Abbot script versus a plain old JUnit TestCase?</h3>
+Usually if you are writing unit tests or tests for small groups of components,
+you should use a
+<a href="api/junit/extensions/abbot/ComponentTestFixture.html">ComponentTestFixture</a>
+which is derived from 
+<a href="http://www.junit.org/junit/javadoc/3.8.1/junit/framework/TestCase">
+junit.framework.TestCase</a>, explicitly invoking actions and
+assertions on your small number of gui components.  See 
+<a href=Tutorial-1.shtml>this tutorial</a> for an example of this
+approach.<p>
+Otherwise use scripts, since it lowers the complexity of the overall test and
+makes it much easier to edit.  The script provides easy mnemonics for
+referenced components.  It also abstracts the test into simple actions and
+assertions.  These elements become much less obvious within a long test
+written entirely in Java code.<p> 
+
+<a name=q102></a>
+<h3>How do I test an applet?</h3>
+Instead of a <code>Launch</code> step, use the <code>Appletviewer</code>
+step.  It will run your applet under appletviewer.  You can specify the
+<code>applet</code> tag attributes as well as parameters for the applet.
+
+<a name=q103></a>
+<h3>I don't see the functions I need.</h3>
+The <a href=api/abbot/script/Call.html>Call</a> step is very
+flexible; you can specify an arbitrary class and invoke a method on it, or you
+can invoke any method on an existing ComponentTester or Component.
+<p>
+Abbot is also very extensible.  You can add custom
+<a href=api/abbot/script/Step.html>Step</a> classes that do exactly what 
+you want, <a href=api/abbot/script/parsers/package.html>custom parsers</a>
+for translating Strings into custom objects, or add
+<a href=api/abbot/tester/ComponentTester.html>ComponentTester</a> classes for
+your own components.  You can also add methods (actions or assertions) to any
+of the existing testers and contribute them back to the project.
+Implementation details are provided in the javadoc description of each of
+those classes.   Most things only require that you make the new class
+available in the classpath; the framework will pick up the new features
+automatically, providing you adhere to some simple conventions.
+<p>
+The script language may incorporate a more
+extensive basis in the future (such as Jython or beanshell), but that hasn't
+yet proved to be a high priority. 
+<p>
+
+<a name=q101></a>
+<h3>Classpath, classpath, wherefor art though classpath?</h3>
+There are two methods of specifying the classpath for your application
+under test.<p>
+<ul>
+<li><i>Specify the classpath in the script Launch step.</i><br>
+A custom class loader (abbot.script.DynamicClassLoader) will be used to load
+your classes from the classpath you specify.  Relative paths are evaluated
+based on the current directory (user.dir).  If your code under test uses
+ClassLoader.getSystemClassLoader to obtain the "current" class loader, you
+should fix the code to use Class.getClassLoader or
+Thread.getContextClassLoader instead.  
+<li><i>Pass the classpath to the VM on startup.</i><br>
+This method is not preferred.  Don't do it.  Only the framework classpath
+(i.e. abbot.jar and/or costello.jar) belongs here.<br>
+There are some cases where you might want to use this method (such as when you
+need to dynamically generate the classpath for a number of different runs).
+If so, then the classpath in the launch step should be left blank, and the
+launch step should be set to fork="true", unless you don't care about
+reloading all classes on each test run.
+<li><i>Pass the full classpath to the Launch step, and part of the classpath
+to the VM on startup.</i><br>
+Sometimes an application will report that it cannot load resources that it can
+find when not running under the Abbot framework.  One common cause is that
+ClassLoader.getSystemClassLoader() is often used when
+getClass().getClassLoader() should really be used instead.  The class loader
+returned by the former is the class loader for the Abbot framework (which uses
+the classpath passed to the VM on startup).  In the latter case, the class
+loader is that created by the Launch step for your app.  You can work around
+the problem by either <b>a)</b> changing the code to be correct or <b>b)</b>
+putting the path to your resources in the classpath of the startup VM.
+<p>
+</ul>
+<p>
+
+<a name=q104></a>
+<h3>How do I set <code>java.library.path</code>? How do I set other VM settings?</h3>
+Except for the classpath, all VM settings must be set when the VM is
+launched.  That means you need to set them either when launching Costello or
+when launching your JUnit test runner.
+<p>
+
+<a name=q105></a>
+<h3>How do add assertions for something on a modal Dialog?</h3>
+See <a href=user-guide.shtml#modal-assertions>this section of the Costello
+user's guide</a>.
+<p>
+
+<a name=q200></a>
+<h3>How can I easily integrate a group of scripts into JUnit?  I don't want to
+have to write a TestCase every time I add a new script.</h3>
+The class
+<a href=api/junit/extensions/abbot/ScriptTestSuite.html>
+junit.extensions.abbot.ScriptTestSuite</a> has a main method which
+accepts a list of Abbot script filenames.  It will run the standard JUnit text
+UI TestRunner on each of those scripts.<p>
+You can also derive from the
+<a href=api/junit/extensions/abbot/ScriptTestSuite.html>ScriptTestSuite</a>
+or 
+<a href=api/junit/extensions/abbot/ScriptFixture.html>ScriptFixture</a>
+classes as described in the documentation for those classes to get other types
+of groupings for scripts, including collecting all scripts from a given
+directory and recursing into subdirectories, or collecting all scripts
+matching a particular filename pattern.<p>
+
+<a name=q201></a>
+<h3>My application appears to start, but then nothing happens.</h3>
+If your main routine doesn't return, or if it performs GUI operations (such as
+displaying a Dialog) prior to returning, you need to set your Launch step to
+"threaded".  This causes the script to not wait for your main routine to
+finish and allows it to continue generating events for your code under test.
+<p>
+<a name=q202></a>
+<h3>When running my script I get an InvalidScriptException complaining about a property not recognized for SAX.</h3>
+Normally it's the
+"http://apache.org/xml/properties/schema/external-noNamespaceSchemaLocation"
+property that's not recognized. The reason for this that the Abbot tries to do
+schema validation on the script on load but the parser used does not support
+schema validation. This may happen in the case that the classpath contains an
+entry to an older version of the xerces XML parser. This feature is tested
+with Xerces 1.4.4 and Xerces 2.4.0 (this is the version delivered with
+Abbot). Newer version should work also.  The solution would be to change the
+classpath so that the recomended versions of Xerces will be used.  If this is
+for whatever reason not possible in your case it's possible to switch off the
+vaildation feature by providing the system property
+<code>-Dabbot.script.validation=false</code> to the VM. 
+<p>
+<a name=q203></a>
+<h3>Running tests headless</h3>
+Sometimes you'd like to be able to run tests without them taking over your
+computer.  Windows systems can run in "service" mode; if you have sshd (which
+allows remote login to your w32 system) running or can otherwise launch a
+terminal login session, this session will run with its own desktop which is
+invisible to the main display.  The tests will run in AWT mode, so certain
+tests (notably drag/drop, which requires native OS events) will not work.<p> 
+X11-based systems can run under any display, not just that of the logged-in
+user.
+<p>
+<a name=q204></a>
+<h3>Matching regular expressions</h3>
+<p>
+Most expressions within a script can be replaced with a regular expression.
+For instance, if the title of a window is "Window (FFF)", where "FFF"
+represents a file and may change, you can change the title attribute of its
+component reference to "/Window .*/" so that it always matches the variable
+title. 
+<a name=q205></a>
+<h3>Matching multiple lines</h3>
+The regular expression package supports matching of carriage return and
+newline characters.  Within a regular expression, the string "(\r?\n)" will
+match cross-platform.
+<p>
+<a name=q206></a>
+<h3>Keyboard Mapping</h3>
+Different keyboard layouts require different keystrokes to generate any given
+key.  Abbot attempts to figure out the correct keystroke, but may need
+some help on non-US keyboard layouts and/or locales.  The keystroke may also
+vary by platform.  Currently available keymaps are found in
+the <code>abbot.tester.keymaps</code> package.<p>
+If your keyboard layout/locale is not yet supported, you can run
+<code>abbot.tester.MapGenerator</code> to generate appropriate key maps, then
+submit those to the <a href=http://sourceforge.net/tracker/?group_id=50939&atid=461492>Patches area on the project site</a>.
+If a key mapping can't be found, only the resulting String is generated.
+<p>
+<a name=q207></a>
+<h3>Missing Images and/or Resources</h3>
+If your application uses <code>Class.getSystemResource(String)</code>
+instead of <code>Class.getResource(String)</code>, it's probably not
+finding the resources in question in the active class path.  When applications
+are launched from Costello, <em>Costello's</em> classpath is the one used by
+<code>getSystemResource</code>.  To access your application's launch
+classpath, you should use <code>Class.getResource(String)</code> from one of
+your application's classes.
+<p>
+<a name=q300></a>
+<h3>How can I contribute to the project?</h3>
+There are many things that would help move this project along.  In addition to
+simply using it to test your GUI and providing feedback and bugreports to <a
+href=http://sf.net/projects/abbot>the sourceforge page</a>, you can do any of
+the following:<p>
+<ul>
+<li>Write a ComponentTester class for a component that doesn't yet have one,
+or add more accessors and/or actions to existing ones that need more.
+<li>Write a Recorder class for a component that doesn't yet have one.  The
+recorder should capture those actions exported by the corresponding
+ComponentTester class.
+<li>Write a user's manual for the editor.
+<li>Contribute your general GUI testing experience to the
+<a href="http://groups.yahoo.com/group/java-gui-testing">
+yahoo discussion group</a>.  Note that this group is for discussion of general
+GUI testing issues and practices; questions specific to Abbot should be
+directed to the <a href="http://sf.net/mail/?group_id=50939">Abbot user's
+mailing list on SourceForge</a>.
+</ul>
+<p>
+
+<!-- Future additions
+
+Setup
+* What's the best way to test a full-blown application?
+* I don't see what I need to test in the list of assertions or properties.
+How do I extend Abbot to test X (How to write a custom ComponentTester)? 
+* I've got an action or assert but the script throws an
+IllegalArgumentException when it runs.  How do I make Abbot recognize an
+argument of class X (How do I write a custom Converter)? 
+
+Running Tests
+* Playback has lots of failures on my w32 box.  What's the deal?
+* How does Abbot find my classes?
+* My application runs OK the first time, but then acts strange on subsequent
+test runs.
+* My application is set to reload on each run, but I get illegal access
+exceptions. 
+-->
+<hr>
+<center>
+<table>
+<td><a href="http://www.jars.com/"><img src="http://www.jars.com/images/java_registered.gif"/></a></td>
+<td>&nbsp;</td>
+
+<td><i>This project's physical resources are supplied by</i><br>
+<A href="http://sourceforge.net"> <IMG
+src="http://sourceforge.net/sflogo.php?group_id=50939&type=5" width="210"
+height="62" border="0" alt="SourceForge Logo"></A></td>
+<td>&nbsp;</td>
+
+<td><center><a href="http://groups.yahoo.com/group/java-gui-testing/join">
+<img src="http://groups.yahoo.com/img/ui/join.gif" border=0><br>
+Click to subscribe to java-gui-testing</a></center></td>
+</table>
+</center>
+</td>
+</tr>
+</table>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+

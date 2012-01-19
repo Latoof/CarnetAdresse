@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/xstream-1.4.2/lib/xstream-1.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-1.4.2/lib/xstream/kxml2-2.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit4.10/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="lib/abbot-1.2.0/lib/abbot.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

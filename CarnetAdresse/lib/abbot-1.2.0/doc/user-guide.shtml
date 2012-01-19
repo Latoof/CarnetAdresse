@@ -1,0 +1,166 @@
+<html>
+<head>
+  <title>Costello Editor User's Guide</title>
+<meta name="authors" content="Timothy Wall">
+<meta name="keywords" content="java, gui, test, testing, unit, software, automated, junit, jfcunit, swingunit, awtunit,record, playback, qa, quality, test first, junit, tools, framework, functional test, acceptance test, gui test">
+<meta name="description" content="User's guide for the Abbot framework's script editor called Costello.">
+<meta name="date" content="2008-03-05">
+</head>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="146" valign="top">
+<!--#include virtual="/doc/topics.shtml" -->
+</td>
+	<td>
+<center><i>Costello Editor User's Guide</i><br>  
+All materials Copyright &#169; 2002-2011
+<a href=mailto:twall_AT_users.sf.net>Timothy Wall</a>,
+All Rights Reserved<br><p>
+This version 1.2.0<br>
+</center> 
+
+<center><h1>Getting Started with Costello</h1></center>
+
+This document provides more in-depth descriptions of how to use the Costello script editor.  You should also run the script "editor-tutorial-1.xml", which follows the information included here but displays it in the context of the editor application itself.
+<blockquote><pre><code>
+% java -cp lib/costello.jar junit.extensions.abbot.ScriptFixture doc/editor-tutorial-1.xml
+</code></pre></blockquote>
+
+
+
+<h2>Creating a Script</h2>
+<b><i>Scripts</i></b> are a convenient way to organize a suite of actions and assertions that make up a test case.  They are saved to disk as XML as a convenient and standardized storage format.
+<p>
+Scripts are primarily composed of actions, assertions, and component references.  <b><i>Actions</i></b> are things that a user usually does to operate a GUI component, like pushing a button, selecting a menu item, or entering text. Most actions require one or more arguments, one of which is the target GUI component.  The Abbot framework allows you to use simple IDs in place of looking up a Java reference to a Component object instance.  
+<p>
+<b><i>Component references</i></b> represent actual GUI component instances within your code under test.  Each has a unique ID that may be used to indicate to other script steps the actual component on which you wish to operate.   For example, there might be a component reference for the OK button in a dialog, with an ID of "OK Button".  You can then use the string "OK Button" as an argument to an Action in place of the actual button instance.
+<p>
+Finally, <b><i>assertions</i></b> allow you to verify the state of your GUI. You can check the value of GUI component properties or evaluate arbitrary expressions. Normally the script will stop running and report an error if these assertions fail.  Assertions may also be changed to wait steps, where the script execution pauses until the condition becomes true.
+<p>
+There are a few other lesser-used Script Step types; see the <a href="api/abbot/script/package-summary.html">abbot.script</a> package for more details.  In general, scripts should be kept as simple as possible; advanced conditionals and looping constructs do not lend to this intent. 
+
+<h3>Create New Script</h3>
+Select <b>New</b> from the <b>File</b> menu, and you will be prompted for a destination filename.  New scripts automatically have Launch and Terminate steps included.<p>
+<h3>Open an Existing Script</h3>
+Select <b>Open</b> from the <b>File</b> menu, and you can browse for an existing script to open.  Scripts do not require a filename extension, although ".xml" is used by convention.
+
+
+
+<h2>Launching an Application</h2>
+<h3>Launch Information</h3>
+The <b><i>Launch</i></b> Step allows you to indicate the main class name of your code under test.  It doesn't have to be "main", but the method must be a public static method.  You also must indicate a classpath to be used to find your main class.  If you use relative path names, then your scripts will be runnable on different platforms.<p>
+If the method you call to launch your code under test does not return, then you must set the Launch step to be threaded.  In the editor, there is a checkbox for this option.  If the Launch is not threaded, the editor will wait for the method invocation to finish before continuing.  You should also use the threaded option if your application displays a modal dialog (or any other GUI which requires interaction) before returning from its main method.
+<h3>Class Loading</h3>
+It is preferable to enter the classpath in the Launch step (rather than specifying it in the environment CLASSPATH or on the command-line when launching the editor) so that your classes can be reloaded on each test run. However, some applications improperly use resource or class loading methods that directly access the system class loader (you should almost never explicitly reference the system class loader, but instead either use the Thread context class loader or the class loader for the current class).  In these instances it may be necessary to rely on either the environment CLASSPATH or java.class.path as passed to the editor.  Keep in mind that in these situations, running a test the first time may have different behavior from subsequent runs.
+<h3>Wait for...</h3>
+The first thing you should do after your application launches, is to wait for it to show up.  There's no sense in starting to click buttons that aren't there yet.  The most common thing to wait for is your main component window; if you're recording for the first time, this step will automatically be inserted for you (Wait for Component Showing).  Some applications may not be ready for input until a splashscreen goes away, or until some icon appears in the toolbar.  You should adjust the wait step accordingly.  
+<h3>Duplicate Fixture</h3>
+You often need to use the same application launch setup for several scripts. The menu option <b>File->Duplicate Fixture</b> copies the Launch/Wait for.../Terminate steps into a new script, ready to be filled in.
+
+
+
+<h2>What goes into a Script?</h2>
+The <b>Insert</b> menu allows you to manually insert any available script step type.  
+<h3>Recording/Playback</h3>
+The easiest way to see the types of things that go into a script is to start recording.  Once you've set up your launch step properly, you can start recording from the <b>Capture</b> menu, or with a keyboard shortcut.  If your app has not been launched, it will be automatically, and the editor will begin recording your actions.  When you are finished recording, you can either activate the editor window or use the same keyboard shortcut to stop recording. Now you can use <b>Test->Run</b> or click the <b>Run</b> button to play back the recording.  Note that recording doesn't know anything about what you're trying to test; you may want to remove extra waits, actions or events that are not pertinent to what you're focusing on.
+<h3>Assertions</h3>
+Once you have the basic actions filled in, you'll want to insert some verification about the state of the GUI.  You can select components in your application by moving the pointer over them and pressing shift-F1.  This will select the given component in the hierarchy browser in the lower left of the editor window.  All the properties available for that component will appear in the table to the right of the hierarchy browser.  You can select any property and insert an assert step into the script that indicates the script should fail if the given property does not match its expected value.  Holding the shift key inverts the sense of the test, and holding down the shortcut modifier (Control on w32, Command on OSX) makes the assert a wait step instead.  In most cases, you can replace the expected value of an assertion with a regular expression bounded by slashes, e.g. "/My Application.*/" would match any string that started with "My Application".<p>
+<a name=modal-assertions></a>
+You can't interact with the Costello interface while your application under test is showing a modal dialog.  If you wish to make an assertion on a component within a modal dialog, you will need to manually make a reference to that component (alt-shift-F1) while the modal dialog is showing, and then dismiss the dialog.  You can then select the new reference in the hierarchy browser, and make assertions as usual.  Note that the property values you see in this case may not accurately reflect the values in the component when it is showing.
+<h3>Samples</h3>
+You can sample any property value for later use by using a Sample step in place of an assert step.  You insert a Sample as you would an Assert.  You then need to edit the step to identify the name you want to give the property.  You can then refer to that value later in your script by using the dereference notation "<code>${property.name}</code>", where "<code>property.name</code>" is the name you gave the property. 
+
+<h3>Action Arguments and Methods</h3>
+The available selection of actions may change based on the currently selected component (shift F1).  The <b>Insert->Action</b> menu is dynamically generated based on the action methods provided by the appropriate ComponentTester class for the selected component.<p>
+When you insert an action, you will be prompted for the arguments to the method invocation.  The first argument will often be the ID of the target component (which may be filled in automatically).  You should enter the arguments you'd like to use, separated by commas.  Once the step is inserted, you can further edit its attributes in the step editor.
+<h3>Component References</h3>
+Whenever you reference a component in the GUI hierarchy, a component reference is created for it.  This allows you to use its string ID to refer in place of the actual GUI object.  Component references keep a set of attribute values which help to look up the actual GUI object when the test is run.  These attribute values can be edited to use regular expression values in case the attribute is variable.  
+<h3>Arbitrary Expressions</h3>
+The <a href="api/abbot/script/Expression.html">Expression</a> step lets you
+evaluate arbitrary Java expressions should you need to go beyond simple
+actions and assertions.  The expression interpreter is Groovey,  and it has a
+lot of nifty convenience features too numerous to list here.  The interpreter
+state is maintained throughout a given script run, so one expression can set
+variables for use by a later expression.
+<p>Several built-in variables are provided for convenience:<br>
+<ul>
+<li><code>finder</code> a ComponentFinder for looking up components
+<li><code>resolver</code> the current Resolver context
+<li><code>script</code> the containing script
+</ul>
+Several built-in methods are provided as well:<br>
+<ul>
+<li><code>find(matcher)</code>
+<li><code>find(root,matcher)</code> returns the first component matching the given spec
+<li><code>component(id)</code> returns the component matching the component reference with the given id
+<li><code>reference(id)</code> returns the component reference with the given id
+</ul>
+The standard JUnit <code>assertX()</code> methods are provided, and may be
+invoked directly from the expression, e.g.<br>
+<ul>
+<li><code>assertTrue("Component not wide enough", component("myframe").getWidth()
+&gt; 500);</code>
+<li><code>assertEquals("Wrong number of Frames", 5, Frame.getFrames().length);</code>
+</ul>
+
+
+<h2>Cleaning Up</h2>
+<h3>Terminate</h3>
+The terminate step causes all GUI components generated by your code under test to be disposed and made ready for garbage collection. Whether they actually get GC'd will depend on your VM and how well your application cleans up after itself. 
+<h3>Unnecessary Script Steps</h3>
+Not all recorded steps will be necessary for the test you are writing.  Every step should have a purpose, and those that don't should be removed.
+
+
+
+<h2>Advanced Topics</h2>
+<h3>Compiled Suites of Scripts</h3>
+You can aggregate a number of related scripts into a suite launchable by the JUnit harness in a number of ways.  The class junit.extensions.abbot.ScriptFixture's main routine takes any number of filename arguments and automatically runs them together as a suite of tests. You can extend the <a href="api/junit/extensions/abbot/ScriptTestSuite.html">ScriptTestSuite</a> class to build a suite of tests based on a customized file system search for scripts.  If such a class is found in the editor's classpath, it will be available from the <b>Select Test Suite...</b> button and you will be able to flip among all the scripts contained within that suite.  An example of this is provided with the sample <b>MyCode</b> scripts.
+<h3>Regular Expressions</h3>
+In most cases, you can replace any string that represents an expected value with a regular expression bounded by slashes, e.g. "/My Application.*/" would match any string that started with "My Application".  This works in component reference attributes, assertion expected values, and other places.
+<h3>Component Locations</h3>
+Some component actions take a ComponentLocation argument.  These are special objects which encapsulate a component-relative location, such as a cell in a table, a row in a tree, or an item in a list.  They usually can be created from a Point (e.g. "(x, y)"), an indexed location (e.g. "[row, col]"), or a quoted value (e.g. "list item" - quotes are part of the argument).  Usage of component locations avoids an explosion of APIs that only differ based on whether the target location is a point, and indexed location, or the location of a contained value.
+<h3>Conversion of Call Arguments</h3>
+The Abbot parser attempts to convert string arguments into their target argument types, but is not restricted to basic data types to do this.  In addition to the parsers in the <a href="api/abbot/script/parsers/package-summary.html">abbot.script.parsers</a> package, the following conversions can be made:
+<ul>
+<li>Arrays, e.g. "[an,array,of,strings]" is a four-element array
+<li>Properties, e.g. "<code>${property.name}</code>", which will be replaced by a sampled property or a system property if no such sampled property exists.
+<li>Component Locations, e.g. "[row]", "(x,y)", "value in list"
+</ul>
+<h3>Editing Component References</h3>
+You can edit reference attributes in the component browser by selecting a
+given reference and changing the attribute values which appear to the right.
+Be careful when changing the component reference ID, since it is likely used
+in your script.  Those references to the ID will not be automatically changed
+to the new value.
+<hr>
+<center>
+<table>
+<td><a href="http://www.jars.com/"><img src="http://www.jars.com/images/java_registered.gif"/></a></td>
+<td>&nbsp;</td>
+
+<td><i>This project generously hosted by</i><br>
+<A href="http://sourceforge.net"> <IMG
+src="http://sourceforge.net/sflogo.php?group_id=50939&type=5" width="210"
+height="62" border="0" alt="SourceForge Logo"></A></td>
+<td>&nbsp;</td>
+
+<td><center><a href="http://groups.yahoo.com/group/java-gui-testing/join">
+<img src="http://groups.yahoo.com/img/ui/join.gif" border=0><br>
+Click to subscribe to java-gui-testing</a></center></td>
+</table>
+</center>
+</td>
+</tr>
+</table>
+
+</html>
+<!-- 
+Local variables:
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "<meta name=\"date\" content=\""
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\">"
+End:
+-->
+
+
