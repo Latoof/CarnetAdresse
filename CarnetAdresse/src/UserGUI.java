@@ -26,6 +26,7 @@ public class UserGUI extends JFrame implements ActionListener {
 	private JMenuItem itemNouveau;
 	private JMenuItem itemOuvrir;
 	private JMenuItem itemEnregistrer;
+	private JMenuItem itemQuitter;
 	
 	public UserGUI ( Carnet c ) {
 		
@@ -65,17 +66,25 @@ public class UserGUI extends JFrame implements ActionListener {
 				        KeyEvent.VK_3, ActionEvent.ALT_MASK));
 				itemEnregistrer.getAccessibleContext().setAccessibleDescription(
 				        "This doesn't really do anything");
+				itemQuitter = new JMenuItem("Quitter l'application");
+				itemQuitter.setAccelerator(KeyStroke.getKeyStroke(
+				        KeyEvent.VK_4, ActionEvent.ALT_MASK));
+				itemQuitter.getAccessibleContext().setAccessibleDescription(
+				        "This doesn't really do anything");
 			
 				itemNouveau.addActionListener(this);
 				itemOuvrir.addActionListener(this);
 				itemEnregistrer.addActionListener(this);
-
+				itemQuitter.addActionListener(this);
 		
 				menuFichier.add(itemNouveau);
 				menuFichier.addSeparator();
 				menuFichier.add(itemOuvrir);
 				menuFichier.addSeparator();
 				menuFichier.add(itemEnregistrer);
+				menuFichier.addSeparator();
+				menuFichier.add(itemQuitter);
+
 			menuBar.add(menuFichier);
 		this.setJMenuBar(menuBar);
 		
@@ -106,7 +115,7 @@ public class UserGUI extends JFrame implements ActionListener {
 	
 
 	
-	public void popFiche( Fiche f ) {
+	public void visualiserFiche( Fiche f ) {
 		
 		this.fichePanel.voirFiche( f );
 		this.fichePanel.repaint();
@@ -121,7 +130,17 @@ public class UserGUI extends JFrame implements ActionListener {
 		if ( arg0.getSource() instanceof JMenuItem ) {
 			System.out.println("OK");
 			
-			if ( ((JMenuItem) arg0.getSource()).equals(this.itemOuvrir) ) {
+			if ( ((JMenuItem) arg0.getSource()).equals(this.itemNouveau) ) {
+				
+				this.carnet = new Carnet();
+				Fiche nouvelleFiche = new Fiche("nNom", "n_Prenom", "0240667799", new Adresse(12,"rue du paradis", "AuroVille", 65489, "Inde"));
+				this.carnet.addFiche( nouvelleFiche );
+				this.listePanel.genList( this.carnet );
+				this.visualiserFiche( nouvelleFiche );
+				
+			}
+			
+			else if ( ((JMenuItem) arg0.getSource()).equals(this.itemOuvrir) ) {
 				
 				JFrame fr = new JFrame();
 				JFileChooser fc = new JFileChooser();
@@ -155,6 +174,12 @@ public class UserGUI extends JFrame implements ActionListener {
 				    	this.carnet.toXML( fc.getSelectedFile().getAbsolutePath() );
 
 				    }
+			}
+			
+			else if ( ((JMenuItem) arg0.getSource()).equals(this.itemQuitter) ) {
+				
+				this.dispose();
+				
 			}
 		
 		}

@@ -8,7 +8,10 @@ import java.util.Vector;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
@@ -24,6 +27,8 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 	private Carnet carnet;
 	private JButton bNouveau;
 	private JButton bSupprimer;
+	private JButton bComparer;
+
 	
 	
 	public ListePanel( UserGUI g, Carnet c ) {
@@ -42,18 +47,22 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		JPanel paneButton = new JPanel(new GridLayout(1, 2));
 		this.bNouveau = new JButton("Nouveau");
 		this.bSupprimer = new JButton("Supprimer");
+		this.bComparer = new JButton("Comparer");
 		
 		bNouveau.addActionListener(this);
 		bSupprimer.addActionListener(this);
+		bComparer.addActionListener(this);
 		
 		paneButton.add(bNouveau);
 		paneButton.add(bSupprimer);
+		paneButton.add(bComparer);
 		
 		
 		
 		this.add(new JScrollPane(this.liste), BorderLayout.CENTER);
 		this.add(paneButton, BorderLayout.SOUTH);
 	
+		this.updateButtons();
 		this.liste.addListSelectionListener( this );
 
 		
@@ -72,13 +81,57 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 
 			}
 			else if ( ((JButton) arg0.getSource()).equals(this.bSupprimer) ) {
-				int index = liste.getSelectedIndex();
 				
-				if ( index != -1 ) {
-					this.carnet.delFiche( (Fiche) listeM.getElementAt(index) );
-					listeM.removeElementAt(index);
-					System.out.println("Deletion de "+index);
+				int nbSelected = liste.getSelectedIndices().length;
+				if ( nbSelected == 1 ) {
+				
+					Fiche ficheASupprimer = (Fiche) this.liste.getSelectedValue();
+					
+					this.carnet.delFiche( ficheASupprimer);
+					listeM.removeElement( ficheASupprimer );
+					//System.out.println("Deletion de "+index);
+					
+					
 				}
+				else if ( nbSelected > 1 ) {
+					
+					Object[] fichesASupprimer = this.liste.getSelectedValues();
+					
+					for ( int i = 0; i < nbSelected; i++ ) {
+						
+						Fiche ficheASupprimer = (Fiche) fichesASupprimer[i];
+						
+						this.carnet.delFiche( ficheASupprimer);
+						listeM.removeElement( ficheASupprimer );
+						
+					}
+					
+				}
+				
+			}
+			else if ( ((JButton) arg0.getSource()).equals(this.bComparer) ) {
+				
+				if ( this.liste.getSelectedIndices().length == 2 ) {
+					
+					//JDialog popup = new JDialog(this.gui, true);
+					Object[] fichesSelectionnees = this.liste.getSelectedValues();
+					
+					Fiche f1 = (Fiche) fichesSelectionnees[0];
+					Fiche f2 = (Fiche) fichesSelectionnees[1];
+
+					
+					System.out.println( f1.equals(f2) );
+					
+					String txtResultat = ( f1.equals(f2) ? "Les deux fiches sont identiques !" : "Les deux fiches sont differentes !");
+
+					
+					JOptionPane op = new JOptionPane();
+
+
+					JOptionPane.showInputDialog(this.gui, new JLabel(txtResultat), txtResultat, JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				
 			}
 			
 			//this.genList();
@@ -100,14 +153,42 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		
 		this.repaint();
 	}
+	
+	public void genList( Carnet c ) {
+		
+		this.carnet = c;
+		this.genList();
+
+	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		
+		this.updateButtons();
+		
 		if (liste.getSelectedIndex() != -1) {
-			this.gui.popFiche( (Fiche) this.liste.getSelectedValue() );
+			this.gui.visualiserFiche( (Fiche) this.liste.getSelectedValue() );
 		}
 		
+	}
+	
+	public void updateButtons() {
+		if ( this.liste.getSelectedIndices().length > 0 ) {
+			
+			this.bSupprimer.setEnabled(true);
+			
+			if ( this.liste.getSelectedIndices().length == 2 ) {
+				this.bComparer.setEnabled(true);
+			}
+			else {
+				this.bComparer.setEnabled(false);
+			}
+			
+		}
+		else {
+			this.bSupprimer.setEnabled(false);
+			this.bComparer.setEnabled(false);
+		}
 	}
 
 
