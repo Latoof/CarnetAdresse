@@ -191,5 +191,17 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		}
 	}
 
+	public JButton getbNouveau() {
+		return bNouveau;
+	}
+
+	public JButton getbSupprimer() {
+		return bSupprimer;
+	}
+
+	public JButton getbComparer() {
+		return bComparer;
+	}
+
 
 }

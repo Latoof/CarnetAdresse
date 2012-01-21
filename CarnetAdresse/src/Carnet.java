@@ -71,4 +71,7 @@ public class Carnet {
 		
 	}
 	
+	public int getNbFiches() {
+		return this.fiches.size();
+	}
 }

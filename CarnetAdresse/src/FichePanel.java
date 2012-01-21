@@ -93,6 +93,10 @@ public class FichePanel extends JPanel {
 	
 	}
 	
+	public Fiche getFicheCourante() {
+		return this.fiche;
+	}
+	
 	public GridBagConstraints setGridBagConstraints (int gx, int gy,int sx, int sy, int wx, int wy, GridBagConstraints gbc){
 		
 		gbc.gridx = gx;
