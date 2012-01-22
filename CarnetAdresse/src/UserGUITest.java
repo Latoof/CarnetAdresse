@@ -5,6 +5,11 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+
 import abbot.finder.ComponentNotFoundException;
 import abbot.finder.MultipleComponentsFoundException;
 import abbot.finder.matchers.ClassMatcher;
@@ -31,13 +36,18 @@ public class UserGUITest extends ComponentTestFixture  {
 		System.out.println("Const");
 
 	}
-
-	/**
-	 * Teste si la selection d'une liste implique bien le changement de la vue de droite.
-	 */
-	public void testOnListSelection() {
-		
-		//this.initCarnetPourTest();
+	
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    	
+    }
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+    
+    @Before
+    public void setUp() {
+        System.out.println("testCreate!!!!!!!!!!!");
 		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
 		this.f1.addEmail("test@email.fr");
 
@@ -55,6 +65,18 @@ public class UserGUITest extends ComponentTestFixture  {
 		if ( this.gui == null ) {
 			this.gui = new UserGUI( this.carnetTest );
 		}
+
+    }
+    
+    @After
+    public void tearDown() {
+    	System.out.println("Finised");
+    }
+
+	/**
+	 * Teste si la selection d'une liste implique bien le changement de la vue de droite.
+	 */
+	public void testOnListSelection() {
 
 		
 		//Component list =findListePanel();
@@ -100,23 +122,7 @@ public class UserGUITest extends ComponentTestFixture  {
 	 */
 	public void testClicBoutonNouvelleFiche() {
 		
-		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
-		this.f1.addEmail("test@email.fr");
 
-		this.f2 = new Fiche("AAA", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fdfs", "Nantes", 44000, "France"));
-		this.f2.addEmail("test2@email.fr");
-		
-		this.f3 = new Fiche("BBB", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la chose", "Nantes", 44000, "France"));
-		this.f3.addEmail("test3@email.fr");
-		
-		this.carnetTest = new Carnet();
-		this.carnetTest.addFiche(f1);
-		this.carnetTest.addFiche(f2);
-		this.carnetTest.addFiche(f3);
-
-		if ( this.gui == null ) {
-			this.gui = new UserGUI( this.carnetTest );
-		}
 
 		
 		Component listePanel = null;
@@ -151,23 +157,6 @@ public class UserGUITest extends ComponentTestFixture  {
 	 */
 	public void testClicBoutonSupprimer() {
 		
-		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
-		this.f1.addEmail("test@email.fr");
-
-		this.f2 = new Fiche("AAA", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fdfs", "Nantes", 44000, "France"));
-		this.f2.addEmail("test2@email.fr");
-		
-		this.f3 = new Fiche("BBB", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la chose", "Nantes", 44000, "France"));
-		this.f3.addEmail("test3@email.fr");
-		
-		this.carnetTest = new Carnet();
-		this.carnetTest.addFiche(f1);
-		this.carnetTest.addFiche(f2);
-		this.carnetTest.addFiche(f3);
-
-		if ( this.gui == null ) {
-			this.gui = new UserGUI( this.carnetTest );
-		}
 
 		Component liste = null;
 		try {
@@ -224,23 +213,6 @@ public class UserGUITest extends ComponentTestFixture  {
 	 */
 	public void testMenuNouveauCarnet() {
 		
-		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
-		this.f1.addEmail("test@email.fr");
-
-		this.f2 = new Fiche("AAA", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fdfs", "Nantes", 44000, "France"));
-		this.f2.addEmail("test2@email.fr");
-		
-		this.f3 = new Fiche("BBB", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la chose", "Nantes", 44000, "France"));
-		this.f3.addEmail("test3@email.fr");
-		
-		this.carnetTest = new Carnet();
-		this.carnetTest.addFiche(f1);
-		this.carnetTest.addFiche(f2);
-		this.carnetTest.addFiche(f3);
-
-		if ( this.gui == null ) {
-			this.gui = new UserGUI( this.carnetTest );
-		}
 
 			
         JPopupMenu popup = new JPopupMenu();
