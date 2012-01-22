@@ -117,6 +117,12 @@ public class UserGUI extends JFrame implements ActionListener {
 	
 
 	
+	public Carnet getCarnet() {
+		return carnet;
+	}
+
+
+
 	public void visualiserFiche( Fiche f ) {
 		
 		this.fichePanel.voirFiche( f );
@@ -146,7 +152,7 @@ public class UserGUI extends JFrame implements ActionListener {
 				
 				JFrame fr = new JFrame();
 				JFileChooser fc = new JFileChooser();
-				fc.setApproveButtonText("Ouvrirmm");
+				fc.setApproveButtonText("Ouvrir");
 
 				fr.add(fc);
 				fr.pack();
@@ -187,5 +193,8 @@ public class UserGUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	public JMenuItem getMenuNouveauCarnet() {
+		return this.itemNouveau;
+	}
 	
 }

@@ -2,13 +2,17 @@ import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
 
 import abbot.finder.ComponentNotFoundException;
 import abbot.finder.MultipleComponentsFoundException;
 import abbot.finder.matchers.ClassMatcher;
+import abbot.finder.matchers.JMenuMatcher;
 import abbot.tester.JButtonTester;
 import abbot.tester.JListLocation;
 import abbot.tester.JListTester;
+import abbot.tester.JMenuItemTester;
 import junit.extensions.abbot.ComponentTestFixture;
 import junit.extensions.abbot.TestHelper;
 
@@ -28,7 +32,9 @@ public class UserGUITest extends ComponentTestFixture  {
 
 	}
 
-	
+	/**
+	 * Teste si la selection d'une liste implique bien le changement de la vue de droite.
+	 */
 	public void testOnListSelection() {
 		
 		//this.initCarnetPourTest();
@@ -89,7 +95,10 @@ public class UserGUITest extends ComponentTestFixture  {
 
 	}
 	
-	public void testClicBoutonNouveau() {
+	/**
+	 * Teste si le clic sur le bouton "nouvelle fiche" déclenche bien l'apparition concrete d'une fiche vide
+	 */
+	public void testClicBoutonNouvelleFiche() {
 		
 		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
 		this.f1.addEmail("test@email.fr");
@@ -130,14 +139,16 @@ public class UserGUITest extends ComponentTestFixture  {
 			buttonTester.actionClick( ((ListePanel)listePanel).getbNouveau() );
 			
 			
-			assertEquals("Erreur lors de l'ajout d'une fiche", this.carnetTest.getNbFiches(), nbFichesBefore+1);
+			assertEquals("Erreur lors de l'ajout d'une fiche", this.gui.getCarnet().getNbFiches(), nbFichesBefore+1);
 		}
 		
 		
 		
 	}
 	
-	
+	/**
+	 * Teste si le clic sur le bouton "supprimer fiche" déclenche bien la disparition de la Fiche qui était sélectionnée
+	 */
 	public void testClicBoutonSupprimer() {
 		
 		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
@@ -188,19 +199,65 @@ public class UserGUITest extends ComponentTestFixture  {
 		
 		if ( listePanel != null) {
 			
-			int nbFichesBefore = this.carnetTest.getNbFiches();
+			Fiche ficheASupprimer = (Fiche) ((ListePanel)listePanel).getListe().getSelectedValue();
+			int nbFichesBefore = this.gui.getCarnet().getNbFiches();
 
+			// Le carnet contient bien la fiche a supprimer
+			assertTrue( this.gui.getCarnet().contains(ficheASupprimer) );
 		
 			JButtonTester buttonTester = new JButtonTester();
 			buttonTester.actionClick( ((ListePanel)listePanel).getbSupprimer() );
 			
+			// Le carnet ne contient plus la fiche a supprimer
+			assertFalse( this.gui.getCarnet().contains(ficheASupprimer) );
+
 			/* Le clic sur "Supprimer" est impossible s'il n'y aucun elts dans la liste */
-			assertEquals("Erreur lors de la suppression d'une fiche", this.carnetTest.getNbFiches(), nbFichesBefore-1);
+			assertEquals("Erreur lors de la suppression d'une fiche", this.gui.getCarnet().getNbFiches(), nbFichesBefore-1);
 		}
 		
 		
 		
 	}
+	
+	/**
+	 * Teste si l'action "nouveau carnet" détruit bien toutes les fichies et crée une Fiche vide.
+	 */
+	public void testMenuNouveauCarnet() {
+		
+		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
+		this.f1.addEmail("test@email.fr");
+
+		this.f2 = new Fiche("AAA", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fdfs", "Nantes", 44000, "France"));
+		this.f2.addEmail("test2@email.fr");
+		
+		this.f3 = new Fiche("BBB", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la chose", "Nantes", 44000, "France"));
+		this.f3.addEmail("test3@email.fr");
+		
+		this.carnetTest = new Carnet();
+		this.carnetTest.addFiche(f1);
+		this.carnetTest.addFiche(f2);
+		this.carnetTest.addFiche(f3);
+
+		if ( this.gui == null ) {
+			this.gui = new UserGUI( this.carnetTest );
+		}
+
+			
+        JPopupMenu popup = new JPopupMenu();
+        popup.add(this.gui.getMenuNouveauCarnet());
+        popup.setVisible(true);
+			JMenuItemTester menuItemTester = new JMenuItemTester();
+			
+			menuItemTester.actionClick( this.gui.getMenuNouveauCarnet() );
+			
+			/* Le clic sur "Supprimer" est impossible s'il n'y aucun elts dans la liste */
+			assertEquals("Erreur de la creation d'un nouveau carnet : "+this.gui.getCarnet().getNbFiches(), 1, this.gui.getCarnet().getNbFiches());
+		
+		
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		 TestHelper.runTests(args, UserGUITest.class);
 	}

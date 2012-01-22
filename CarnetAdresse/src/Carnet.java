@@ -62,6 +62,11 @@ public class Carnet {
 		
 	}
 	
+	public boolean contains( Fiche f ) {
+		return this.fiches.contains(f);
+	}
+	
+	
 	public int fromXML( File file ) {
 				
 		XStream xs = new XStream();
