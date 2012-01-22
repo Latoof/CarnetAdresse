@@ -9,6 +9,8 @@ import com.thoughtworks.xstream.XStream;
 
 public class Fiche {
 
+	final static String default_email = "N/A";
+	
 	String 				nom, numeroTel;
 	TreeSet<String>		prenoms;
 	TreeSet<Adresse> 	adresses;
@@ -56,6 +58,7 @@ public class Fiche {
 		this.adresses = new TreeSet<Adresse>();
 		this.adresses.add(adresse);
 		this.emails =  new TreeSet<String>();
+		this.addEmail(default_email);
 
 	}
 	
@@ -71,6 +74,7 @@ public class Fiche {
 		this.adresses = new TreeSet<Adresse>();
 		this.adresses.add(adresse);
 		this.emails =  new TreeSet<String>();
+		this.addEmail(default_email);
 
 	}
 	
@@ -79,7 +83,13 @@ public class Fiche {
 	 * @param email
 	 */
 	public void addEmail( String email ) {
+		
+		if ( this.emails.size() == 1 && this.emails.first().equals(default_email)) {
+			this.emails.pollFirst();
+		}
+		
 		this.emails.add(email);
+		
 	}
 	
 	public void addAdresse(Adresse adresse){

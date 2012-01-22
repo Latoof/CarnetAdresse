@@ -25,17 +25,18 @@ public class CarnetTest extends TestCase {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
+	
 	@Before
 	public void setUp() throws Exception {
 		
-		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
-		this.f1.addEmail("test@email.fr");
-
-		this.f2 = new Fiche("AAA", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fdfs", "Nantes", 44000, "France"));
-		this.f2.addEmail("test2@email.fr");
+		/* 
+		 * Est execute a chaque fois qu'un test est demarre par Junit. 
+		 * Dans notre cas, on instancie 3 fiches qu'on place dans notre Carnet.
+		 */
 		
+		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
+		this.f2 = new Fiche("AAA", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fdfs", "Nantes", 44000, "France"));
 		this.f3 = new Fiche("BBB", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la chose", "Nantes", 44000, "France"));
-		this.f3.addEmail("test3@email.fr");
 		
 		this.carnetTest = new Carnet();
 		this.carnetTest.addFiche(f1);
