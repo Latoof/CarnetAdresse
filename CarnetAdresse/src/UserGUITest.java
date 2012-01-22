@@ -33,7 +33,6 @@ public class UserGUITest extends ComponentTestFixture  {
 	
 	public UserGUITest( String name ) {
 		super(name);
-		System.out.println("Const");
 
 	}
 	
@@ -47,7 +46,6 @@ public class UserGUITest extends ComponentTestFixture  {
     
     @Before
     public void setUp() {
-        System.out.println("testCreate!!!!!!!!!!!");
 		this.f1 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
 		this.f1.addEmail("test@email.fr");
 
