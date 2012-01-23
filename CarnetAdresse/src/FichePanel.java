@@ -20,7 +20,6 @@ public class FichePanel extends JPanel {
 		super();
 		JPanel panel = new JPanel(new GridBagLayout());
 		
-		this.setBackground(Color.MAGENTA);
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -34,22 +33,22 @@ public class FichePanel extends JPanel {
 
 		this.entryMail = new JLabel();
 		
-		panel.add( new JLabel("Nom"), setGridBagConstraints(0, 0, 1, 1, 0, 0, gbc) );
+		panel.add( new JLabel("Nom	"), setGridBagConstraints(0, 0, 1, 1, 1, 1, gbc) );
 		panel.add( entryNom, setGridBagConstraints(1, 0, 1, 1, 0, 0, gbc) );
 		
-		panel.add( new JLabel("Prenom"), setGridBagConstraints(0, 1, 1, 3, 0, 0, gbc) );
+		panel.add( new JLabel("Prenom	"), setGridBagConstraints(0, 1, 1, 3, 0, 0, gbc) );
 		panel.add( entryPrenom, setGridBagConstraints(1, 1, 1, 1, 0, 0, gbc) );
 		panel.add( entryPrenom2, setGridBagConstraints(1, 2, 1, 1, 0, 0, gbc) );
 		panel.add( entryPrenom3, setGridBagConstraints(1, 3, 1, 1, 0, 0, gbc) );
 
-		panel.add( new JLabel("Adresse"), setGridBagConstraints(0, 4, 1, 1, 0, 0, gbc) );
+		panel.add( new JLabel("Adresse	"), setGridBagConstraints(0, 4, 1, 1, 0, 0, gbc) );
 		panel.add( entryAdresse, setGridBagConstraints(1, 4, 1, 1, 0, 0, gbc) );
 
 
-		panel.add( new JLabel("Tel."), setGridBagConstraints(0, 5, 1, 1, 0, 0, gbc) );
+		panel.add( new JLabel("Tel.	"), setGridBagConstraints(0, 5, 1, 1, 0, 0, gbc) );
 		panel.add( entryTel, setGridBagConstraints(1, 5, 1, 1, 0, 0, gbc) );
 		
-		panel.add( new JLabel("eMail"), setGridBagConstraints(0, 6, 1, 1, 0, 0, gbc) );
+		panel.add( new JLabel("eMail	"), setGridBagConstraints(0, 6, 1, 1, 0, 0, gbc) );
 		panel.add( entryMail, setGridBagConstraints(1, 6, 1, 1, 0, 0, gbc) );
 		
 		

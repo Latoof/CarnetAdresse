@@ -126,9 +126,6 @@ public class FichePanelModify extends JPanel implements ActionListener {
 		this.fiche.getPrenoms().pollFirst();
 		this.fiche.getPrenoms().add( this.entryPrenom.getText() );
 		
-		// this.fiche.getAdresses().pollFirst();
-		// this.fiche.getAdresses().add( new Adresse( this.entryAdresse.getText( ) ) );
-		
 		this.fiche.getEmails().pollFirst();
 		this.fiche.getEmails().add( this.entryMail.getText() );
 		

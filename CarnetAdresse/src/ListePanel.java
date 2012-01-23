@@ -74,7 +74,8 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 			if ( ((JButton) arg0.getSource()).equals(this.bNouveau) ) {
 				
 				/* On a convenu d'une "Fiche par defaut" generee automatiquement */
-				Fiche nouvelleFiche = new Fiche("nNom", "n_Prenom", "0240667799", new Adresse(12,"rue du paradis", "AuroVille", 65489, "Inde"));
+				Fiche nouvelleFiche = new Fiche("Doe", "John", "0123456789", new Adresse(00,"", "", 00000, ""));
+
 				this.carnet.addFiche( nouvelleFiche );
 				this.listeM.addElement(nouvelleFiche);
 
@@ -124,7 +125,7 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 	
 					String txtResultat = ( f1.equals(f2) ? "Les deux fiches sont identiques !" : "Les deux fiches sont differentes !");
 
-					JOptionPane.showInputDialog(this.gui, new JLabel(txtResultat), txtResultat, JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this.gui, new JLabel(txtResultat), txtResultat, JOptionPane.INFORMATION_MESSAGE);
 				}
 				
 				

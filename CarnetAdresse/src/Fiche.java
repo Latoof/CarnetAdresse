@@ -18,12 +18,28 @@ public class Fiche {
 	 * et permettent de comparer les éléments sans se préoccuper de leur ordre.
 	 */
 	
+	/**
+	 * Une fiche est la representation des informations concernenant une personne. 
+	 * Ce constructeur prends un fichier XML en entree.
+	 * @param filename - fichier d'entree, au format XML.
+	 */
 	public Fiche(String filename) {
+
+		this.prenoms = new TreeSet<String>();
+		this.adresses = new TreeSet<Adresse>();
+		this.emails =  new TreeSet<String>();
 		
 		this.fromXMLFile(filename);
 		
 	}
-		
+	
+	/**
+	 * Constructeur d'une fiche relative Ã  une personne.
+	 * @param nom
+	 * @param prenom1
+	 * @param numeroTel
+	 * @param adresse
+	 */
 	public Fiche(String nom,String prenom1, String numeroTel, Adresse adresse) {
 		
 		this.nom = nom;
@@ -37,6 +53,14 @@ public class Fiche {
 
 	}
 	
+	/**
+	 * Constructeur d'une fiche relative Ã  une personne.
+	 * @param nom
+	 * @param prenom1
+	 * @param prenom2
+	 * @param numeroTel
+	 * @param adresse
+	 */
 	public Fiche(String nom, String prenom1, String prenom2, String numeroTel, Adresse adresse) {
 		
 		this.nom = nom;
@@ -51,7 +75,15 @@ public class Fiche {
 
 	}
 	
-	
+	/**
+	 * Constructeur d'une fiche relative Ã  une personne.
+	 * @param nom
+	 * @param prenom1
+	 * @param prenom2
+	 * @param prenom3
+	 * @param numeroTel
+	 * @param adresse
+	 */
 	public Fiche(String nom, String prenom1, String prenom2, String prenom3, String numeroTel, Adresse adresse) {
 		
 		this.nom = nom;
@@ -68,7 +100,7 @@ public class Fiche {
 	}
 	
 	/**
-	 * Ajoute une adresse email.
+	 * Ajoute une adresse email aux adresse emails connues pour cette fiche.
 	 * @param email
 	 */
 	public void addEmail( String email ) {
@@ -81,15 +113,18 @@ public class Fiche {
 		
 	}
 	
+	/**
+	 * Ajoute une adresse aux adresse connues pour cette fiche
+	 * @param adresse
+	 */
 	public void addAdresse(Adresse adresse){
 		this.adresses.add(adresse);
 	}
 
-	public String toStringDBG() {
-		return "Fiche [nom=" + nom + ", numeroTel=" + numeroTel + ", prenoms="
-				+ prenoms + ", adresse=" + adresses + "]";
-	}
-
+	/**
+	 * Methode permettant de verifier si la fiche courante est identique Ã  une autre.
+	 * @param o - l'autre fiche Ã  considerer.
+	 */
 	public boolean equals(Object o) {
 		
 		Fiche f = (Fiche) o;
@@ -101,23 +136,11 @@ public class Fiche {
 				& ( this.emails.equals( f.emails ) )
 				);
 	}
-	
-	public String toXML() {
-		
-		
-		XStream xstream = new XStream();
-		String str = xstream.toXML(this);
-		
-		return str;
-	}
-	
-	public void fromXML(String str) {
-		
-		XStream xstream = new XStream();
 
-		xstream.fromXML(str);
-	}
-	
+	/**
+	 * Permet de generer un fichier au format XML correspondant aux informations de la fiche courante
+	 * @param filename - le nom de fichier en sortie
+	 */
 	public void toXMLFile( String filename ) {
 		
 		FileOutputStream stream = null;
@@ -133,6 +156,10 @@ public class Fiche {
 		
 	}
 	
+	/**
+	 * Permet de generer une fiche depuis un fichier XML en entree.
+	 * @param filename - le fichier d'entree a considerer
+	 */
 	public void fromXMLFile( String filename ) {
 		
 		FileInputStream stream = null;

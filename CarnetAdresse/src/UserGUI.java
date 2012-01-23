@@ -44,7 +44,7 @@ public class UserGUI extends JFrame implements ActionListener {
 		
 		
 		this.setSize(new Dimension(800, 600));
-		this.setMinimumSize( new Dimension(550, 425) );
+		this.setMinimumSize( new Dimension(640, 425) );
 		this.setVisible(true);
 		
 		
@@ -101,7 +101,6 @@ public class UserGUI extends JFrame implements ActionListener {
 		
 		/* Contient l'éditeur de Fiche */
 		fichePanelModify = new FichePanelModify( this, this.carnet.getFicheFromIndex(0) );
-		fichePanelModify.setBackground(Color.GREEN);
 		
 		rightPanel.add(fichePanel);
 		rightPanel.add(fichePanelModify);
@@ -141,7 +140,7 @@ public class UserGUI extends JFrame implements ActionListener {
 			if ( ((JMenuItem) arg0.getSource()).equals(this.itemNouveau) ) {
 				
 				this.carnet = new Carnet();
-				Fiche nouvelleFiche = new Fiche("nNom", "n_Prenom", "0240667799", new Adresse(12,"rue du paradis", "AuroVille", 65489, "Inde"));
+				Fiche nouvelleFiche = new Fiche("Doe", "John", "0123456789", new Adresse(00,"", "", 00000, ""));
 				this.carnet.addFiche( nouvelleFiche );
 				this.listePanel.genList( this.carnet );
 				this.visualiserFiche( nouvelleFiche );
@@ -157,7 +156,6 @@ public class UserGUI extends JFrame implements ActionListener {
 				fr.add(fc);
 				fr.pack();
 				fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				//fr.setVisible(true);
 				   int returnVal = fc.showOpenDialog(fr);
 				    if(returnVal == JFileChooser.APPROVE_OPTION) {
 
@@ -170,12 +168,10 @@ public class UserGUI extends JFrame implements ActionListener {
 			else if ( ((JMenuItem) arg0.getSource()).equals(this.itemEnregistrer) ) {
 				JFrame fr = new JFrame();
 				JFileChooser fc = new JFileChooser();
-				//fc.setDialogType(JFileChooser.SAVE_DIALOG);
 				fc.setApproveButtonText("Enregistrer");
 				fr.add(fc);
 				fr.pack();
 				fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				//fr.setVisible(true);
 				   int returnVal = fc.showOpenDialog(fr);
 				    if(returnVal == JFileChooser.APPROVE_OPTION) {
 
