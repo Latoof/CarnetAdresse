@@ -3,12 +3,8 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
-import java.util.Vector;
-
-import junit.extensions.abbot.*;
 
 /**
  * 
@@ -17,6 +13,7 @@ import junit.extensions.abbot.*;
  *
  */
 
+@SuppressWarnings("serial")
 public class UserGUI extends JFrame implements ActionListener {
 
 	private Carnet 				carnet;
@@ -36,7 +33,7 @@ public class UserGUI extends JFrame implements ActionListener {
 		
 		this.carnet = c;
 		
-		//Nous permet d'activer le mÃ©canisme de fermeture de la fenetre
+		// Permet d'activer le mecanisme de fermeture de la fenetre
 		WindowListener l = new WindowAdapter() {
 			public void windowClosing(WindowEvent e){
 			System.exit(0);
@@ -57,22 +54,22 @@ public class UserGUI extends JFrame implements ActionListener {
 				itemNouveau.setAccelerator(KeyStroke.getKeyStroke(
 				        KeyEvent.VK_1, ActionEvent.ALT_MASK));
 				itemNouveau.getAccessibleContext().setAccessibleDescription(
-				        "This doesn't really do anything");
+				        "Cree un nouveau Carnet. Les donnees actuelles sont perdues.");
 				itemOuvrir = new JMenuItem("Ouvrir fichier");
 				itemOuvrir.setAccelerator(KeyStroke.getKeyStroke(
 				        KeyEvent.VK_2, ActionEvent.ALT_MASK));
 				itemOuvrir.getAccessibleContext().setAccessibleDescription(
-				        "This doesn't really do anything");
+				        "Ouvre un Carnet a partir d'un fichier");
 				itemEnregistrer = new JMenuItem("Enregistrer carnet");
 				itemEnregistrer.setAccelerator(KeyStroke.getKeyStroke(
 				        KeyEvent.VK_3, ActionEvent.ALT_MASK));
 				itemEnregistrer.getAccessibleContext().setAccessibleDescription(
-				        "This doesn't really do anything");
+				        "Enregistre le Carnet dans un fichier");
 				itemQuitter = new JMenuItem("Quitter l'application");
 				itemQuitter.setAccelerator(KeyStroke.getKeyStroke(
 				        KeyEvent.VK_4, ActionEvent.ALT_MASK));
 				itemQuitter.getAccessibleContext().setAccessibleDescription(
-				        "This doesn't really do anything");
+				        "Quitte l'application. Les données non-enregistrees sont perdues");
 			
 				itemNouveau.addActionListener(this);
 				itemOuvrir.addActionListener(this);
@@ -93,14 +90,16 @@ public class UserGUI extends JFrame implements ActionListener {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout( new BorderLayout());
 		
+		/* Contiendra la liste des Fiches */
 		listePanel = new ListePanel(this, this.carnet);
 		
 		
 		JPanel rightPanel = new JPanel(new GridLayout(2, 1));
 		
+		/* Contient la vue d'une Fiche */
 		fichePanel = new FichePanel( this.carnet.getFicheFromIndex(0) );
-		//fichePanel.setBackground(Color.BLUE);
 		
+		/* Contient l'éditeur de Fiche */
 		fichePanelModify = new FichePanelModify( this, this.carnet.getFicheFromIndex(0) );
 		fichePanelModify.setBackground(Color.GREEN);
 		

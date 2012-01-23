@@ -1,8 +1,6 @@
 import java.awt.Component;
 
-import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 
 import org.junit.After;
@@ -13,7 +11,6 @@ import org.junit.BeforeClass;
 import abbot.finder.ComponentNotFoundException;
 import abbot.finder.MultipleComponentsFoundException;
 import abbot.finder.matchers.ClassMatcher;
-import abbot.finder.matchers.JMenuMatcher;
 import abbot.tester.JButtonTester;
 import abbot.tester.JListLocation;
 import abbot.tester.JListTester;
@@ -81,10 +78,8 @@ public class UserGUITest extends ComponentTestFixture  {
 		try {
 			liste = getFinder().find(new ClassMatcher(JList.class));
 		} catch (ComponentNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MultipleComponentsFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -92,7 +87,7 @@ public class UserGUITest extends ComponentTestFixture  {
 		jt.actionSelectRow( liste, new JListLocation(1));
 		
 		/* On verifie que la ligne selectionnee correspond bien a l'objet (Fiche) concerne */
-		assertEquals("Erreur entre la liste et son modele",(Fiche)(((JList) liste).getSelectedValue()), f2);
+		assertEquals("Erreur entre la liste et son modele",(Fiche)(((JList<?>) liste).getSelectedValue()), f2);
 		
 		/* Le finder permet de trouver automatiquement une instance de classe sans utiliser d'accesseurs */
 		Component fichePanel = null;

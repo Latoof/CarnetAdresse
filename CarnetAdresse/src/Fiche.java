@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.util.TreeSet;
 
 import com.thoughtworks.xstream.XStream;
@@ -15,22 +13,13 @@ public class Fiche {
 	TreeSet<String>		prenoms;
 	TreeSet<Adresse> 	adresses;
 	TreeSet<String>		emails;
+	/*
+	 * On choisit d'utiliser des TreeSet car ils assurent l'unicité des éléments
+	 * et permettent de comparer les éléments sans se préoccuper de leur ordre.
+	 */
 	
 	public Fiche(String filename) {
 		
-		this.prenoms = new TreeSet<String>();
-		this.adresses = new TreeSet<Adresse>();
-		this.emails =  new TreeSet<String>();
-		
-		try {
-			BufferedReader in = new BufferedReader ( new FileReader(filename) );
-			
-		}
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		} 
 		this.fromXMLFile(filename);
 		
 	}
@@ -111,7 +100,6 @@ public class Fiche {
 				& ( this.adresses.equals( f.adresses ) )
 				& ( this.emails.equals( f.emails ) )
 				);
-		
 	}
 	
 	public String toXML() {

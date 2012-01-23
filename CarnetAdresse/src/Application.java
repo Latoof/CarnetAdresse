@@ -15,7 +15,7 @@ public class Application {
 		Fiche fich3 = new Fiche("Gautier", "Chouquette", "Quentin", "0123456789", new Adresse(14, "rue de la fistiniere", "Nantes", 44000, "France"));
 		
 		fich3.addEmail("aba@bidon.dot.com");
-		fich3.addEmail("trol@lil.ol");
+		fich3.addEmail("trol@lil.ol");         
 		fich3.addEmail("kikoo@vendee.com");
 
 		carnet.addFiche( fich1 );
@@ -23,7 +23,7 @@ public class Application {
 		carnet.addFiche( fich3 );
 
 		
-		UserGUI f = new UserGUI( carnet );
+		new UserGUI( carnet );
 	}
 
 }

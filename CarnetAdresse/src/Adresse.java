@@ -1,3 +1,4 @@
+@SuppressWarnings("rawtypes")
 public class Adresse implements Comparable {
 	
 	private int numero, codePostal;

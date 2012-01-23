@@ -1,28 +1,27 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 
+@SuppressWarnings("serial")
 public class ListePanel extends JPanel implements ActionListener, ListSelectionListener {
 
 	private UserGUI gui;
+	@SuppressWarnings("rawtypes")
 	private JList liste;
+	@SuppressWarnings("rawtypes")
 	private DefaultListModel listeM;
 	private Carnet carnet;
 	private JButton bNouveau;
@@ -30,7 +29,7 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 	private JButton bComparer;
 
 	
-	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ListePanel( UserGUI g, Carnet c ) {
 		
 		this.gui = g;
@@ -57,8 +56,6 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		paneButton.add(bSupprimer);
 		paneButton.add(bComparer);
 		
-		
-		
 		this.add(new JScrollPane(this.liste), BorderLayout.CENTER);
 		this.add(paneButton, BorderLayout.SOUTH);
 	
@@ -68,12 +65,15 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void actionPerformed(ActionEvent arg0) {
+	/* On a decide de regrouper dans cette methode tout ce qui concerne le clic sur les bouttons */
 		
 		if ( arg0.getSource() instanceof JButton ) {
 			
 			if ( ((JButton) arg0.getSource()).equals(this.bNouveau) ) {
 				
+				/* On a convenu d'une "Fiche par defaut" generee automatiquement */
 				Fiche nouvelleFiche = new Fiche("nNom", "n_Prenom", "0240667799", new Adresse(12,"rue du paradis", "AuroVille", 65489, "Inde"));
 				this.carnet.addFiche( nouvelleFiche );
 				this.listeM.addElement(nouvelleFiche);
@@ -82,20 +82,24 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 			else if ( ((JButton) arg0.getSource()).equals(this.bSupprimer) ) {
 				
 				int nbSelected = liste.getSelectedIndices().length;
+				
+				/* Si une seule Fiche selectionnee, se contente de recuperer la valeur courante */
 				if ( nbSelected == 1 ) {
 				
 					Fiche ficheASupprimer = (Fiche) this.liste.getSelectedValue();
 					
 					this.carnet.delFiche( ficheASupprimer);
-					listeM.removeElement( ficheASupprimer );
-					//System.out.println("Deletion de "+index);
-					
+					listeM.removeElement( ficheASupprimer );				
 					
 				}
+				
+				/* Le processus est un peu different lorsque plusieurs fiches sont selectionnees */
 				else if ( nbSelected > 1 ) {
 					
+					@SuppressWarnings("deprecation") //JRE7
 					Object[] fichesASupprimer = this.liste.getSelectedValues();
 					
+					/* Pour chaque Fiche selectionnee. */
 					for ( int i = 0; i < nbSelected; i++ ) {
 						
 						Fiche ficheASupprimer = (Fiche) fichesASupprimer[i];
@@ -112,6 +116,7 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 				
 				if ( this.liste.getSelectedIndices().length == 2 ) {
 					
+					@SuppressWarnings("deprecation")
 					Object[] fichesSelectionnees = this.liste.getSelectedValues();
 					
 					Fiche f1 = (Fiche) fichesSelectionnees[0];
@@ -119,7 +124,6 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 	
 					String txtResultat = ( f1.equals(f2) ? "Les deux fiches sont identiques !" : "Les deux fiches sont differentes !");
 
-					JOptionPane op = new JOptionPane();
 					JOptionPane.showInputDialog(this.gui, new JLabel(txtResultat), txtResultat, JOptionPane.INFORMATION_MESSAGE);
 				}
 				
@@ -130,11 +134,14 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		
 	}	
 	
+	@SuppressWarnings("rawtypes")
 	public JList getListe() {
 		return this.liste;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void genList() {
+		/* Met en place la liste des Fiches en fonction du Carnet en attribut */
 		
 		this.listeM.removeAllElements();
 		
