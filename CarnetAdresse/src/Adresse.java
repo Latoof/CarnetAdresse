@@ -3,6 +3,14 @@ public class Adresse implements Comparable {
 	private int numero, codePostal;
 	private String nomRue, ville, pays;
 	
+	/**
+	 * la classe Adresse nous permet de representer la notion d'adresse complete.
+	 * @param numero
+	 * @param nomRue
+	 * @param ville
+	 * @param codePostal
+	 * @param pays
+	 */
 	public Adresse(int numero, String nomRue, String ville, int codePostal,	String pays) {
 		this.numero = numero;
 		this.codePostal = codePostal;
@@ -20,7 +28,6 @@ public class Adresse implements Comparable {
 
 	}
 	
-		
 	public int getNumero() {
 		return numero;
 	}
@@ -70,7 +77,12 @@ public class Adresse implements Comparable {
 		this.pays = pays;
 	}
 
-
+	/**
+	 * la methode compareTo nous est necessaire pour pouvoir comparer les adresses deux a deux. 
+	 * Elle est alors appellee par defaut lors d'une eventuelle comparaison.
+	 * @param o - l'autre objet a comparer
+	 * @see Fiche
+	 */
 	@Override
 	public int compareTo(Object o) {
 		
