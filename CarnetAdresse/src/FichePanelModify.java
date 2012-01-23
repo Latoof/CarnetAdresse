@@ -143,7 +143,7 @@ public class FichePanelModify extends JPanel implements ActionListener {
 		gbc.weighty = wy;
 		
 		gbc.fill = GridBagConstraints.BOTH;
-		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		return gbc;
 	}
 	
