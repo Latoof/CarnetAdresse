@@ -71,13 +71,12 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 	public void actionPerformed(ActionEvent arg0) {
 		
 		if ( arg0.getSource() instanceof JButton ) {
-			System.out.println("OK");
 			
 			if ( ((JButton) arg0.getSource()).equals(this.bNouveau) ) {
+				
 				Fiche nouvelleFiche = new Fiche("nNom", "n_Prenom", "0240667799", new Adresse(12,"rue du paradis", "AuroVille", 65489, "Inde"));
 				this.carnet.addFiche( nouvelleFiche );
 				this.listeM.addElement(nouvelleFiche);
-				System.out.println("New");
 
 			}
 			else if ( ((JButton) arg0.getSource()).equals(this.bSupprimer) ) {
@@ -113,28 +112,20 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 				
 				if ( this.liste.getSelectedIndices().length == 2 ) {
 					
-					//JDialog popup = new JDialog(this.gui, true);
 					Object[] fichesSelectionnees = this.liste.getSelectedValues();
 					
 					Fiche f1 = (Fiche) fichesSelectionnees[0];
 					Fiche f2 = (Fiche) fichesSelectionnees[1];
-
-					
-					System.out.println( f1.equals(f2) );
-					
+	
 					String txtResultat = ( f1.equals(f2) ? "Les deux fiches sont identiques !" : "Les deux fiches sont differentes !");
 
-					
 					JOptionPane op = new JOptionPane();
-
-
 					JOptionPane.showInputDialog(this.gui, new JLabel(txtResultat), txtResultat, JOptionPane.INFORMATION_MESSAGE);
 				}
 				
 				
 			}
 			
-			//this.genList();
 		}
 		
 	}	
@@ -168,10 +159,14 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 		
 		if (liste.getSelectedIndex() != -1) {
 			this.gui.visualiserFiche( (Fiche) this.liste.getSelectedValue() );
+			
 		}
 		
 	}
 	
+	/*
+	 * Pour griser les boutons lorsque leur fonction n'a pas de sens.
+	 */
 	public void updateButtons() {
 		if ( this.liste.getSelectedIndices().length > 0 ) {
 			
@@ -189,6 +184,18 @@ public class ListePanel extends JPanel implements ActionListener, ListSelectionL
 			this.bSupprimer.setEnabled(false);
 			this.bComparer.setEnabled(false);
 		}
+	}
+
+	public JButton getbNouveau() {
+		return bNouveau;
+	}
+
+	public JButton getbSupprimer() {
+		return bSupprimer;
+	}
+
+	public JButton getbComparer() {
+		return bComparer;
 	}
 
 

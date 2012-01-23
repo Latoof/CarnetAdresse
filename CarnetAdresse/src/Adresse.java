@@ -20,8 +20,6 @@ public class Adresse implements Comparable {
 
 	}
 	
-	
-
 		
 	public int getNumero() {
 		return numero;

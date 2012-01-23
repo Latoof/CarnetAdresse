@@ -10,6 +10,9 @@ import javax.swing.*;
 
 public class FichePanelModify extends JPanel implements ActionListener {
 
+	UserGUI gui;
+	
+	
 	Fiche fiche;
 	
 	JTextField entryNom;
@@ -24,10 +27,12 @@ public class FichePanelModify extends JPanel implements ActionListener {
 	JButton boutonAnnuler;
 
 	
-	public FichePanelModify ( Fiche f ) {
+	public FichePanelModify ( UserGUI g, Fiche f ) {
 		
 		super();
 		this.setSize(400, 600);
+		
+		this.gui = g;
 		
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -81,13 +86,10 @@ public class FichePanelModify extends JPanel implements ActionListener {
 		if ( f != null ) {
 			this.fiche = f;
 
-			this.voirFiche(f);
+			this.afficherFicheEditeur(f);
 
-	
 		}
 		else {
-			
-			
 			
 		}
 		
@@ -96,7 +98,7 @@ public class FichePanelModify extends JPanel implements ActionListener {
 		
 	}
 	
-	public void voirFiche( Fiche f ) {
+	public void afficherFicheEditeur( Fiche f ) {
 		
 		this.fiche = f;
 		
@@ -131,6 +133,10 @@ public class FichePanelModify extends JPanel implements ActionListener {
 		this.fiche.getEmails().pollFirst();
 		this.fiche.getEmails().add( this.entryMail.getText() );
 		
+		this.fiche.setNumeroTel( this.entryTel.getText() );
+		
+		this.gui.visualiserFiche(this.fiche);
+		this.repaint();
 	}
 	
 	public GridBagConstraints setGridBagConstraints (int gx, int gy,int sx, int sy, int wx, int wy, GridBagConstraints gbc){
@@ -157,7 +163,7 @@ public class FichePanelModify extends JPanel implements ActionListener {
 				this.validerChangements();
 			}
 			else if ( ((JButton) arg0.getSource()).equals(this.boutonAnnuler) ) {
-				this.voirFiche(this.fiche);
+				this.afficherFicheEditeur(this.fiche);
 			}
 		}
 		

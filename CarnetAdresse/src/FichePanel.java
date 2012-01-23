@@ -56,14 +56,12 @@ public class FichePanel extends JPanel {
 		panel.add( entryMail, setGridBagConstraints(1, 6, 1, 1, 0, 0, gbc) );
 		
 		
-		
-				
 		this.add(panel);
 				
 		if ( f != null ) {
 			this.fiche = f;
 
-			this.voirFiche(f);
+			this.afficherFicheVisualiseur(f);
 		}
 		else {
 			
@@ -73,7 +71,7 @@ public class FichePanel extends JPanel {
 
 	}
 	
-	public void voirFiche( Fiche f ) {
+	public void afficherFicheVisualiseur( Fiche f ) {
 		
 		this.fiche = f;
 		
@@ -91,6 +89,10 @@ public class FichePanel extends JPanel {
 	
 		this.entryMail.setText( f.getEmails().first() );
 	
+	}
+	
+	public Fiche getFicheCourante() {
+		return this.fiche;
 	}
 	
 	public GridBagConstraints setGridBagConstraints (int gx, int gy,int sx, int sy, int wx, int wy, GridBagConstraints gbc){

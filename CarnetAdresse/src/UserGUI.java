@@ -101,7 +101,7 @@ public class UserGUI extends JFrame implements ActionListener {
 		fichePanel = new FichePanel( this.carnet.getFicheFromIndex(0) );
 		//fichePanel.setBackground(Color.BLUE);
 		
-		fichePanelModify = new FichePanelModify( this.carnet.getFicheFromIndex(0) );
+		fichePanelModify = new FichePanelModify( this, this.carnet.getFicheFromIndex(0) );
 		fichePanelModify.setBackground(Color.GREEN);
 		
 		rightPanel.add(fichePanel);
@@ -117,9 +117,16 @@ public class UserGUI extends JFrame implements ActionListener {
 	
 
 	
+	public Carnet getCarnet() {
+		return carnet;
+	}
+
+
+
 	public void visualiserFiche( Fiche f ) {
 		
-		this.fichePanel.voirFiche( f );
+		this.fichePanel.afficherFicheVisualiseur( f );
+		this.fichePanelModify.afficherFicheEditeur( f );
 		this.fichePanel.repaint();
 		
 	}
@@ -146,7 +153,7 @@ public class UserGUI extends JFrame implements ActionListener {
 				
 				JFrame fr = new JFrame();
 				JFileChooser fc = new JFileChooser();
-				fc.setApproveButtonText("Ouvrirmm");
+				fc.setApproveButtonText("Ouvrir");
 
 				fr.add(fc);
 				fr.pack();
@@ -187,5 +194,8 @@ public class UserGUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	public JMenuItem getMenuNouveauCarnet() {
+		return this.itemNouveau;
+	}
 	
 }

@@ -44,13 +44,13 @@ public class Carnet {
 		return this.fiches.get( index );
 	}
 	
+	/* Enregistre les donnees du Carnet directement dans un fichier, au format XML */
 	public int toXML( String filename ) {
 		
 		FileOutputStream stream;
 		try {
 			stream = new FileOutputStream(filename);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}
@@ -62,6 +62,11 @@ public class Carnet {
 		
 	}
 	
+	public boolean contains( Fiche f ) {
+		return this.fiches.contains(f);
+	}
+	
+	/* Charge les donnees du Carnet depuis un fichier */
 	public int fromXML( File file ) {
 				
 		XStream xs = new XStream();
@@ -71,4 +76,7 @@ public class Carnet {
 		
 	}
 	
+	public int getNbFiches() {
+		return this.fiches.size();
+	}
 }

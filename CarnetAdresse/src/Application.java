@@ -1,7 +1,8 @@
 public class Application {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		/* Exemples */
 		
 		Carnet carnet = new Carnet();
 		
@@ -21,12 +22,8 @@ public class Application {
 		carnet.addFiche( fich2 );
 		carnet.addFiche( fich3 );
 
-//		System.out.println(fich1);
-//		System.out.println(fich2);
-//		System.out.println(fich3);
 		
 		UserGUI f = new UserGUI( carnet );
-		//FicheFrame ff = new FicheFrame(fich1);
 	}
 
 }
